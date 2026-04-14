@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TriTravel &#8211; Chuy&#234;n gia Du l&#7883;ch &#272;&#224; N&#7861;ng</title>
+  <meta name="description" content="Tritravel &#8211; D&#7883;ch v&#7909; du l&#7883;ch, visa, d&#7883;ch thu&#7853;t v&#224; thu&#234; xe t&#7841;i &#272;&#224; N&#7861;ng.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  { DEFAULT: '#0D2B6B', light: '#1A3F9A', dark: '#081B47' },
+            gold:  { DEFAULT: '#C9A84C', light: '#E2C06A', dark: '#A8852E' },
+            cream: '#F8F5EE',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --navy:#0D2B6B; --gold:#C9A84C; --cream:#F8F5EE; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--navy); margin:0; }
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#EDF2FB}::-webkit-scrollbar-thumb{background:var(--navy);border-radius:3px}
+    .hero-title-gradient{background:linear-gradient(135deg,#fff 0%,#E2C06A 60%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .gold-line{display:inline-block;width:60px;height:3px;background:var(--gold);border-radius:2px}
+    .card-lift{transition:transform .3s ease,box-shadow .3s ease}
+    .card-lift:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(13,43,107,.15)}
+    .btn-primary{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#0D2B6B;font-weight:600;padding:14px 32px;border-radius:50px;transition:all .3s ease;display:inline-block;letter-spacing:.3px;text-decoration:none}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.4)}
+    .btn-outline{border:2px solid #C9A84C;color:#C9A84C;padding:12px 30px;border-radius:50px;font-weight:600;transition:all .3s ease;display:inline-block;text-decoration:none}
+    .btn-outline:hover{background:#C9A84C;color:#0D2B6B}
+    .hero-overlay{background:linear-gradient(135deg,rgba(8,27,71,.85) 0%,rgba(13,43,107,.70) 50%,rgba(13,43,107,.40) 100%)}
+    .trip-letter{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,5rem);font-weight:900;line-height:1}
+    .testimonial-card{background:white;border-left:4px solid var(--gold);border-radius:0 16px 16px 0}
+    .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    #mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    #mobile-menu.open{max-height:600px}
+    .lang-btn{cursor:pointer;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;transition:all .2s;background:transparent;border:none}
+    .lang-btn.active{background:var(--gold);color:var(--navy)}
+    .lang-btn:not(.active){color:rgba(255,255,255,.6)}
+    [data-lang="en"]{display:none}
+    body.lang-en [data-lang="vi"]{display:none}
+    body.lang-en [data-lang="en"]{display:revert}
+    #header{transition:padding .3s ease,background .3s ease}
+    #header.scrolled{padding-top:8px;padding-bottom:8px;background:rgba(8,27,71,.97)!important;backdrop-filter:blur(10px)}
+    .stat-number{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold);line-height:1}
+    .service-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:2px solid rgba(201,168,76,.3);font-size:1.6rem;margin-bottom:1rem;transition:all .3s ease}
+    .card-lift:hover .service-icon{background:linear-gradient(135deg,#C9A84C,#E2C06A)}
+    .form-input{width:100%;border:1.5px solid rgba(13,43,107,.2);border-radius:10px;padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:.95rem;background:white;color:#0D2B6B;transition:border .2s;outline:none}
+    .form-input:focus{border-color:var(--gold)}
+    .clip-diag{clip-path:polygon(0 0,100% 5%,100% 100%,0 100%);padding-top:6rem}
+    a{text-decoration:none}
+  </style>
+</head>
+<body class="font-body">
+
+<!-- HEADER -->
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-navy px-5 py-4 md:px-10">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/><rect x="10" y="14" width="12" height="3" rx="1.5" fill="#C9A84C" opacity="0.5"/></svg>
+      <div class="leading-tight">
+        <span class="text-white font-display font-bold text-xl">Tri</span><span style="color:#C9A84C" class="font-display font-bold text-xl">Travel</span>
+        <div class="text-white/50 tracking-widest uppercase" style="font-size:0.6rem">&#272;&#224; N&#7861;ng</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="#home"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Trang Ch&#7911;</a>
+      <a href="#home"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Home</a>
+      <a href="#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Gi&#7899;i Thi&#7879;u</a>
+      <a href="#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="en">About Me</a>
+      <a href="#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a>
+      <a href="#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a>
+      <a href="#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Di Chuy&#7875;n</a>
+      <a href="#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Transport</a>
+      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Tour &amp; Blog</a>
+      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Tours &amp; Blog</a>
+      <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="vi">&#272;&#7863;t L&#7883;ch</a>
+      <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="en">Book Now</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-1 ml-3 border border-white/20 rounded-full px-2 py-1">
+      <button class="lang-btn active" id="btn-vi" onclick="setLang('vi')">VN</button>
+      <span class="text-white/30 text-xs">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button id="hamburger" class="md:hidden text-white" onclick="toggleMenu()">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden">
+    <div class="pt-4 pb-2 px-4 flex flex-col gap-3 border-t border-white/10 mt-3">
+      <a href="#home"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Trang Ch&#7911;</a>
+      <a href="#home"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Home</a>
+      <a href="#about"     onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Gi&#7899;i Thi&#7879;u</a>
+      <a href="#about"     onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">About Me</a>
+      <a href="#visa"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a>
+      <a href="#visa"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Visa &amp; Translation</a>
+      <a href="#transport" onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Di Chuy&#7875;n</a>
+      <a href="#transport" onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Transport</a>
+      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Tour &amp; Blog</a>
+      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Tours &amp; Blog</a>
+      <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="vi">&#272;&#7863;t L&#7883;ch Ngay</a>
+      <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="en">Book Now</a>
+      <div class="flex gap-3 mt-1">
+        <button onclick="setLang('vi')" class="lang-btn active text-white" id="mb-btn-vi">&#127475;&#127475; Ti&#7871;ng Vi&#7879;t</button>
+        <button onclick="setLang('en')" class="lang-btn text-white"         id="mb-btn-en">&#127468;&#127463; English</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+  <img src="images/hero-danang.jpg" alt="Da Nang" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.background='linear-gradient(135deg,#0D2B6B,#1A3F9A)';this.style.display='block';" />
+  <div class="hero-overlay absolute inset-0"></div>
+  <div class="absolute top-1/4 right-10 w-40 h-40 rounded-full border border-yellow-400/20 opacity-50"></div>
+  <div class="absolute bottom-1/3 right-20 w-20 h-20 rounded-full border border-yellow-400/30 opacity-40"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16 w-full">
+    <div class="max-w-2xl">
+      <div class="inline-flex items-center gap-2 bg-yellow-400/20 border border-yellow-400/40 text-yellow-300 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2l2.09 6.26L18 9.27l-4.91 4.73L14.18 20 10 17.27 5.82 20l1.09-6L2 9.27l5.91-.01L10 2z"/></svg>
+        <span data-lang="vi">Chuy&#234;n gia Du l&#7883;ch &#272;&#224; N&#7861;ng #1</span>
+        <span data-lang="en">#1 Da Nang Travel Expert</span>
+      </div>
+      <h1 class="font-display font-black leading-tight mb-6" style="font-size:clamp(2.4rem,6vw,4.5rem)">
+        <span class="hero-title-gradient" data-lang="vi">Kh&#225;m Ph&#225; &#272;&#224; N&#7861;ng<br/>&#272;&#250;ng Ngh&#297;a Nh&#7845;t</span>
+        <span class="hero-title-gradient" data-lang="en">Discover Da Nang<br/>Like Never Before</span>
+      </h1>
+      <p class="text-white/75 text-lg leading-relaxed mb-8 max-w-xl" data-lang="vi">Xin ch&#224;o! M&#236;nh l&#224; <strong class="text-yellow-300">Tritravel</strong> &#8211; ng&#432;&#7901;i d&#7851;n &#273;&#432;&#7901;ng t&#7853;n t&#226;m v&#7899;i h&#417;n 8 n&#259;m kinh nghi&#7879;m. C&#249;ng m&#236;nh kh&#225;m ph&#225; v&#7867; &#273;&#7865;p &#7849;n khu&#7845;t c&#7911;a &#272;&#224; N&#7861;ng.</p>
+      <p class="text-white/75 text-lg leading-relaxed mb-8 max-w-xl" data-lang="en">Hi there! I'm <strong class="text-yellow-300">Tritravel</strong> &#8211; a passionate travel guide with 8+ years of experience. Let me show you the hidden beauty of Da Nang through unforgettable journeys.</p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#booking" class="btn-primary text-base" data-lang="vi">&#128197; &#272;&#7863;t L&#7883;ch T&#432; V&#7845;n</a>
+        <a href="#booking" class="btn-primary text-base" data-lang="en">&#128197; Book a Consultation</a>
+        <a href="#about"   class="btn-outline text-base" data-lang="vi">Kh&#225;m Ph&#225; Th&#234;m</a>
+        <a href="#about"   class="btn-outline text-base" data-lang="en">Learn More</a>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-4 mt-16 max-w-lg">
+      <div class="text-center">
+        <div class="stat-number">500<span style="font-size:1.5rem;color:#C9A84C">+</span></div>
+        <div class="text-white/60 text-xs mt-1" data-lang="vi">Kh&#225;ch H&#224;ng</div>
+        <div class="text-white/60 text-xs mt-1" data-lang="en">Happy Clients</div>
+      </div>
+      <div class="text-center border-x border-white/10">
+        <div class="stat-number">8<span style="font-size:1.5rem;color:#C9A84C">+</span></div>
+        <div class="text-white/60 text-xs mt-1" data-lang="vi">N&#259;m Kinh Nghi&#7879;m</div>
+        <div class="text-white/60 text-xs mt-1" data-lang="en">Years Experience</div>
+      </div>
+      <div class="text-center">
+        <div class="stat-number">15<span style="font-size:1.5rem;color:#C9A84C">+</span></div>
+        <div class="text-white/60 text-xs mt-1" data-lang="vi">Qu&#7889;c Gia Visa</div>
+        <div class="text-white/60 text-xs mt-1" data-lang="en">Visa Countries</div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
+    <div class="text-white/40 text-xs tracking-widest uppercase" data-lang="vi">Cu&#7897;n xu&#7889;ng</div>
+    <div class="text-white/40 text-xs tracking-widest uppercase" data-lang="en">Scroll down</div>
+    <svg width="20" height="20" fill="none" stroke="white" opacity="0.4" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </div>
+</section>
+
+<!-- TRIP VALUES -->
+<section class="bg-navy py-20 px-6 clip-diag">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="vi">H&#7879; Th&#7889;ng Gi&#225; Tr&#7883; <span class="text-yellow-300">TRIP</span></h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="en">The <span class="text-yellow-300">TRIP</span> Value System</h2>
+      <p class="text-white/60 max-w-xl mx-auto" data-lang="vi">B&#7889;n tr&#7909; c&#7897;t &#273;&#7883;nh h&#432;&#7899;ng m&#7885;i h&#224;nh &#273;&#7897;ng v&#224; d&#7883;ch v&#7909; c&#7911;a Tritravel</p>
+      <p class="text-white/60 max-w-xl mx-auto" data-lang="en">Four pillars guiding every action and service at Tritravel</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="card-lift bg-white/5 border border-white/10 rounded-2xl p-7 text-center fade-up">
+        <div class="trip-letter text-yellow-300 mb-2">T</div>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="vi">Bi&#7871;t &#416;n</h3>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="en">Thankful</h3>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="vi">Tr&#226;n tr&#7885;ng t&#7915;ng chuy&#7871;n &#273;i, t&#7915;ng kho&#7843;nh kh&#7855;c v&#224; t&#7915;ng v&#7883; kh&#225;ch &#273;&#227; tin t&#432;&#7903;ng &#273;&#7891;ng h&#224;nh.</p>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="en">Cherishing every journey, every moment and every guest who trusts us.</p>
+      </div>
+      <div class="card-lift bg-white/5 border border-white/10 rounded-2xl p-7 text-center fade-up" style="transition-delay:.1s">
+        <div class="trip-letter text-yellow-300 mb-2">R</div>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="vi">Tr&#225;ch Nhi&#7879;m</h3>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="en">Responsible</h3>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="vi">Cam k&#7871;t an to&#224;n, &#273;&#250;ng h&#7865;n v&#224; minh b&#7841;ch trong m&#7885;i d&#7883;ch v&#7909; t&#7915; A &#273;&#7871;n Z.</p>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="en">Committed to safety, punctuality and transparency in every service from A to Z.</p>
+      </div>
+      <div class="card-lift bg-white/5 border border-white/10 rounded-2xl p-7 text-center fade-up" style="transition-delay:.2s">
+        <div class="trip-letter text-yellow-300 mb-2">I</div>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="vi">S&#225;ng T&#7841;o</h3>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="en">Innovative</h3>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="vi">Li&#234;n t&#7909;c t&#236;m ki&#7871;m tr&#7843;i nghi&#7879;m m&#7899;i, &#273;i&#7875;m &#273;&#7871;n &#273;&#7897;c &#273;&#225;o ch&#432;a ai kh&#225;m ph&#225;.</p>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="en">Constantly seeking new experiences and unique destinations no one else has found.</p>
+      </div>
+      <div class="card-lift bg-white/5 border border-white/10 rounded-2xl p-7 text-center fade-up" style="transition-delay:.3s">
+        <div class="trip-letter text-yellow-300 mb-2">P</div>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="vi">Chuy&#234;n Nghi&#7879;p</h3>
+        <h3 class="text-white font-semibold text-lg mb-2" data-lang="en">Professional</h3>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="vi">Quy tr&#236;nh r&#245; r&#224;ng, &#273;&#7897;i ng&#361; &#273;&#432;&#7907;c &#273;&#224;o t&#7841;o b&#224;i b&#7843;n, lu&#244;n v&#432;&#7907;t k&#7923; v&#7885;ng.</p>
+        <p class="text-white/55 text-sm leading-relaxed" data-lang="en">Clear processes, well-trained team, always exceeding expectations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ME -->
+<section id="about" class="py-20 px-6 bg-cream">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="relative fade-up">
+        <div class="absolute -top-4 -left-4 w-full h-full border-2 border-yellow-400/40 rounded-3xl"></div>
+        <img src="images/tritravel-portrait.jpg" alt="Tritravel" class="w-full h-96 object-cover rounded-3xl relative z-10" onerror="this.src='https://placehold.co/600x400/0D2B6B/C9A84C?text=Tritravel'" />
+        <div class="absolute -bottom-6 -right-4 bg-yellow-400 text-navy font-bold text-center px-6 py-3 rounded-2xl z-20 shadow-lg">
+          <div class="text-2xl font-display">8+</div>
+          <div class="text-xs" data-lang="vi">N&#259;m Kinh Nghi&#7879;m</div>
+          <div class="text-xs" data-lang="en">Years Exp.</div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:.15s">
+        <span class="gold-line"></span>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-4" data-lang="vi">Xin Ch&#224;o! M&#236;nh L&#224; <span style="color:#C9A84C">Tritravel</span></h2>
+        <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-4" data-lang="en">Hi! I&#39;m <span style="color:#C9A84C">Tritravel</span></h2>
+        <p class="text-navy/70 leading-relaxed mb-4" data-lang="vi">Sinh ra v&#224; l&#7899;n l&#234;n t&#7841;i &#272;&#224; N&#7861;ng, m&#236;nh lu&#244;n t&#7921; h&#224;o l&#224; ng&#432;&#7901;i con c&#7911;a th&#224;nh ph&#7889; &#273;&#225;ng s&#7889;ng b&#7853;c nh&#7845;t Vi&#7879;t Nam. V&#7899;i h&#417;n 8 n&#259;m trong ng&#224;nh du l&#7883;ch &#8211; t&#7915; h&#432;&#7899;ng d&#7851;n vi&#234;n, t&#432; v&#7845;n visa &#273;&#7871;n ch&#7911; doanh nghi&#7879;p d&#7883;ch thu&#7853;t &#8211; m&#236;nh &#273;&#227; &#273;&#7891;ng h&#224;nh c&#249;ng h&#224;ng ng&#224;n du kh&#225;ch trong v&#224; ngo&#224;i n&#432;&#7899;c.</p>
+        <p class="text-navy/70 leading-relaxed mb-6" data-lang="vi">S&#7913; m&#7879;nh c&#7911;a m&#236;nh l&#224; &#273;&#432;a &#272;&#224; N&#7861;ng l&#234;n b&#7843;n &#273;&#7891; du l&#7883;ch th&#7871; gi&#7899;i, kh&#244;ng ch&#7881; qua nh&#7919;ng b&#7913;c &#7843;nh &#273;&#7865;p m&#224; c&#242;n qua nh&#7919;ng tr&#7843;i nghi&#7879;m ch&#7841;m &#273;&#7871;n tr&#225;i tim.</p>
+        <p class="text-navy/70 leading-relaxed mb-4" data-lang="en">Born and raised in Da Nang, I&#39;m proud to be a son of Vietnam&#39;s most liveable city. With 8+ years in tourism &#8211; from tour guide, visa consultant to translation business owner &#8211; I&#39;ve accompanied thousands of domestic and international travelers.</p>
+        <p class="text-navy/70 leading-relaxed mb-6" data-lang="en">My mission is to put Da Nang on the world tourism map &#8211; not just through beautiful photos but through heart-touching experiences.</p>
+        <div class="flex flex-wrap gap-3">
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="vi">&#127917; Tour &#272;&#224; N&#7861;ng</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="vi">&#128203; Visa &amp; D&#7883;ch Thu&#7853;t</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="vi">&#128663; Cho Thu&#234; Xe</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="vi">&#9992; V&#233; M&#225;y Bay</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="en">&#127917; Da Nang Tours</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="en">&#128203; Visa &amp; Translation</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="en">&#128663; Car Rental</span>
+          <span class="bg-navy/10 text-navy text-sm px-4 py-2 rounded-full font-medium" data-lang="en">&#9992; Flight Tickets</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="py-20 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="vi">D&#7883;ch V&#7909; C&#7911;a M&#236;nh</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="en">My Services</h2>
+      <p class="text-navy/60 max-w-lg mx-auto" data-lang="vi">Tr&#7885;n g&#243;i t&#7915; l&#250;c l&#234;n k&#7871; ho&#7841;ch &#273;&#7871;n khi b&#7841;n v&#7873; nh&#224; an to&#224;n</p>
+      <p class="text-navy/60 max-w-lg mx-auto" data-lang="en">Complete package from planning to your safe return home</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a href="#visa" class="card-lift bg-cream rounded-2xl p-7 block text-center border border-navy/10 fade-up">
+        <div class="service-icon mx-auto">&#128706;</div>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">Visa &amp;<br/>D&#7883;ch Thu&#7853;t</h3>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">Visa &amp;<br/>Translation</h3>
+        <p class="text-navy/60 text-sm" data-lang="vi">Xin visa 15+ qu&#7889;c gia, d&#7883;ch thu&#7853;t c&#244;ng ch&#7913;ng nhanh ch&#243;ng.</p>
+        <p class="text-navy/60 text-sm" data-lang="en">Visa for 15+ countries, certified translation services.</p>
+      </a>
+      <a href="#tour" class="card-lift bg-cream rounded-2xl p-7 block text-center border border-navy/10 fade-up" style="transition-delay:.1s">
+        <div class="service-icon mx-auto">&#128506;</div>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">Tour &#272;&#7863;c S&#7855;c</h3>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">Signature Tours</h3>
+        <p class="text-navy/60 text-sm" data-lang="vi">Tour &#272;&#224; N&#7861;ng &#8211; H&#7897;i An &#8211; Hu&#7871; &#8211; B&#224; N&#224; v&#224; nhi&#7873;u h&#224;nh tr&#236;nh &#273;&#7897;c &#273;&#225;o.</p>
+        <p class="text-navy/60 text-sm" data-lang="en">Da Nang &#8211; Hoi An &#8211; Hue &#8211; Ba Na Hills and more.</p>
+      </a>
+      <a href="#transport" class="card-lift bg-cream rounded-2xl p-7 block text-center border border-navy/10 fade-up" style="transition-delay:.2s">
+        <div class="service-icon mx-auto">&#128663;</div>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">Thu&#234; Xe T&#7921; L&#225;i</h3>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">Self-Drive Rental</h3>
+        <p class="text-navy/60 text-sm" data-lang="vi">Xe &#273;&#7901;i m&#7899;i, b&#7843;o hi&#7875;m &#273;&#7847;y &#273;&#7911;, giao xe t&#7853;n n&#417;i t&#7841;i &#272;&#224; N&#7861;ng.</p>
+        <p class="text-navy/60 text-sm" data-lang="en">New vehicles, full insurance, door-to-door delivery.</p>
+      </a>
+      <a href="#transport" class="card-lift bg-cream rounded-2xl p-7 block text-center border border-navy/10 fade-up" style="transition-delay:.3s">
+        <div class="service-icon mx-auto">&#9992;</div>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">V&#233; M&#225;y Bay Gi&#225; T&#7889;t</h3>
+        <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">Best-Price Flights</h3>
+        <p class="text-navy/60 text-sm" data-lang="vi">&#272;&#7863;t v&#233; n&#7897;i &#273;&#7883;a &amp; qu&#7889;c t&#7871;, t&#432; v&#7845;n l&#7883;ch bay t&#7889;i &#432;u.</p>
+        <p class="text-navy/60 text-sm" data-lang="en">Domestic &amp; international flights, optimised schedule advisory.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VISA & DICH THUAT -->
+<section id="visa" class="py-20 px-6 bg-navy clip-diag">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t TRIP</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="en">TRIP Visa &amp; Translation</h2>
+      <p class="text-white/60 max-w-xl mx-auto" data-lang="vi">C&#244;ng ty D&#7883;ch thu&#7853;t TRIP &#8211; &#273;&#417;n v&#7883; th&#224;nh vi&#234;n, chuy&#234;n x&#7917; l&#253; h&#7891; s&#417; visa v&#224; d&#7883;ch thu&#7853;t &#273;a ng&#244;n ng&#7919;.</p>
+      <p class="text-white/60 max-w-xl mx-auto" data-lang="en">TRIP Translation Co. &#8211; a Tritravel affiliate specialising in visa applications and multilingual translation.</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 fade-up">
+        <h3 class="font-display font-bold text-2xl text-yellow-300 mb-5" data-lang="vi">&#128706; D&#7883;ch V&#7909; Visa</h3>
+        <h3 class="font-display font-bold text-2xl text-yellow-300 mb-5" data-lang="en">&#128706; Visa Services</h3>
+        <ul class="space-y-3 text-white/75 text-sm">
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Visa H&#224;n Qu&#7889;c, Nh&#7853;t B&#7843;n, Trung Qu&#7889;c, &#272;&#224;i Loan</span><span data-lang="en">South Korea, Japan, China, Taiwan Visa</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Visa Ch&#226;u &#194;u Schengen (Ph&#225;p, &#272;&#7913;c, &#221;...)</span><span data-lang="en">Schengen Visa Europe (France, Germany, Italy...)</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Visa M&#7929;, Canada, &#218;c, New Zealand</span><span data-lang="en">USA, Canada, Australia, New Zealand Visa</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Visa Du l&#7883;ch, Th&#432;&#417;ng m&#7841;i, Du h&#7885;c</span><span data-lang="en">Tourist, Business, Student Visa</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">T&#432; v&#7845;n h&#7891; s&#417; mi&#7877;n ph&#237;, t&#7881; l&#7879; th&#224;nh c&#244;ng cao</span><span data-lang="en">Free document consultation, high approval rate</span></li>
+        </ul>
+        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="vi">T&#432; V&#7845;n Ngay</a>
+        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="en">Consult Now</a>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 fade-up" style="transition-delay:.15s">
+        <h3 class="font-display font-bold text-2xl text-yellow-300 mb-5" data-lang="vi">&#128221; D&#7883;ch V&#7909; D&#7883;ch Thu&#7853;t</h3>
+        <h3 class="font-display font-bold text-2xl text-yellow-300 mb-5" data-lang="en">&#128221; Translation Services</h3>
+        <ul class="space-y-3 text-white/75 text-sm">
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">D&#7883;ch thu&#7853;t c&#244;ng ch&#7913;ng (30+ ng&#244;n ng&#7919;)</span><span data-lang="en">Certified translation (30+ languages)</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">D&#7883;ch h&#7897; chi&#7871;u, CMND, gi&#7845;y t&#7901; ph&#225;p l&#253;</span><span data-lang="en">Passport, ID, legal document translation</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Phi&#234;n d&#7883;ch tr&#7921;c ti&#7871;p (Anh, H&#224;n, Nh&#7853;t, Trung)</span><span data-lang="en">Interpretation (English, Korean, Japanese, Chinese)</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Bi&#234;n d&#7883;ch t&#224;i li&#7879;u doanh nghi&#7879;p, h&#7907;p &#273;&#7891;ng</span><span data-lang="en">Corporate document &amp; contract translation</span></li>
+          <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Giao nh&#7853;n t&#7853;n n&#417;i, tr&#7843; k&#7871;t qu&#7843; nhanh</span><span data-lang="en">Door-to-door pickup &amp; fast turnaround</span></li>
+        </ul>
+        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="vi">&#272;&#7863;t D&#7883;ch V&#7909;</a>
+        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="en">Order Service</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSPORT & FLIGHTS -->
+<section id="transport" class="py-20 px-6 bg-cream">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="vi">Di Chuy&#7875;n &amp; Bay</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="en">Transport &amp; Flights</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-lift fade-up">
+        <img src="images/car-rental-danang.jpg" alt="Thue xe" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x300/1A3F9A/ffffff?text=Car+Rental'" />
+        <div class="p-7">
+          <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">&#128663; Thu&#234; Xe T&#7921; L&#225;i</h3>
+          <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">&#128663; Self-Drive Car Rental</h3>
+          <p class="text-navy/65 text-sm mb-4" data-lang="vi">&#272;&#7897;i xe &#273;a d&#7841;ng t&#7915; 4 &#273;&#7871;n 16 ch&#7895;, xe &#273;&#7901;i m&#7899;i, b&#7843;o d&#432;&#7905;ng &#273;&#7883;nh k&#7923;. Giao xe t&#7841;i s&#226;n bay, kh&#225;ch s&#7841;n ho&#7863;c b&#7845;t k&#7923; &#273;&#7883;a &#273;i&#7875;m n&#224;o t&#7841;i &#272;&#224; N&#7861;ng.</p>
+          <p class="text-navy/65 text-sm mb-4" data-lang="en">Diverse fleet from 4 to 16-seaters, late-model vehicles, regularly serviced. Delivery at airport, hotel or anywhere in Da Nang.</p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">B&#7843;o hi&#7875;m &#273;&#7847;y &#273;&#7911;</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">H&#7895; tr&#7907; 24/7</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">GPS mi&#7877;n ph&#237;</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">Full Insurance</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">24/7 Support</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">Free GPS</span>
+          </div>
+          <a href="#booking" class="btn-primary text-sm" data-lang="vi">&#272;&#7863;t Xe Ngay</a>
+          <a href="#booking" class="btn-primary text-sm" data-lang="en">Book a Car</a>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-lift fade-up" style="transition-delay:.15s">
+        <img src="images/flight-tickets.jpg" alt="Ve may bay" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/600x300/0D2B6B/C9A84C?text=Flight+Tickets'" />
+        <div class="p-7">
+          <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="vi">&#9992; V&#233; M&#225;y Bay Gi&#225; T&#7889;t</h3>
+          <h3 class="font-display font-bold text-xl text-navy mb-2" data-lang="en">&#9992; Best-Price Flights</h3>
+          <p class="text-navy/65 text-sm mb-4" data-lang="vi">So s&#225;nh gi&#225; v&#224; &#273;&#7863;t v&#233; m&#225;y bay n&#7897;i &#273;&#7883;a &amp; qu&#7889;c t&#7871;. &#431;u &#273;&#227;i s&#7899;m, l&#7883;ch bay linh ho&#7841;t, thanh to&#225;n d&#7877; d&#224;ng.</p>
+          <p class="text-navy/65 text-sm mb-4" data-lang="en">Compare and book domestic &amp; international flights. Early-bird deals, flexible schedules, easy payment.</p>
+          <div class="flex flex-wrap gap-2 mb-5">
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">N&#7897;i &#273;&#7883;a &amp; Qu&#7889;c t&#7871;</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">Gi&#225; t&#7889;t nh&#7845;t</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="vi">H&#7895; tr&#7907; &#273;&#7893;i/ho&#224;n</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">Domestic &amp; International</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">Best Price</span>
+            <span class="text-xs bg-navy/10 text-navy px-3 py-1 rounded-full" data-lang="en">Change/Refund Support</span>
+          </div>
+          <a href="#booking" class="btn-primary text-sm" data-lang="vi">T&#432; V&#7845;n V&#233; Bay</a>
+          <a href="#booking" class="btn-primary text-sm" data-lang="en">Get Flight Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOUR & BLOG -->
+<section id="tour" class="py-20 px-6 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="vi">Tour N&#7893;i B&#7853;t &amp; Blog</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="en">Featured Tours &amp; Blog</h2>
+      <p class="text-navy/60 max-w-lg mx-auto" data-lang="vi">H&#224;nh tr&#236;nh do Tritravel thi&#7871;t k&#7871; t&#7881; m&#7881;, t&#7915;ng ng&#224;y t&#7915;ng tr&#7843;i nghi&#7879;m</p>
+      <p class="text-navy/60 max-w-lg mx-auto" data-lang="en">Itineraries meticulously crafted, day by day, experience by experience</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 mb-16">
+      <div class="card-lift bg-cream rounded-2xl overflow-hidden border border-navy/10 fade-up">
+        <div class="relative">
+          <img src="images/tour-danang-hoian.jpg" alt="Da Nang Hoi An" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x250/0D2B6B/C9A84C?text=Da+Nang+Hoi+An'" />
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="vi">1 Ng&#224;y</div>
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="en">1 Day</div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="vi">&#272;&#224; N&#7861;ng &#8211; H&#7897;i An C&#7893; K&#237;nh</h4>
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="en">Da Nang &#8211; Ancient Hoi An</h4>
+          <p class="text-navy/60 text-sm mb-3" data-lang="vi">Kh&#225;m ph&#225; ph&#7889; c&#7893; H&#7897;i An, th&#7843; &#273;&#232;n l&#7891;ng, th&#432;&#7903;ng th&#7913;c &#7849;m th&#7921;c &#273;&#432;&#7901;ng ph&#7889;.</p>
+          <p class="text-navy/60 text-sm mb-3" data-lang="en">Explore Hoi An ancient town, release lanterns, enjoy street food.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-bold" style="color:#A8852E" data-lang="vi">T&#7915; 350.000&#8363;</span>
+            <span class="font-bold" style="color:#A8852E" data-lang="en">From $15</span>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="vi">&#272;&#7863;t Tour</a>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="en">Book Tour</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-lift bg-cream rounded-2xl overflow-hidden border border-navy/10 fade-up" style="transition-delay:.1s">
+        <div class="relative">
+          <img src="images/tour-bana-hills.jpg" alt="Ba Na Hills" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x250/1A3F9A/ffffff?text=Ba+Na+Hills'" />
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="vi">1 Ng&#224;y</div>
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="en">1 Day</div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="vi">B&#224; N&#224; Hills &#8211; C&#7847;u V&#224;ng</h4>
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="en">Ba Na Hills &#8211; Golden Bridge</h4>
+          <p class="text-navy/60 text-sm mb-3" data-lang="vi">Tham quan c&#7847;u V&#224;ng huy&#7873;n tho&#7841;i, l&#224;ng Ph&#225;p c&#7893; v&#224; v&#432;&#7901;n hoa Le Jardin.</p>
+          <p class="text-navy/60 text-sm mb-3" data-lang="en">Visit the legendary Golden Bridge, French Village and Le Jardin garden.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-bold" style="color:#A8852E" data-lang="vi">T&#7915; 750.000&#8363;</span>
+            <span class="font-bold" style="color:#A8852E" data-lang="en">From $30</span>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="vi">&#272;&#7863;t Tour</a>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="en">Book Tour</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-lift bg-cream rounded-2xl overflow-hidden border border-navy/10 fade-up" style="transition-delay:.2s">
+        <div class="relative">
+          <img src="images/tour-hue.jpg" alt="Hue Co Do" class="w-full h-48 object-cover" onerror="this.src='https://placehold.co/400x250/081B47/C9A84C?text=Hue+Imperial+City'" />
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="vi">2 Ng&#224;y</div>
+          <div class="absolute top-3 left-3 bg-yellow-400 text-navy text-xs font-bold px-3 py-1 rounded-full" data-lang="en">2 Days</div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="vi">Hu&#7871; C&#7889; &#272;&#244; L&#7883;ch S&#7917;</h4>
+          <h4 class="font-display font-bold text-navy text-lg mb-1" data-lang="en">Hue Imperial City</h4>
+          <p class="text-navy/60 text-sm mb-3" data-lang="vi">&#272;&#7841;i N&#7897;i, l&#259;ng t&#7849;m vua, ch&#249;a Thi&#234;n M&#7909; v&#224; thuy&#7873;n r&#7891;ng tr&#234;n s&#244;ng H&#432;&#417;ng.</p>
+          <p class="text-navy/60 text-sm mb-3" data-lang="en">Citadel, royal tombs, Thien Mu Pagoda and dragon boat on Perfume River.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-bold" style="color:#A8852E" data-lang="vi">T&#7915; 1.200.000&#8363;</span>
+            <span class="font-bold" style="color:#A8852E" data-lang="en">From $50</span>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="vi">&#272;&#7863;t Tour</a>
+            <a href="#booking" class="text-navy text-sm font-semibold border border-navy/30 px-3 py-1 rounded-full hover:bg-navy hover:text-white transition" data-lang="en">Book Tour</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="font-display font-bold text-2xl text-navy mb-6 fade-up" data-lang="vi">&#128218; B&#224;i Vi&#7871;t M&#7899;i Nh&#7845;t</h3>
+    <h3 class="font-display font-bold text-2xl text-navy mb-6 fade-up" data-lang="en">&#128218; Latest Blog Posts</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="flex gap-4 bg-cream rounded-xl p-5 card-lift border border-navy/10 fade-up">
+        <img src="images/blog-sunset-danang.jpg" alt="Blog" class="w-24 h-24 rounded-xl object-cover flex-shrink-0" onerror="this.src='https://placehold.co/100x100/0D2B6B/C9A84C?text=Blog'" />
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest" style="color:#A8852E" data-lang="vi">POV &#183; &#272;&#224; N&#7861;ng</span>
+          <span class="text-xs font-semibold uppercase tracking-widest" style="color:#A8852E" data-lang="en">POV &#183; Da Nang</span>
+          <h4 class="font-display font-bold text-navy text-base mt-1 mb-1" data-lang="vi">5 &#273;i&#7875;m xem ho&#224;ng h&#244;n &#273;&#7865;p nh&#7845;t &#272;&#224; N&#7861;ng m&#224; &#237;t ai bi&#7871;t</h4>
+          <h4 class="font-display font-bold text-navy text-base mt-1 mb-1" data-lang="en">5 Best Sunset Spots in Da Nang That Few Know About</h4>
+          <p class="text-navy/55 text-xs" data-lang="vi">Nh&#7919;ng g&#243;c nh&#236;n b&#237; &#7849;n ch&#7881; ng&#432;&#7901;i &#273;&#7883;a ph&#432;&#417;ng m&#7899;i bi&#7871;t...</p>
+          <p class="text-navy/55 text-xs" data-lang="en">Secret viewpoints only locals know about...</p>
+        </div>
+      </div>
+      <div class="flex gap-4 bg-cream rounded-xl p-5 card-lift border border-navy/10 fade-up" style="transition-delay:.1s">
+        <img src="images/blog-visa-korea.jpg" alt="Blog Visa" class="w-24 h-24 rounded-xl object-cover flex-shrink-0" onerror="this.src='https://placehold.co/100x100/1A3F9A/ffffff?text=Blog'" />
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-widest" style="color:#A8852E" data-lang="vi">H&#432;&#7899;ng D&#7851;n &#183; Visa</span>
+          <span class="text-xs font-semibold uppercase tracking-widest" style="color:#A8852E" data-lang="en">Guide &#183; Visa</span>
+          <h4 class="font-display font-bold text-navy text-base mt-1 mb-1" data-lang="vi">C&#225;ch xin visa H&#224;n Qu&#7889;c t&#7921; t&#250;c 2025 &#8211; T&#7881; l&#7879; &#273;&#7853;u cao</h4>
+          <h4 class="font-display font-bold text-navy text-base mt-1 mb-1" data-lang="en">How to Apply for Korean Visa 2025 &#8211; High Approval Tips</h4>
+          <p class="text-navy/55 text-xs" data-lang="vi">H&#7891; s&#417; c&#7847;n g&#236;, chu&#7849;n b&#7883; ra sao &#273;&#7875; kh&#244;ng b&#7883; t&#7915; ch&#7889;i...</p>
+          <p class="text-navy/55 text-xs" data-lang="en">What documents needed and how to prepare to avoid rejection...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-20 px-6 bg-navy">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-14 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="vi">Kh&#225;ch H&#224;ng N&#243;i G&#236;?</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-white mt-4 mb-3" data-lang="en">What Clients Say</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="testimonial-card p-6 fade-up">
+        <div class="mb-3" style="color:#C9A84C">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="vi">"Tritravel r&#7845;t nhi&#7879;t t&#236;nh v&#224; chuy&#234;n nghi&#7879;p! Tour H&#7897;i An do Tritravel t&#7893; ch&#7913;c v&#432;&#7907;t xa mong &#273;&#7907;i c&#7911;a m&#236;nh. Nh&#7845;t &#273;&#7883;nh s&#7869; quay l&#7841;i l&#7847;n sau!"</p>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="en">"Tritravel is very enthusiastic and professional! The Hoi An tour far exceeded my expectations. Will definitely come back!"</p>
+        <div class="flex items-center gap-3">
+          <img src="images/client-1.jpg" alt="Chi Lan" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://placehold.co/40x40/C9A84C/ffffff?text=L'" />
+          <div>
+            <div class="font-semibold text-navy text-sm">Ch&#7883; Nguy&#7877;n Lan</div>
+            <div class="text-navy/50 text-xs" data-lang="vi">TP.HCM</div>
+            <div class="text-navy/50 text-xs" data-lang="en">Ho Chi Minh City</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card p-6 fade-up" style="transition-delay:.1s">
+        <div class="mb-3" style="color:#C9A84C">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="vi">"Nh&#7901; Tritravel t&#432; v&#7845;n m&#224; m&#236;nh &#273;&#7853;u visa H&#224;n Qu&#7889;c ngay l&#7847;n &#273;&#7847;u. D&#7883;ch v&#7909; nhanh, gi&#225; h&#7907;p l&#253;, th&#225;i &#273;&#7897; tuy&#7879;t v&#7901;i!"</p>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="en">"Thanks to Tritravel's guidance, I got Korean visa approved on the first try. Fast, affordable, excellent service!"</p>
+        <div class="flex items-center gap-3">
+          <img src="images/client-2.jpg" alt="Anh Minh" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://placehold.co/40x40/0D2B6B/ffffff?text=M'" />
+          <div>
+            <div class="font-semibold text-navy text-sm">Anh Tr&#7847;n Minh</div>
+            <div class="text-navy/50 text-xs" data-lang="vi">H&#224; N&#7897;i</div>
+            <div class="text-navy/50 text-xs" data-lang="en">Hanoi</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card p-6 fade-up" style="transition-delay:.2s">
+        <div class="mb-3" style="color:#C9A84C">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="vi">"Thu&#234; xe t&#7921; l&#225;i c&#7911;a Tritravel, xe m&#7899;i, s&#7841;ch s&#7869;, th&#7911; t&#7909;c nhanh g&#7885;n. Tritravel h&#7895; tr&#7907; 24/7, r&#7845;t y&#234;n t&#226;m khi l&#225;i xe &#7903; &#272;&#224; N&#7861;ng!"</p>
+        <p class="text-navy/80 text-sm leading-relaxed mb-4" data-lang="en">"Rented a self-drive car from Tritravel &#8211; new, clean vehicle, quick paperwork. 24/7 support gave me full peace of mind!"</p>
+        <div class="flex items-center gap-3">
+          <img src="images/client-3.jpg" alt="Sarah Kim" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://placehold.co/40x40/A8852E/ffffff?text=S'" />
+          <div>
+            <div class="font-semibold text-navy text-sm">Sarah Kim</div>
+            <div class="text-navy/50 text-xs" data-lang="vi">H&#224;n Qu&#7889;c</div>
+            <div class="text-navy/50 text-xs" data-lang="en">South Korea</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="booking" class="py-20 px-6 bg-cream">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-12 fade-up">
+      <span class="gold-line"></span>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="vi">&#272;&#7863;t L&#7883;ch T&#432; V&#7845;n</h2>
+      <h2 class="font-display font-bold text-3xl md:text-4xl text-navy mt-4 mb-3" data-lang="en">Book a Consultation</h2>
+      <p class="text-navy/60" data-lang="vi">&#272;i&#7873;n th&#244;ng tin b&#234;n d&#432;&#7899;i, m&#236;nh s&#7869; li&#234;n h&#7879; trong v&#242;ng 2 gi&#7901; &#10024;</p>
+      <p class="text-navy/60" data-lang="en">Fill in your details below and I'll get back to you within 2 hours &#10024;</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 fade-up">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="vi">H&#7885; v&#224; t&#234;n *</label>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="en">Full Name *</label>
+          <input type="text" id="f-name" class="form-input" placeholder="Nguyen Van A" />
+        </div>
+        <div>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="vi">S&#7889; &#273;i&#7879;n tho&#7841;i *</label>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="en">Phone Number *</label>
+          <input type="tel" id="f-phone" class="form-input" placeholder="0935 191 394" />
+        </div>
+        <div>
+          <label class="block text-navy/70 text-sm font-medium mb-2">Email</label>
+          <input type="email" id="f-email" class="form-input" placeholder="email@example.com" />
+        </div>
+        <div>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="vi">D&#7883;ch v&#7909; quan t&#226;m *</label>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="en">Service of Interest *</label>
+          <select id="f-service" class="form-input">
+            <option value="" data-lang="vi">-- Ch&#7885;n d&#7883;ch v&#7909; --</option>
+            <option value="" data-lang="en">-- Select service --</option>
+            <option value="tour"   data-lang="vi">Tour du l&#7883;ch</option>
+            <option value="tour"   data-lang="en">Tours</option>
+            <option value="visa"   data-lang="vi">Visa &amp; D&#7883;ch thu&#7853;t</option>
+            <option value="visa"   data-lang="en">Visa &amp; Translation</option>
+            <option value="car"    data-lang="vi">Thu&#234; xe t&#7921; l&#225;i</option>
+            <option value="car"    data-lang="en">Car Rental</option>
+            <option value="flight" data-lang="vi">V&#233; m&#225;y bay</option>
+            <option value="flight" data-lang="en">Flight Tickets</option>
+          </select>
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="vi">Ng&#224;y d&#7921; ki&#7871;n &amp; Ghi ch&#250;</label>
+          <label class="block text-navy/70 text-sm font-medium mb-2" data-lang="en">Planned Date &amp; Notes</label>
+          <textarea id="f-note" class="form-input h-28 resize-none" placeholder="Vi du: Gia dinh 4 nguoi, muon di Ba Na cuoi thang 8..."></textarea>
+        </div>
+      </div>
+      <div class="mt-7 text-center">
+        <button onclick="submitBooking()" class="btn-primary text-base px-10" style="cursor:pointer;border:none">
+          <span data-lang="vi">&#128233; G&#7917;i Y&#234;u C&#7847;u T&#432; V&#7845;n</span>
+          <span data-lang="en">&#128233; Send Consultation Request</span>
+        </button>
+      </div>
+      <div id="success-msg" class="hidden mt-5 text-center bg-green-50 border border-green-200 text-green-700 rounded-xl py-3 px-5 text-sm">
+        <span data-lang="vi">&#9989; C&#7843;m &#417;n b&#7841;n! M&#236;nh s&#7869; li&#234;n h&#7879; l&#7841;i trong v&#242;ng 2 gi&#7901; nh&#233;!</span>
+        <span data-lang="en">&#9989; Thank you! I'll contact you within 2 hours!</span>
+      </div>
+      <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-navy/60">
+        <span data-lang="vi">Ho&#7863;c li&#234;n h&#7879; tr&#7921;c ti&#7871;p:</span>
+        <span data-lang="en">Or contact directly:</span>
+        <a href="https://wa.me/84901234567" class="flex items-center gap-1 text-green-600 font-semibold hover:underline" target="_blank">&#128241; WhatsApp</a>
+        <a href="https://m.me/tritravel"     class="flex items-center gap-1 text-blue-600 font-semibold hover:underline"  target="_blank">&#128172; Messenger</a>
+        <a href="https://zalo.me/0935191394" class="flex items-center gap-1 text-blue-500 font-semibold hover:underline"  target="_blank">&#128153; Zalo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-12 px-6" style="background:#081B47">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/></svg>
+          <span class="text-white font-display font-bold text-xl">Tri<span style="color:#C9A84C">Travel</span></span>
+        </div>
+        <p class="text-white/50 text-sm leading-relaxed" data-lang="vi">&#272;&#432;a &#272;&#224; N&#7861;ng l&#234;n b&#7843;n &#273;&#7891; du l&#7883;ch th&#7867; gi&#7899;i qua nh&#7919;ng h&#224;nh tr&#236;nh ch&#7841;m &#273;&#7871;n tr&#225;i tim.</p>
+        <p class="text-white/50 text-sm leading-relaxed" data-lang="en">Putting Da Nang on the world tourism map through heart-touching journeys.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="vi">D&#7883;ch V&#7909;</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="en">Services</h4>
+        <ul class="space-y-2 text-white/50 text-sm">
+          <li><a href="#visa"      class="hover:text-yellow-400 transition" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a><a href="#visa"      class="hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a></li>
+          <li><a href="#tour"      class="hover:text-yellow-400 transition" data-lang="vi">Tour &#272;&#224; N&#7861;ng</a><a href="#tour"      class="hover:text-yellow-400 transition" data-lang="en">Da Nang Tours</a></li>
+          <li><a href="#transport" class="hover:text-yellow-400 transition" data-lang="vi">Thu&#234; Xe T&#7921; L&#225;i</a><a href="#transport" class="hover:text-yellow-400 transition" data-lang="en">Car Rental</a></li>
+          <li><a href="#transport" class="hover:text-yellow-400 transition" data-lang="vi">V&#233; M&#225;y Bay</a><a href="#transport" class="hover:text-yellow-400 transition" data-lang="en">Flight Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="vi">Li&#234;n H&#7879;</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="en">Contact</h4>
+        <ul class="space-y-2 text-white/50 text-sm">
+          <li>&#128205; <span data-lang="vi">&#272;&#224; N&#7861;ng, Vi&#7879;t Nam</span><span data-lang="en">Da Nang, Vietnam</span></li>
+          <li>&#128241; <a href="tel:+84901234567" class="hover:text-yellow-400 transition">0935 191 394</a></li>
+          <li>&#128231; <a href="mailto:tritravel.vn@gmail.com" class="hover:text-yellow-400 transition">tritravel.vn@gmail.com</a></li>
+          <li>
+            <div class="flex gap-3 mt-3">
+              <a href="https://tiktok.com/@tritravel"   target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">&#127925;</a>
+              <a href="https://facebook.com/tritravel"  target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">&#128216;</a>
+              <a href="https://instagram.com/tritravel" target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">&#128247;</a>
+              <a href="https://youtube.com/@tritravel"  target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">&#9654;</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 text-center text-white/30 text-xs">
+      <span data-lang="vi">&#169; 2025 TriTravel. &#272;&#432;&#7907;c t&#7841;o ra v&#7899;i &#10084; t&#7841;i &#272;&#224; N&#7861;ng</span>
+      <span data-lang="en">&#169; 2025 TriTravel. Made with &#10084; in Da Nang</span>
+    </div>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+  // 1. CHUYEN NGON NGU
+  function setLang(lang) {
+    if (lang === 'en') {
+      document.body.classList.add('lang-en');
+    } else {
+      document.body.classList.remove('lang-en');
+    }
+    var btnVi = document.getElementById('btn-vi');
+    var btnEn = document.getElementById('btn-en');
+    var mbVi  = document.getElementById('mb-btn-vi');
+    var mbEn  = document.getElementById('mb-btn-en');
+    if (btnVi) btnVi.classList.toggle('active', lang === 'vi');
+    if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+    if (mbVi)  mbVi.classList.toggle('active', lang === 'vi');
+    if (mbEn)  mbEn.classList.toggle('active', lang === 'en');
+    try { localStorage.setItem('tritravel-lang', lang); } catch(e) {}
+  }
+  window.addEventListener('DOMContentLoaded', function() {
+    var saved = 'vi';
+    try { saved = localStorage.getItem('tritravel-lang') || 'vi'; } catch(e) {}
+    setLang(saved);
+  });
+
+  // 2. MENU MOBILE
+  function toggleMenu() {
+    var m = document.getElementById('mobile-menu');
+    if (m) m.classList.toggle('open');
+  }
+
+  // 3. HEADER SCROLL
+  window.addEventListener('scroll', function() {
+    var h = document.getElementById('header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // 4. FADE UP KHI SCROLL
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  // 5. BOOKING FORM
+  function submitBooking() {
+    var name  = document.getElementById('f-name').value.trim();
+    var phone = document.getElementById('f-phone').value.trim();
+    var isEn  = document.body.classList.contains('lang-en');
+    if (!name || !phone) {
+      alert(isEn ? 'Please fill in your name and phone number.' : 'Ban vui long dien ho ten va so dien thoai!');
+      return;
+    }
+    var msg = document.getElementById('success-msg');
+    if (msg) msg.classList.remove('hidden');
+    ['f-name','f-phone','f-email','f-service','f-note'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    if (msg) msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+</body>
+</html>
