@@ -459,6 +459,18 @@ body.lang-en [data-lang="en"]{display:revert!important}
   document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
 
   // Copy link
+  function setLang(lang) {
+  if (lang === 'en') { document.body.classList.add('lang-en'); }
+  else { document.body.classList.remove('lang-en'); }
+  var vi = document.getElementById('btn-vi'); if(vi) vi.classList.toggle('active', lang==='vi');
+  var en = document.getElementById('btn-en'); if(en) en.classList.toggle('active', lang==='en');
+  try { localStorage.setItem('tritravel-lang', lang); } catch(e) {}
+}
+window.addEventListener('DOMContentLoaded', function() {
+  var saved = 'vi';
+  try { saved = localStorage.getItem('tritravel-lang') || 'vi'; } catch(e) {}
+  setLang(saved);
+});
   function copyLink() {
     navigator.clipboard.writeText(window.location.href).then(function() {
       document.getElementById('copy-msg').classList.remove('hidden');
