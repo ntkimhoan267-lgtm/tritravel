@@ -103,6 +103,12 @@
     /* Share buttons */
     .share-btn { transition: all .2s; }
     .share-btn:hover { transform: translateY(-3px); }
+    .lang-btn{cursor:pointer;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;transition:all .2s;background:transparent;border:none}
+.lang-btn.active{background:#C9A84C;color:#0D2B6B}
+.lang-btn:not(.active){color:rgba(255,255,255,.6)}
+[data-lang="en"]{display:none!important}
+body.lang-en [data-lang="vi"]{display:none!important}
+body.lang-en [data-lang="en"]{display:revert!important}
   </style>
 </head>
 <body class="font-body">
@@ -125,6 +131,11 @@
       <a href="index.html#visa" class="text-white/80 hover:text-yellow-400 transition">Visa & Dịch Thuật</a>
       <a href="index.html#tour" class="text-white/80 hover:text-yellow-400 transition">Tour</a>
       <a href="index.html#booking" class="btn-primary py-2 px-5 text-sm">Đặt Lịch</a>
+      <div class="flex items-center gap-1 border border-white/20 rounded-full px-2 py-1">
+  <button class="lang-btn active" id="btn-vi" onclick="setLang('vi')">VN</button>
+  <span class="text-white/30 text-xs">|</span>
+  <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+</div>
     </nav>
     <a href="index.html" class="md:hidden text-white/80 text-sm flex items-center gap-1">← Về trang chủ</a>
   </div>
