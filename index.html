@@ -91,7 +91,188 @@
     a{text-decoration:none}
   [data-lang="en"] { display: none !important; }
 body.lang-en [data-lang="vi"] { display: none !important; }
-body.lang-en [data-lang="en"] { display: inline-block !important; }</style>
+body.lang-en [data-lang="en"] { display: inline-block !important; }
+  
+  /* ===== POSTER SHOWCASE SECTION ===== */
+.poster-section {
+  position: relative;
+  background: radial-gradient(ellipse at 30% 50%, #0F3580 0%, #0D2B6B 40%, #081B47 100%);
+  overflow: hidden;
+  padding: 6rem 1.5rem;
+}
+.poster-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(201,168,76,0.12) 0%, transparent 35%),
+    radial-gradient(circle at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 30%);
+  pointer-events: none;
+}
+.poster-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .poster-grid { grid-template-columns: 1fr 1.1fr; gap: 5rem; }
+}
+.poster-frame {
+  position: relative;
+  max-width: 460px;
+  margin: 0 auto;
+  width: 100%;
+}
+.poster-frame::before,
+.poster-frame::after {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border: 2px solid #C9A84C;
+  z-index: 1;
+  transition: all .5s ease;
+}
+.poster-frame::before {
+  top: -18px;
+  left: -18px;
+  border-right: none;
+  border-bottom: none;
+}
+.poster-frame::after {
+  bottom: -18px;
+  right: -18px;
+  border-left: none;
+  border-top: none;
+}
+.poster-image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.45), 0 0 0 1px rgba(201,168,76,0.25), 0 0 80px rgba(201,168,76,0.15);
+  transition: transform .6s ease;
+}
+.poster-image-wrap:hover { transform: translateY(-8px); }
+.poster-image-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 1.2s ease;
+}
+.poster-image-wrap:hover img { transform: scale(1.04); }
+.poster-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(8,27,71,0.85);
+  border: 1px solid rgba(201,168,76,0.45);
+  color: #C9A84C;
+  font-family: 'Playfair Display', serif;
+  font-size: .7rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 30px;
+}
+.poster-content { color: white; }
+.poster-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  color: #C9A84C;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .35em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.poster-eyebrow .dash {
+  width: 36px;
+  height: 1px;
+  background: #C9A84C;
+}
+.poster-headline {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.poster-headline .gold-word {
+  background: linear-gradient(135deg, #E2C06A 0%, #C9A84C 50%, #A8852E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+.poster-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  color: rgba(255,255,255,0.55);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.poster-quote {
+  border-left: 2px solid rgba(201,168,76,0.5);
+  padding-left: 1.4rem;
+  color: rgba(255,255,255,0.78);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 2.2rem;
+  max-width: 520px;
+}
+.poster-signature {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+}
+.poster-signature-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  font-style: italic;
+  color: #C9A84C;
+  line-height: 1;
+}
+.poster-signature-name {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.poster-signature-role {
+  color: rgba(255,255,255,0.5);
+  font-size: .82rem;
+}
+.poster-cta-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.poster-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.25);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: .8rem;
+  color: rgba(255,255,255,0.75);
+}
+.poster-stat-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #C9A84C;
+  box-shadow: 0 0 12px #C9A84C;
+}</style>
 </head>
 <body class="font-body">
 
@@ -201,7 +382,65 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }</style>
   </div>
 </section>
 
-<!-- TRIP VALUES -->
+<!-- POSTER SHOWCASE -->
+<section id="brand-poster" class="poster-section">
+  <div class="poster-grid">
+    <div class="poster-frame fade-up">
+      <div class="poster-image-wrap">
+        <img src="images/poster-danang.jpg" alt="Tritravel - Da Nang Poster"
+             onerror="this.src='https://placehold.co/800x1067/0D2B6B/C9A84C?text=Da+Nang'" />
+        <div class="poster-badge">Tritravel &times; &#272;&#224; N&#7861;ng</div>
+      </div>
+    </div>
+
+    <div class="poster-content fade-up" style="transition-delay:.15s">
+      <div class="poster-eyebrow">
+        <span class="dash"></span>
+        <span data-lang="vi">Th&#432;&#417;ng Hi&#7879;u C&#225; Nh&#226;n</span>
+        <span data-lang="en">Personal Brand</span>
+      </div>
+
+      <h2 class="poster-headline">
+        <span data-lang="vi">M&#7897;t mi&#7873;n &#273;&#7845;t &#273;&#7875; <span class="gold-word">y&#234;u</span>,<br/>m&#7897;t h&#224;nh tr&#236;nh &#273;&#7875; <span class="gold-word">nh&#7899;</span>.</span>
+        <span data-lang="en">A land to <span class="gold-word">love</span>,<br/>a journey to <span class="gold-word">remember</span>.</span>
+      </h2>
+
+      <div class="poster-subtitle">
+        <span data-lang="vi">&#272;&#224; N&#7861;ng &#8211; Timeless Charm, Endless Memories</span>
+        <span data-lang="en">Da Nang &#8211; Timeless Charm, Endless Memories</span>
+      </div>
+
+      <p class="poster-quote">
+        <span data-lang="vi">Sinh ra t&#7915; nh&#7919;ng b&#236;nh minh tr&#234;n s&#244;ng H&#224;n, l&#7899;n l&#234;n c&#249;ng ti&#7871;ng chu&#244;ng ph&#7889; H&#7897;i v&#224; &#225;nh s&#225;ng C&#7847;u V&#224;ng &#8211; Tritravel mang theo c&#7843; m&#7897;t &#272;&#224; N&#7861;ng trong t&#7915;ng h&#224;nh tr&#236;nh.</span>
+        <span data-lang="en">Born from sunrises over the Han River, raised by the bells of Hoi An and the golden Ba Na light &#8211; Tritravel carries the soul of Da Nang into every journey.</span>
+      </p>
+
+      <div class="poster-signature">
+        <div class="poster-signature-mark">T.</div>
+        <div>
+          <div class="poster-signature-name">Tritravel</div>
+          <div class="poster-signature-role">
+            <span data-lang="vi">Ng&#432;&#7901;i D&#7851;n &#272;&#432;&#7901;ng &#272;&#224; N&#7861;ng</span>
+            <span data-lang="en">Da Nang Storyteller</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="poster-cta-row">
+        <a href="#booking" class="btn-primary text-sm">
+          <span data-lang="vi">B&#7855;t &#272;&#7847;u H&#224;nh Tr&#236;nh</span>
+          <span data-lang="en">Start Your Journey</span>
+        </a>
+        <div class="poster-stat-pill">
+          <span class="dot"></span>
+          <span data-lang="vi">&#272;ang nh&#7853;n &#273;&#7863;t l&#7883;ch 2026</span>
+          <span data-lang="en">Booking open for 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <!-- TRIP VALUES -->
 <section class="bg-navy py-20 px-6 clip-diag">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14 fade-up">
