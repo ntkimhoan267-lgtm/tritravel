@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nộp hồ sơ Visa online — TRI TRAVEL</title>
+<meta name="description" content="Gửi hộ chiếu và CCCD online, TRI TRAVEL kiểm tra và liên hệ tư vấn visa Nhật Bản, Hàn Quốc, Úc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14488F;        /* mực xanh con dấu nhập cảnh */
+  --ink-dark:#0D3164;
+  --paper:#FBFAF7;      /* giấy hồ sơ */
+  --card:#FFFFFF;
+  --text:#1E2733;
+  --muted:#6B7280;
+  --line:#DDD8CE;
+  --stamp:#C0392B;      /* đỏ dấu mộc — chỉ dùng cho dấu * và cảnh báo */
+  --ok:#1F7A55;
+  --radius:14px;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* ---------- Header ---------- */
+header{
+  background:var(--ink-dark);
+  color:#fff;
+  padding:28px 20px 0;
+}
+.header-inner{max-width:640px;margin:0 auto}
+.brand{
+  font-size:.8rem;font-weight:700;letter-spacing:.22em;
+  color:#AFC6EA;text-transform:uppercase;
+}
+.brand a{color:inherit;text-decoration:none}
+h1{
+  font-size:clamp(1.6rem,5.5vw,2.2rem);
+  font-weight:800;line-height:1.2;
+  margin:10px 0 8px;
+}
+.sub{color:#C9D8F0;font-size:.95rem;line-height:1.55;max-width:46ch;padding-bottom:22px}
+/* Dải MRZ — chữ ký thị giác của trang */
+.mrz{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;letter-spacing:.14em;
+  color:#7E9CCB;
+  border-top:1px dashed rgba(255,255,255,.25);
+  padding:10px 0 14px;
+  white-space:nowrap;overflow:hidden;
+  user-select:none;
+}
+
+/* ---------- Form ---------- */
+main{max-width:640px;margin:0 auto;padding:24px 20px 64px}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px 20px;
+  margin-bottom:18px;
+}
+.step{
+  display:flex;align-items:baseline;gap:10px;
+  margin-bottom:16px;
+}
+.step .no{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.75rem;color:var(--ink);
+  border:1.5px solid var(--ink);
+  border-radius:50%;
+  width:26px;height:26px;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.step h2{font-size:1.05rem;font-weight:700}
+label{
+  display:block;
+  font-size:.82rem;font-weight:500;color:var(--muted);
+  margin:14px 0 6px;
+}
+.req{color:var(--stamp)}
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  width:100%;
+  font:inherit;font-size:1rem;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#fff;color:var(--text);
+}
+input:focus,select:focus,textarea:focus{
+  outline:2px solid var(--ink);outline-offset:1px;border-color:var(--ink);
+}
+textarea{resize:vertical;min-height:76px}
+
+/* ---------- Khung scan upload ---------- */
+.slot{
+  position:relative;
+  border:1.5px dashed var(--line);
+  border-radius:12px;
+  padding:18px 14px;
+  text-align:center;
+  cursor:pointer;
+  transition:border-color .2s, background .2s;
+  margin-top:8px;
+  background:#FDFDFB;
+}
+.slot:hover,.slot:focus-visible{border-color:var(--ink);background:#F4F7FC;outline:none}
+.slot.filled{border-style:solid;border-color:var(--ok);background:#F3FAF6}
+/* 4 góc định vị như khung máy scan */
+.slot::before,.slot::after,
+.slot .c::before,.slot .c::after{
+  content:"";position:absolute;width:16px;height:16px;
+  border-color:var(--ink);border-style:solid;
+}
+.slot::before{top:6px;left:6px;border-width:2px 0 0 2px}
+.slot::after{top:6px;right:6px;border-width:2px 2px 0 0}
+.slot .c::before{bottom:6px;left:6px;border-width:0 0 2px 2px}
+.slot .c::after{bottom:6px;right:6px;border-width:0 2px 2px 0}
+.slot.filled::before,.slot.filled::after,
+.slot.filled .c::before,.slot.filled .c::after{border-color:var(--ok)}
+.slot input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.slot .icon{font-size:1.5rem;line-height:1;margin-bottom:6px}
+.slot .name{font-weight:700;font-size:.95rem}
+.slot .hint{font-size:.78rem;color:var(--muted);margin-top:3px}
+.slot img.preview{
+  max-width:100%;max-height:170px;
+  border-radius:8px;display:block;margin:0 auto 8px;
+}
+.slot .done{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:700;color:var(--ok);
+}
+.tip{
+  font-size:.8rem;color:var(--muted);
+  background:#F4F2EC;border-radius:8px;
+  padding:10px 12px;margin-top:14px;line-height:1.5;
+}
+
+/* ---------- Nút gửi ---------- */
+button.submit{
+  width:100%;
+  font:inherit;font-size:1.05rem;font-weight:700;
+  background:var(--ink);color:#fff;
+  border:none;border-radius:12px;
+  padding:16px;cursor:pointer;
+  transition:background .2s;
+}
+button.submit:hover{background:var(--ink-dark)}
+button.submit:disabled{background:#9AA7B8;cursor:wait}
+button.submit:focus-visible{outline:3px solid var(--ink-dark);outline-offset:2px}
+.privacy{font-size:.75rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
+.error{
+  display:none;
+  background:#FBEBE8;color:var(--stamp);
+  border:1px solid #EAC4BD;border-radius:10px;
+  padding:12px 14px;font-size:.9rem;margin-bottom:14px;
+}
+.error.show{display:block}
+
+/* ---------- Màn hình thành công ---------- */
+#success{display:none;text-align:center;padding:48px 20px}
+#success.show{display:block}
+.stamp-seal{
+  width:150px;height:150px;margin:0 auto 22px;
+  border:4px solid var(--ok);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--ok);
+  transform:rotate(-8deg);
+  font-weight:800;
+  animation:stampIn .45s cubic-bezier(.2,1.6,.4,1) both;
+}
+@keyframes stampIn{
+  from{transform:rotate(-8deg) scale(2.2);opacity:0}
+  to{transform:rotate(-8deg) scale(1);opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.stamp-seal{animation:none}}
+.stamp-seal .big{font-size:1.05rem;letter-spacing:.08em}
+.stamp-seal .mono{font-size:.7rem;margin-top:4px}
+#success h2{font-size:1.4rem;font-weight:800;margin-bottom:10px}
+#success p{color:var(--muted);line-height:1.6;max-width:42ch;margin:0 auto 8px}
+#success .code{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:500;color:var(--ink);font-size:1.05rem;
+}
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;
+  border-radius:50%;vertical-align:-3px;margin-right:8px;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{
+  text-align:center;font-size:.78rem;color:var(--muted);
+  padding:0 20px 40px;
+}
+footer a{color:var(--ink)}
+
+/* ---------- Khối form riêng cho Hàn Quốc ---------- */
+#krBlock{display:none}
+#krBlock.show{display:block}
+.kr-sub{
+  font-size:.9rem;font-weight:700;color:var(--ink);
+  margin:18px 0 4px;padding-top:14px;
+  border-top:1px dashed var(--line);
+}
+.kr-sub:first-of-type{border-top:none;padding-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:480px){.grid2{grid-template-columns:1fr}}
+/* nhóm nút chọn (radio dạng chip) */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips label{
+  margin:0;cursor:pointer;
+  border:1px solid var(--line);border-radius:999px;
+  padding:8px 14px;font-size:.9rem;color:var(--text);
+  background:#fff;transition:all .15s;user-select:none;
+}
+.chips input{position:absolute;opacity:0;width:0;height:0}
+.chips input:checked + span{color:#fff}
+.chips label:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff}
+.chips label:has(input:checked) span{color:#fff}
+/* bảng người đi cùng */
+.travel-row{
+  display:grid;grid-template-columns:2fr 1.2fr 1fr 1.2fr;gap:6px;margin-top:6px;
+}
+.travel-row input{padding:9px 10px;font-size:.9rem}
+.travel-head{
+  display:grid;grid-template-columns:2fr 1.2fr 1fr 1.2fr;gap:6px;
+  font-size:.72rem;color:var(--muted);margin-top:10px;font-weight:500;
+}
+@media(max-width:560px){
+  .travel-head{display:none}
+  .travel-row{grid-template-columns:1fr 1fr;gap:5px;
+    padding:10px;border:1px solid var(--line);border-radius:10px;background:#FDFDFB}
+}
+.kr-hint{font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.5}
+.spouse-box{display:none}
+.spouse-box.show{display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand"><a href="https://tritravel.vn">TRI TRAVEL</a> · Dịch vụ Visa</div>
+    <h1>Nộp hồ sơ visa online</h1>
+    <p class="sub">Chụp và gửi hộ chiếu + CCCD ngay tại đây. Hệ thống tự động kiểm tra thông tin, nhân viên TRI TRAVEL sẽ liên hệ tư vấn trong giờ làm việc.</p>
+    <div class="mrz" aria-hidden="true">P&lt;VNMTRITRAVEL&lt;&lt;VISA&lt;JAPAN&lt;KOREA&lt;AUSTRALIA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
+  </div>
+</header>
+
+<main>
+  <form id="visaForm" novalidate>
+    <div class="card">
+      <div class="step"><span class="no mono">1</span><h2>Thông tin liên hệ</h2></div>
+      <label for="full_name">Họ và tên <span class="req">*</span></label>
+      <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Nguyễn Văn A">
+      <label for="phone">Số điện thoại / Zalo <span class="req">*</span></label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" placeholder="ban@email.com (không bắt buộc)">
+      <label for="destination">Visa cần làm <span class="req">*</span></label>
+      <select id="destination" name="destination" required>
+        <option value="" disabled selected>Chọn quốc gia</option>
+        <option value="Nhật Bản">🇯🇵 Nhật Bản</option>
+        <option value="Hàn Quốc">🇰🇷 Hàn Quốc</option>
+        <option value="Úc">🇦🇺 Úc (Australia)</option>
+        <option value="Khác">Quốc gia khác</option>
+      </select>
+      <label for="note">Ghi chú</label>
+      <textarea id="note" name="note" placeholder="VD: đi du lịch tháng 10, đi cùng gia đình 4 người..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="no mono">2</span><h2>Ảnh giấy tờ</h2></div>
+
+      <div class="slot" id="slot-passport" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf" data-key="passport" aria-label="Tải ảnh hộ chiếu">
+        <div class="content">
+          <div class="icon">🛂</div>
+          <div class="name">Hộ chiếu — trang thông tin</div>
+          <div class="hint">Chụp rõ trang có ảnh và chữ ký, đủ 4 góc</div>
+        </div>
+      </div>
+
+      <div class="slot" id="slot-front" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf" data-key="cccd_front" aria-label="Tải ảnh CCCD mặt trước">
+        <div class="content">
+          <div class="icon">🪪</div>
+          <div class="name">CCCD — mặt trước</div>
+          <div class="hint">Mặt có ảnh chân dung</div>
+        </div>
+      </div>
+
+      <div class="slot" id="slot-back" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf" data-key="cccd_back" aria-label="Tải ảnh CCCD mặt sau">
+        <div class="content">
+          <div class="icon">🪪</div>
+          <div class="name">CCCD — mặt sau</div>
+          <div class="hint">Mặt có vân tay / mã QR</div>
+        </div>
+      </div>
+
+      <div class="tip">📸 Mẹo: đặt giấy tờ trên nền phẳng, đủ sáng, không loá, chữ đọc rõ. Có thể tải lên ảnh chụp hoặc file PDF. Ảnh mờ có thể phải chụp lại.</div>
+    </div>
+
+    <!-- ============ KHỐI FORM RIÊNG CHO VISA HÀN QUỐC ============ -->
+    <div class="card" id="krBlock">
+      <div class="step"><span class="no mono">3</span><h2>Thông tin khai visa Hàn Quốc</h2></div>
+      <p class="kr-hint">Vui lòng khai đầy đủ, chính xác. Thông tin dùng để điền đơn xin visa Hàn Quốc.</p>
+
+      <!-- Người liên hệ tại Việt Nam -->
+      <div class="kr-sub">Người liên hệ (tại Việt Nam)</div>
+      <div class="grid2">
+        <div>
+          <label>Họ và tên</label>
+          <input type="text" id="kr_contact_name" placeholder="Nguyễn Văn A">
+        </div>
+        <div>
+          <label>Ngày sinh</label>
+          <input type="text" id="kr_contact_dob" placeholder="DD/MM/YYYY" inputmode="numeric">
+        </div>
+        <div>
+          <label>Mối quan hệ</label>
+          <input type="text" id="kr_contact_relation" placeholder="VD: Chồng, Anh, Bạn...">
+        </div>
+        <div>
+          <label>Công việc</label>
+          <input type="text" id="kr_contact_job" placeholder="VD: Kinh doanh">
+        </div>
+      </div>
+      <label>Địa chỉ</label>
+      <input type="text" id="kr_contact_address" placeholder="Số nhà, đường, phường, thành phố">
+
+      <!-- Học vấn -->
+      <div class="kr-sub">Trình độ học vấn cao nhất</div>
+      <div class="chips">
+        <label><input type="radio" name="kr_edu" value="Thạc sĩ/Tiến sĩ"><span>Thạc sĩ / Tiến sĩ</span></label>
+        <label><input type="radio" name="kr_edu" value="Cử nhân"><span>Cử nhân (Đại học)</span></label>
+        <label><input type="radio" name="kr_edu" value="Trung học phổ thông"><span>Trung học phổ thông</span></label>
+        <label><input type="radio" name="kr_edu" value="Khác"><span>Khác</span></label>
+      </div>
+      <div class="grid2">
+        <div>
+          <label>Tên trường</label>
+          <input type="text" id="kr_school_name" placeholder="Trường đã tốt nghiệp">
+        </div>
+        <div>
+          <label>Địa chỉ trường</label>
+          <input type="text" id="kr_school_address" placeholder="Địa chỉ trường">
+        </div>
+      </div>
+
+      <!-- Nghề nghiệp -->
+      <div class="kr-sub">Nghề nghiệp hiện tại</div>
+      <div class="grid2">
+        <div>
+          <label>Chức vụ</label>
+          <input type="text" id="kr_job_title" placeholder="VD: Giáo viên, Nhân viên...">
+        </div>
+        <div>
+          <label>Tên cơ quan / công ty</label>
+          <input type="text" id="kr_company_name" placeholder="Nơi đang công tác">
+        </div>
+        <div>
+          <label>Địa chỉ công ty</label>
+          <input type="text" id="kr_company_address" placeholder="Địa chỉ nơi công tác">
+        </div>
+        <div>
+          <label>Số điện thoại công ty</label>
+          <input type="tel" id="kr_company_tel" placeholder="Số điện thoại cơ quan" inputmode="tel">
+        </div>
+      </div>
+
+      <!-- Hôn nhân -->
+      <div class="kr-sub">Tình trạng hôn nhân</div>
+      <div class="chips">
+        <label><input type="radio" name="kr_marital" value="Độc thân"><span>Độc thân</span></label>
+        <label><input type="radio" name="kr_marital" value="Đã kết hôn"><span>Đã kết hôn</span></label>
+        <label><input type="radio" name="kr_marital" value="Ly thân"><span>Ly thân</span></label>
+        <label><input type="radio" name="kr_marital" value="Ly hôn"><span>Ly hôn</span></label>
+        <label><input type="radio" name="kr_marital" value="Góa"><span>Góa</span></label>
+      </div>
+      <label>Số con (nếu có)</label>
+      <input type="text" id="kr_children" placeholder="VD: 2 — để trống nếu chưa có con" inputmode="numeric">
+
+      <!-- Thông tin vợ/chồng: chỉ hiện khi Đã kết hôn -->
+      <div class="spouse-box" id="krSpouse">
+        <div class="kr-sub">Thông tin vợ / chồng</div>
+        <div class="grid2">
+          <div>
+            <label>Họ và tên</label>
+            <input type="text" id="kr_spouse_name" placeholder="Họ tên vợ/chồng">
+          </div>
+          <div>
+            <label>Ngày sinh</label>
+            <input type="text" id="kr_spouse_dob" placeholder="DD/MM/YYYY" inputmode="numeric">
+          </div>
+          <div>
+            <label>Quốc tịch</label>
+            <input type="text" id="kr_spouse_nationality" placeholder="VD: Việt Nam">
+          </div>
+          <div>
+            <label>Số điện thoại</label>
+            <input type="tel" id="kr_spouse_phone" placeholder="Số liên lạc" inputmode="tel">
+          </div>
+        </div>
+        <label>Địa chỉ</label>
+        <input type="text" id="kr_spouse_address" placeholder="Địa chỉ vợ/chồng">
+      </div>
+
+      <!-- Người đi cùng -->
+      <div class="kr-sub">Người thân đi cùng chuyến này (nếu có)</div>
+      <div class="travel-head">
+        <span>Họ và tên</span><span>Ngày sinh</span><span>Quốc tịch</span><span>Quan hệ</span>
+      </div>
+      <div id="krCompanions"></div>
+
+      <!-- VSSID -->
+      <div class="kr-sub">Bảo hiểm xã hội (VSSID)</div>
+      <div class="grid2">
+        <div>
+          <label>Mã số VSSID</label>
+          <input type="text" id="kr_vssid" placeholder="Số VSSID">
+        </div>
+        <div>
+          <label>Mật khẩu VSSID</label>
+          <input type="text" id="kr_vssid_pw" placeholder="Mật khẩu đăng nhập VSSID">
+        </div>
+      </div>
+
+      <!-- Ngày nhập xuất cảnh -->
+      <div class="kr-sub">Ngày dự kiến đi Hàn Quốc</div>
+      <div class="grid2">
+        <div>
+          <label>Ngày nhập cảnh</label>
+          <input type="text" id="kr_arrival" placeholder="DD/MM/YYYY" inputmode="numeric">
+        </div>
+        <div>
+          <label>Ngày xuất cảnh</label>
+          <input type="text" id="kr_departure" placeholder="DD/MM/YYYY" inputmode="numeric">
+        </div>
+      </div>
+
+      <!-- Upload tờ khai (không bắt buộc) -->
+      <div class="kr-sub">Đính kèm tờ khai đã điền (nếu có)</div>
+      <div class="slot" id="slot-declaration" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf,.doc,.docx" data-key="declaration" aria-label="Tải tờ khai đã điền">
+        <div class="content">
+          <div class="icon">📄</div>
+          <div class="name">Tờ khai thông tin</div>
+          <div class="hint">Ảnh, PDF hoặc Word đều được</div>
+        </div>
+      </div>
+    </div>
+    <!-- ============ HẾT KHỐI FORM HÀN QUỐC ============ -->
+
+    <div class="error" id="errBox" role="alert"></div>
+    <button type="submit" class="submit" id="btnSubmit">Gửi hồ sơ</button>
+    <p class="privacy">🔒 Ảnh giấy tờ chỉ dùng cho mục đích làm visa và được TRI TRAVEL bảo mật.</p>
+  </form>
+
+  <div id="success">
+    <div class="stamp-seal">
+      <span class="big">ĐÃ TIẾP NHẬN</span>
+      <span class="mono">TRI TRAVEL ✦ VISA</span>
+    </div>
+    <h2>Gửi hồ sơ thành công!</h2>
+    <p>Mã hồ sơ của bạn: <span class="code" id="subId"></span></p>
+    <p>Nhân viên TRI TRAVEL sẽ kiểm tra và liên hệ với bạn qua điện thoại/Zalo trong giờ làm việc. Cảm ơn bạn đã tin tưởng!</p>
+  </div>
+</main>
+
+<footer>
+  Công ty TNHH Dịch Thuật Dịch Vụ và Du Lịch Trip — Đà Nẵng ·
+  <a href="https://tritravel.vn">tritravel.vn</a>
+</footer>
+
+<script>
+// ===================== CẤU HÌNH =====================
+// Dán URL Web App của Google Apps Script vào đây (dạng https://script.google.com/macros/s/AKfy.../exec)
+const API_URL = "https://script.google.com/macros/s/AKfycbzqfFeLhoHLERC_I6r33-oy8aTUMTyw-sifl3asruNEmWZn0wzKzODmu3K_EC_yMzm0Pg/exec";
+// ====================================================
+
+const files = { passport: null, cccd_front: null, cccd_back: null, declaration: null };
+
+// Nén ảnh phía client: tối đa 1800px cạnh dài, JPEG 85% -> upload nhanh hơn nhiều
+function compressImage(file, maxDim = 1600, quality = 0.8) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width: w, height: h } = img;
+      if (Math.max(w, h) > maxDim) {
+        const s = maxDim / Math.max(w, h);
+        w = Math.round(w * s); h = Math.round(h * s);
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      canvas.toBlob(
+        (blob) => resolve(blob && blob.size < file.size
+          ? new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" })
+          : file),
+        "image/jpeg", quality
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+document.querySelectorAll(".slot input[type=file]").forEach((input) => {
+  input.addEventListener("change", async () => {
+    const file = input.files[0];
+    if (!file) return;
+    const slot = input.closest(".slot");
+    const key = input.dataset.key;
+    const content = slot.querySelector(".content");
+    const name = content.querySelector(".name").textContent;
+
+    const isImage = file.type.startsWith("image/");
+    // Ảnh thì nén; PDF/Word giữ nguyên
+    const finalFile = isImage ? await compressImage(file) : file;
+    files[key] = finalFile;
+
+    if (isImage) {
+      content.innerHTML =
+        `<img class="preview" alt="Ảnh ${name}" src="${URL.createObjectURL(finalFile)}">` +
+        `<span class="done">✓ ${name} — bấm để chọn lại</span>`;
+    } else {
+      // PDF hoặc Word: hiện tên file thay vì ảnh
+      const ext = (file.name.split(".").pop() || "").toUpperCase();
+      content.innerHTML =
+        `<div class="icon">📎</div>` +
+        `<div class="name">${name}</div>` +
+        `<span class="done">✓ Đã tải: ${file.name} (${ext}) — bấm để chọn lại</span>`;
+    }
+    slot.classList.add("filled");
+  });
+});
+
+// ---------- Ẩn/hiện khối form Hàn theo lựa chọn nước ----------
+const krBlock = document.getElementById("krBlock");
+const destSelect = document.getElementById("destination");
+function toggleKrBlock() {
+  const isKorea = destSelect.value.indexOf("Hàn") !== -1;
+  krBlock.classList.toggle("show", isKorea);
+}
+destSelect.addEventListener("change", toggleKrBlock);
+
+// ---------- Hiện thông tin vợ/chồng khi chọn Đã kết hôn ----------
+const krSpouse = document.getElementById("krSpouse");
+document.querySelectorAll('input[name="kr_marital"]').forEach((r) => {
+  r.addEventListener("change", () => {
+    krSpouse.classList.toggle("show", r.value === "Đã kết hôn" && r.checked);
+  });
+});
+
+// ---------- Tạo 4 hàng người đi cùng ----------
+const krCompanions = document.getElementById("krCompanions");
+for (let i = 0; i < 4; i++) {
+  const row = document.createElement("div");
+  row.className = "travel-row";
+  row.innerHTML =
+    `<input type="text" placeholder="Họ và tên"    data-c="name">` +
+    `<input type="text" placeholder="Ngày sinh"    data-c="dob" inputmode="numeric">` +
+    `<input type="text" placeholder="Quốc tịch"    data-c="nat">` +
+    `<input type="text" placeholder="Quan hệ"      data-c="rel">`;
+  krCompanions.appendChild(row);
+}
+function collectCompanions() {
+  const out = [];
+  krCompanions.querySelectorAll(".travel-row").forEach((row) => {
+    const g = (k) => row.querySelector(`[data-c="${k}"]`).value.trim();
+    const name = g("name"), dob = g("dob"), nat = g("nat"), rel = g("rel");
+    if (name || dob || nat || rel) out.push({ name, dob, nationality: nat, relation: rel });
+  });
+  return out;
+}
+
+const form = document.getElementById("visaForm");
+const btn = document.getElementById("btnSubmit");
+const errBox = document.getElementById("errBox");
+
+function showError(msg) {
+  errBox.textContent = msg;
+  errBox.classList.add("show");
+  errBox.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errBox.classList.remove("show");
+
+  const fullName = form.full_name.value.trim();
+  const phone = form.phone.value.trim();
+  if (!fullName) return showError("Vui lòng nhập họ tên.");
+  if (!/^[0-9+ .()-]{8,15}$/.test(phone)) return showError("Số điện thoại chưa đúng, vui lòng kiểm tra lại.");
+  if (!form.destination.value) return showError("Vui lòng chọn loại visa cần làm.");
+  if (!files.passport) return showError("Vui lòng chụp/tải ảnh hộ chiếu.");
+  if (!files.cccd_front || !files.cccd_back) return showError("Vui lòng chụp/tải đủ 2 mặt CCCD.");
+
+  const isKorea = form.destination.value.indexOf("Hàn") !== -1;
+
+  // Chuyển ảnh sang base64 để gửi cho Apps Script
+  const toB64 = (file) => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(",")[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+
+  const val = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ""; };
+  const radioVal = (name) => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ""; };
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Đang gửi & kiểm tra hồ sơ...';
+
+  try {
+    const payload = {
+      full_name: fullName,
+      phone: phone,
+      email: form.email.value.trim(),
+      destination: form.destination.value,
+      note: form.note.value.trim(),
+      passport:   { b64: await toB64(files.passport),   mime: files.passport.type },
+      cccd_front: { b64: await toB64(files.cccd_front), mime: files.cccd_front.type },
+      cccd_back:  { b64: await toB64(files.cccd_back),  mime: files.cccd_back.type },
+    };
+
+    // Nếu là visa Hàn: gom thêm thông tin khách khai + file tờ khai (nếu có)
+    if (isKorea) {
+      payload.korea = {
+        contact_name:     val("kr_contact_name"),
+        contact_dob:      val("kr_contact_dob"),
+        contact_relation: val("kr_contact_relation"),
+        contact_job:      val("kr_contact_job"),
+        contact_address:  val("kr_contact_address"),
+        education:        radioVal("kr_edu"),
+        school_name:      val("kr_school_name"),
+        school_address:   val("kr_school_address"),
+        job_title:        val("kr_job_title"),
+        company_name:     val("kr_company_name"),
+        company_address:  val("kr_company_address"),
+        company_tel:      val("kr_company_tel"),
+        marital:          radioVal("kr_marital"),
+        children:         val("kr_children"),
+        spouse_name:        val("kr_spouse_name"),
+        spouse_dob:         val("kr_spouse_dob"),
+        spouse_nationality: val("kr_spouse_nationality"),
+        spouse_phone:       val("kr_spouse_phone"),
+        spouse_address:     val("kr_spouse_address"),
+        companions:       collectCompanions(),
+        vssid:            val("kr_vssid"),
+        vssid_pw:         val("kr_vssid_pw"),
+        arrival:          val("kr_arrival"),
+        departure:        val("kr_departure"),
+      };
+      if (files.declaration) {
+        payload.declaration = {
+          b64: await toB64(files.declaration),
+          mime: files.declaration.type || "application/octet-stream",
+          filename: files.declaration.name,
+        };
+      }
+    }
+
+    // Content-Type text/plain để tránh lỗi CORS preflight với Apps Script
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.detail || "Máy chủ đang bận, vui lòng thử lại sau ít phút.");
+    document.getElementById("subId").textContent = data.submission_id;
+    form.style.display = "none";
+    document.getElementById("success").classList.add("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    showError("Không gửi được hồ sơ: " + err.message);
+    btn.disabled = false;
+    btn.textContent = "Gửi hồ sơ";
+  }
+});
+</script>
+</body>
+</html>
