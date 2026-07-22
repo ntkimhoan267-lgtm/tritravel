@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nộp hồ sơ Visa Mỹ online — TRI TRAVEL</title>
+<meta name="description" content="Gửi ảnh thẻ 5x5, DS-160 và hộ chiếu online, TRI TRAVEL kiểm tra và liên hệ tư vấn visa Mỹ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D2B6B; --navy-light:#1A3F9A; --navy-dark:#081B47;
+  --gold:#C9A84C; --gold-light:#E2C06A; --gold-dark:#A8852E;
+  --cream:#F8F5EE;
+  /* giữ tên biến cũ, ánh xạ sang bảng màu chính của TriTravel */
+  --ink:#0D2B6B;
+  --ink-dark:#081B47;
+  --paper:#F8F5EE;
+  --card:#FFFFFF;
+  --text:#0D2B6B;
+  --muted:#5E6E90;
+  --line:rgba(13,43,107,.14);
+  --stamp:#C0392B;
+  --ok:#A8852E;
+  --radius:16px;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',system-ui,sans-serif;
+  background:var(--paper);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.mono{font-family:'IBM Plex Mono',monospace}
+a{text-decoration:none}
+
+/* ---------- Header / Masthead ---------- */
+.site-head{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#081B47 0%,#0D2B6B 55%,#12327F 100%);
+}
+.site-head::after{
+  content:"";position:absolute;top:-70px;right:-70px;
+  width:260px;height:260px;border-radius:50%;
+  border:1px solid rgba(201,168,76,.15);pointer-events:none;
+}
+.head-bar{
+  max-width:760px;margin:0 auto;position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 20px;
+}
+.logo{display:flex;align-items:center;gap:10px}
+.logo .wm b{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#fff;display:block;line-height:1}
+.logo .wm b span{color:var(--gold)}
+.logo .wm small{display:block;font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:2px}
+.head-nav{display:flex;align-items:center;gap:18px;font-size:.85rem;font-weight:500}
+.head-nav a{color:rgba(255,255,255,.75);transition:color .2s}
+.head-nav a:hover{color:var(--gold)}
+.head-nav a.active{color:var(--gold);font-weight:600}
+@media(max-width:520px){.head-nav a.hide-sm{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{max-width:760px;margin:0 auto;position:relative;z-index:2;padding:20px 20px 32px}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(226,192,106,.85);margin-bottom:14px;
+}
+.gold-line{display:inline-block;width:40px;height:2px;background:var(--gold);border-radius:2px}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,5.5vw,2.6rem);font-weight:700;line-height:1.14;
+  color:#fff;margin-bottom:12px;
+}
+.hero .sub{color:rgba(255,255,255,.68);font-size:.98rem;line-height:1.6;max-width:54ch}
+/* Dải MRZ — chi tiết đặc trưng của hộ chiếu */
+.mrz{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;letter-spacing:.14em;color:rgba(201,168,76,.6);
+  border-top:1px dashed rgba(201,168,76,.28);
+  margin-top:20px;padding-top:12px;
+  white-space:nowrap;overflow:hidden;user-select:none;
+}
+
+/* ---------- Form ---------- */
+main{max-width:760px;margin:0 auto;padding:34px 20px 60px}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 22px;margin-bottom:18px;
+  box-shadow:0 12px 34px rgba(13,43,107,.06);
+}
+.step{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.step .no{
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:1rem;color:var(--navy-dark);
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
+  border-radius:50%;
+  width:32px;height:32px;flex:none;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.step h2{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy)}
+label{display:block;font-size:.82rem;font-weight:500;color:var(--muted);margin:14px 0 6px}
+.req{color:var(--gold-dark);font-weight:700}
+input[type=text],input[type=tel],input[type=email],select,textarea{
+  width:100%;font:inherit;font-size:1rem;
+  padding:12px 14px;
+  border:1.5px solid var(--line);border-radius:10px;
+  background:#fff;color:var(--text);
+  transition:border-color .15s,box-shadow .15s;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,168,76,.18);
+}
+textarea{resize:vertical;min-height:76px}
+
+/* ---------- Khung scan upload ---------- */
+.slot{
+  position:relative;
+  border:1.5px dashed var(--line);
+  border-radius:12px;
+  padding:20px 14px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;margin-top:10px;
+  background:#FCFAF3;
+}
+.slot:hover,.slot:focus-visible{border-color:var(--gold);background:rgba(201,168,76,.07);outline:none}
+.slot.filled{border-style:solid;border-color:var(--gold);background:rgba(201,168,76,.09)}
+/* 4 góc định vị như khung máy scan */
+.slot::before,.slot::after,
+.slot .c::before,.slot .c::after{
+  content:"";position:absolute;width:16px;height:16px;
+  border-color:var(--navy);border-style:solid;
+}
+.slot::before{top:6px;left:6px;border-width:2px 0 0 2px}
+.slot::after{top:6px;right:6px;border-width:2px 2px 0 0}
+.slot .c::before{bottom:6px;left:6px;border-width:0 0 2px 2px}
+.slot .c::after{bottom:6px;right:6px;border-width:0 2px 2px 0}
+.slot.filled::before,.slot.filled::after,
+.slot.filled .c::before,.slot.filled .c::after{border-color:var(--gold-dark)}
+.slot input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.slot .icon{font-size:1.5rem;line-height:1;margin-bottom:6px}
+.slot .name{font-weight:600;font-size:.95rem;color:var(--navy)}
+.slot .hint{font-size:.78rem;color:var(--muted);margin-top:3px}
+.slot img.preview{
+  max-width:100%;max-height:170px;
+  border-radius:8px;display:block;margin:0 auto 8px;
+}
+.slot .done{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:700;color:var(--gold-dark);
+}
+.tip{
+  font-size:.8rem;color:var(--muted);
+  background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);
+  border-radius:10px;padding:11px 13px;margin-top:14px;line-height:1.5;
+}
+
+/* ---------- Nút gửi ---------- */
+button.submit{
+  width:100%;
+  font:inherit;font-size:1.05rem;font-weight:600;letter-spacing:.02em;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--navy-dark);
+  border:none;border-radius:50px;
+  padding:16px;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+button.submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(201,168,76,.4)}
+button.submit:disabled{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+button.submit:focus-visible{outline:3px solid var(--gold-dark);outline-offset:3px}
+.privacy{font-size:.75rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
+.error{
+  display:none;
+  background:#FBECE9;color:#B23A2E;
+  border:1px solid #EBC6C0;border-radius:12px;
+  padding:12px 14px;font-size:.9rem;margin-bottom:14px;
+}
+.error.show{display:block}
+
+/* ---------- Màn hình thành công ---------- */
+#success{display:none;text-align:center;padding:48px 20px}
+#success.show{display:block}
+.stamp-seal{
+  width:150px;height:150px;margin:0 auto 22px;
+  border:4px solid var(--gold-dark);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  color:var(--gold-dark);
+  transform:rotate(-8deg);
+  font-family:'Playfair Display',serif;font-weight:700;
+  animation:stampIn .45s cubic-bezier(.2,1.6,.4,1) both;
+}
+@keyframes stampIn{
+  from{transform:rotate(-8deg) scale(2.2);opacity:0}
+  to{transform:rotate(-8deg) scale(1);opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.stamp-seal{animation:none}}
+.stamp-seal .big{font-size:1.05rem;letter-spacing:.06em}
+.stamp-seal .mono{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:.68rem;margin-top:4px}
+#success h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:10px}
+#success p{color:var(--muted);line-height:1.6;max-width:42ch;margin:0 auto 8px}
+#success .code{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:500;color:var(--gold-dark);font-size:1.05rem;
+}
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2.5px solid rgba(13,43,107,.3);border-top-color:var(--navy-dark);
+  border-radius:50%;vertical-align:-3px;margin-right:8px;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+footer{
+  background:var(--navy-dark);
+  text-align:center;font-size:.8rem;color:rgba(255,255,255,.5);
+  padding:26px 20px;line-height:1.6;
+}
+footer a{color:var(--gold-light)}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="head-bar">
+    <a class="logo" href="/">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/><rect x="10" y="14" width="12" height="3" rx="1.5" fill="#C9A84C" opacity="0.5"/></svg>
+      <span class="wm"><b>Tri<span>Travel</span></b><small>Đà Nẵng</small></span>
+    </a>
+    <nav class="head-nav">
+      <a href="/" class="hide-sm">Trang Chủ</a>
+      <a href="/visa/">Visa</a>
+      <a href="/visamy/" class="active">Visa Mỹ</a>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="eyebrow"><span class="gold-line"></span> TRI TRAVEL · Visa Mỹ</div>
+    <h1>Nộp hồ sơ visa Mỹ online</h1>
+    <p class="sub">Gửi ảnh thẻ 5x5, trang xác nhận DS-160 và hộ chiếu ngay tại đây. Hệ thống tự động kiểm tra ảnh thẻ theo chuẩn Mỹ và đối chiếu thông tin, nhân viên TRI TRAVEL sẽ liên hệ tư vấn trong giờ làm việc.</p>
+    <div class="mrz" aria-hidden="true">P&lt;VNMTRITRAVEL&lt;&lt;US&lt;VISA&lt;DS160&lt;INTERVIEW&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
+  </div>
+</header>
+
+<main>
+  <form id="visaForm" novalidate>
+    <div class="card">
+      <div class="step"><span class="no mono">1</span><h2>Thông tin liên hệ</h2></div>
+      <label for="full_name">Họ và tên <span class="req">*</span></label>
+      <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Nguyễn Văn A">
+      <label for="phone">Số điện thoại / Zalo <span class="req">*</span></label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" inputmode="tel" placeholder="09xx xxx xxx">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" placeholder="ban@email.com (không bắt buộc)">
+      <label for="note">Ghi chú</label>
+      <textarea id="note" name="note" placeholder="VD: đã đặt lịch phỏng vấn ngày..., đi công tác/du lịch..."></textarea>
+    </div>
+
+    <div class="card">
+      <div class="step"><span class="no mono">2</span><h2>Hồ sơ cần nộp</h2></div>
+
+      <div class="slot" id="slot-photo" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*" data-key="photo" aria-label="Tải ảnh thẻ 5x5">
+        <div class="content">
+          <div class="icon">🖼️</div>
+          <div class="name">Ảnh thẻ 5x5 cm</div>
+          <div class="hint">Nền trắng, nhìn thẳng, chụp trong 6 tháng gần nhất</div>
+        </div>
+      </div>
+
+      <div class="slot" id="slot-ds160" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" data-key="ds160" aria-label="Tải DS-160">
+        <div class="content">
+          <div class="icon">📄</div>
+          <div class="name">Trang xác nhận DS-160</div>
+          <div class="hint">Nhận file PDF, Word (.doc/.docx) hoặc ảnh chụp (trang có mã vạch AA...)</div>
+        </div>
+      </div>
+
+      <div class="slot" id="slot-passport" tabindex="0">
+        <span class="c"></span>
+        <input type="file" accept="image/*,application/pdf" data-key="passport" aria-label="Tải hộ chiếu">
+        <div class="content">
+          <div class="icon">🛂</div>
+          <div class="name">Hộ chiếu — trang thông tin</div>
+          <div class="hint">Ảnh chụp hoặc PDF scan, rõ đủ 4 góc</div>
+        </div>
+      </div>
+
+      <div class="tip">📸 Mẹo: ảnh thẻ nên nhờ tiệm chụp chuẩn 5x5 nền trắng; DS-160 dùng đúng file PDF tải từ trang CEAC là đẹp nhất.</div>
+    </div>
+
+    <div class="error" id="errBox" role="alert"></div>
+    <button type="submit" class="submit" id="btnSubmit">Gửi hồ sơ</button>
+    <p class="privacy">🔒 Ảnh giấy tờ chỉ dùng cho mục đích làm visa và được TRI TRAVEL bảo mật.</p>
+  </form>
+
+  <div id="success">
+    <div class="stamp-seal">
+      <span class="big">ĐÃ TIẾP NHẬN</span>
+      <span class="mono">TRI TRAVEL ✦ VISA</span>
+    </div>
+    <h2>Gửi hồ sơ thành công!</h2>
+    <p>Mã hồ sơ của bạn: <span class="code" id="subId"></span></p>
+    <p>Nhân viên TRI TRAVEL sẽ kiểm tra và liên hệ với bạn qua điện thoại/Zalo trong giờ làm việc. Cảm ơn bạn đã tin tưởng!</p>
+  </div>
+</main>
+
+<footer>
+  Công ty TNHH Dịch Thuật Dịch Vụ và Du Lịch Trip — Đà Nẵng ·
+  <a href="https://tritravel.vn">tritravel.vn</a>
+</footer>
+
+<script>
+// ===================== CẤU HÌNH =====================
+// Dán URL Web App của Apps Script VISA MỸ vào đây (dạng https://script.google.com/macros/s/AKfy.../exec)
+const API_URL = "https://script.google.com/macros/s/AKfycbwQCt0jpyg-hbwdAilbxTj_zcroz-VJyJT5u0FJyXmtvurSyt-RVsuiK7yCrJ2m8WsE/exec";
+// ====================================================
+
+const MAX_PDF_MB = 10;
+const files = { photo: null, ds160: null, passport: null };
+
+// Nén ảnh phía client: tối đa 1800px cạnh dài, JPEG 85% -> upload nhanh hơn nhiều
+function compressImage(file, maxDim = 1600, quality = 0.8) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width: w, height: h } = img;
+      if (Math.max(w, h) > maxDim) {
+        const s = maxDim / Math.max(w, h);
+        w = Math.round(w * s); h = Math.round(h * s);
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = w; canvas.height = h;
+      canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+      canvas.toBlob(
+        (blob) => resolve(blob && blob.size < file.size
+          ? new File([blob], file.name.replace(/\.\w+$/, "") + ".jpg", { type: "image/jpeg" })
+          : file),
+        "image/jpeg", quality
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
+document.querySelectorAll(".slot input[type=file]").forEach((input) => {
+  input.addEventListener("change", async () => {
+    const file = input.files[0];
+    if (!file) return;
+    const slot = input.closest(".slot");
+    const key = input.dataset.key;
+    const content = slot.querySelector(".content");
+    const name = content.querySelector(".name").textContent;
+
+    // Nhận diện file tài liệu (PDF hoặc Word) so với ảnh
+    const isImage = file.type.startsWith("image/");
+    const nameLower = (file.name || "").toLowerCase();
+    const isDoc =
+      file.type === "application/pdf" ||
+      file.type === "application/msword" ||
+      file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+      /\.(pdf|doc|docx)$/.test(nameLower);
+
+    let finalFile;
+    if (isDoc && !isImage) {
+      if (file.size > MAX_PDF_MB * 1024 * 1024) {
+        alert("File vượt quá " + MAX_PDF_MB + "MB, vui lòng chọn file nhỏ hơn.");
+        input.value = "";
+        return;
+      }
+      const kind = /\.(doc|docx)$/.test(nameLower) ? "Word" : "PDF";
+      const icon = kind === "Word" ? "📝" : "📄";
+      finalFile = file;
+      content.innerHTML =
+        `<div class="icon">${icon}</div>` +
+        `<span class="done">✓ ${name} (${kind}: ${file.name}) — bấm để chọn lại</span>`;
+    } else {
+      finalFile = await compressImage(file);
+      content.innerHTML =
+        `<img class="preview" alt="Ảnh ${name}" src="${URL.createObjectURL(finalFile)}">` +
+        `<span class="done">✓ ${name} — bấm để chọn lại</span>`;
+    }
+    files[key] = finalFile;
+    slot.classList.add("filled");
+  });
+});
+
+const form = document.getElementById("visaForm");
+const btn = document.getElementById("btnSubmit");
+const errBox = document.getElementById("errBox");
+
+function showError(msg) {
+  errBox.textContent = msg;
+  errBox.classList.add("show");
+  errBox.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  errBox.classList.remove("show");
+
+  const fullName = form.full_name.value.trim();
+  const phone = form.phone.value.trim();
+  if (!fullName) return showError("Vui lòng nhập họ tên.");
+  if (!/^[0-9+ .()-]{8,15}$/.test(phone)) return showError("Số điện thoại chưa đúng, vui lòng kiểm tra lại.");
+  if (!files.photo) return showError("Vui lòng tải ảnh thẻ 5x5.");
+  if (!files.ds160) return showError("Vui lòng tải trang xác nhận DS-160 (PDF, Word hoặc ảnh).");
+  if (!files.passport) return showError("Vui lòng tải trang thông tin hộ chiếu.");
+
+  // Chuyển file sang base64 để gửi cho Apps Script
+  const toB64 = (file) => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(",")[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Đang gửi & kiểm tra hồ sơ...';
+
+  try {
+    const payload = {
+      full_name: fullName,
+      phone: phone,
+      email: form.email.value.trim(),
+      note: form.note.value.trim(),
+      photo:    { b64: await toB64(files.photo),    mime: files.photo.type || "image/jpeg" },
+      ds160:    { b64: await toB64(files.ds160),    mime: files.ds160.type || "image/jpeg" },
+      passport: { b64: await toB64(files.passport), mime: files.passport.type || "image/jpeg" },
+    };
+    // Content-Type text/plain để tránh lỗi CORS preflight với Apps Script
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.detail || "Máy chủ đang bận, vui lòng thử lại sau ít phút.");
+    document.getElementById("subId").textContent = data.submission_id;
+    form.style.display = "none";
+    document.getElementById("success").classList.add("show");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } catch (err) {
+    showError("Không gửi được hồ sơ: " + err.message);
+    btn.disabled = false;
+    btn.textContent = "Gửi hồ sơ";
+  }
+});
+</script>
+</body>
+</html>
