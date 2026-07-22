@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Du Lịch – TriTravel Đà Nẵng</title>
+  <meta name="description" content="Góc nhìn địa phương, kinh nghiệm thực tế về du lịch Đà Nẵng, visa, và những điểm đến đẹp tại miền Trung Việt Nam.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="keywords" content="blog du lich da nang, kinh nghiem du lich, visa han quoc, hoang hon da nang, tritravel">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tritravel.vn/blog.html">
+  <meta property="og:title" content="Blog Du Lịch – TriTravel Đà Nẵng">
+  <meta property="og:description" content="Góc nhìn địa phương, kinh nghiệm thực tế về du lịch Đà Nẵng và miền Trung.">
+  <meta property="og:image" content="https://tritravel.vn/images/blog-sunset-danang.jpg">
+  <meta property="og:url" content="https://tritravel.vn/blog.html">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:  { DEFAULT: '#0D2B6B', light: '#1A3F9A', dark: '#081B47' },
+            gold:  { DEFAULT: '#C9A84C', light: '#E2C06A', dark: '#A8852E' },
+            cream: '#F8F5EE',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --navy:#0D2B6B; --gold:#C9A84C; --cream:#F8F5EE; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--navy); margin:0; }
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#EDF2FB}::-webkit-scrollbar-thumb{background:var(--navy);border-radius:3px}
+    .gold-line{display:inline-block;width:60px;height:3px;background:var(--gold);border-radius:2px}
+    .card-lift{transition:transform .3s ease,box-shadow .3s ease}
+    .card-lift:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(13,43,107,.15)}
+    .btn-primary{background:linear-gradient(135deg,#C9A84C,#E2C06A);color:#0D2B6B;font-weight:600;padding:14px 32px;border-radius:50px;transition:all .3s ease;display:inline-block;letter-spacing:.3px;text-decoration:none}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(201,168,76,.4)}
+    .btn-outline{border:2px solid #C9A84C;color:#C9A84C;padding:12px 30px;border-radius:50px;font-weight:600;transition:all .3s ease;display:inline-block;text-decoration:none}
+    .btn-outline:hover{background:#C9A84C;color:#0D2B6B}
+    .hero-overlay{background:linear-gradient(135deg,rgba(8,27,71,.88) 0%,rgba(13,43,107,.72) 50%,rgba(13,43,107,.45) 100%)}
+    .hero-title-gradient{background:linear-gradient(135deg,#fff 0%,#E2C06A 60%,#C9A84C 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+    #mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    #mobile-menu.open{max-height:600px}
+    .lang-btn{cursor:pointer;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;transition:all .2s;background:transparent;border:none}
+    .lang-btn.active{background:var(--gold);color:var(--navy)}
+    .lang-btn:not(.active){color:rgba(255,255,255,.6)}
+    [data-lang="en"]{display:none !important}
+    body.lang-en [data-lang="vi"]{display:none !important}
+    body.lang-en [data-lang="en"]{display:revert !important}
+    #header{transition:padding .3s ease,background .3s ease}
+    #header.scrolled{padding-top:8px;padding-bottom:8px;background:rgba(8,27,71,.97)!important;backdrop-filter:blur(10px)}
+    a{text-decoration:none}
+
+    /* Blog hero */
+    .blog-hero {
+      background: linear-gradient(135deg, rgba(8,27,71,0.90) 0%, rgba(13,43,107,0.75) 60%, rgba(168,100,20,0.35) 100%),
+                  url('images/hero-danang.jpg') center/cover no-repeat;
+      min-height: 50vh;
+    }
+
+    /* Category filter tabs */
+    .filter-tab {
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .25s ease;
+      border: 2px solid rgba(13,43,107,0.2);
+      background: white;
+      color: var(--navy);
+    }
+    .filter-tab.active, .filter-tab:hover {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
+    .filter-tab.active {
+      background: linear-gradient(135deg,#0D2B6B,#1A3F9A);
+    }
+
+    /* Blog cards */
+    .blog-card { transition: transform .3s ease, box-shadow .3s ease; }
+    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(13,43,107,.14); }
+    .blog-card.hidden-card { display: none; }
+
+    /* Featured card */
+    .featured-card { position: relative; overflow: hidden; border-radius: 20px; }
+    .featured-overlay {
+      background: linear-gradient(to top, rgba(8,27,71,0.92) 0%, rgba(8,27,71,0.55) 50%, transparent 100%);
+    }
+
+    /* Category badge */
+    .cat-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      background: rgba(201,168,76,0.15);
+      color: #A8852E;
+      border: 1px solid rgba(201,168,76,0.4);
+    }
+
+    /* Read more link */
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--gold);
+      transition: gap .2s ease;
+    }
+    .read-more:hover { gap: 10px; }
+  </style>
+</head>
+<body class="font-body">
+
+<!-- HEADER -->
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-navy px-5 py-4 md:px-10">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/><rect x="10" y="14" width="12" height="3" rx="1.5" fill="#C9A84C" opacity="0.5"/></svg>
+      <div class="leading-tight">
+        <span class="text-white font-display font-bold text-xl">Tri</span><span style="color:#C9A84C" class="font-display font-bold text-xl">Travel</span>
+        <div class="text-white/50 tracking-widest uppercase" style="font-size:0.6rem">Đà Nẵng</div>
+      </div>
+    </a>
+    <nav class="hidden md:flex items-center gap-5 text-sm font-medium">
+      <a href="index.html#home"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Trang Chủ</a>
+      <a href="index.html#home"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Home</a>
+      <a href="index.html#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Giới Thiệu</a>
+      <a href="index.html#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="en">About Me</a>
+      <a href="index.html#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Visa &amp; Dịch Thuật</a>
+      <a href="index.html#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a>
+      <a href="index.html#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Di Chuyển</a>
+      <a href="index.html#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Transport</a>
+      <a href="blog.html" style="color:#C9A84C" class="font-semibold" data-lang="vi">Blog</a>
+      <a href="blog.html" style="color:#C9A84C" class="font-semibold" data-lang="en">Blog</a>
+      <a href="index.html#booking" class="btn-primary py-2 px-5 text-sm" data-lang="vi">Đặt Lịch</a>
+      <a href="index.html#booking" class="btn-primary py-2 px-5 text-sm" data-lang="en">Book Now</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-1 ml-3 border border-white/20 rounded-full px-2 py-1">
+      <button class="lang-btn active" id="btn-vi" onclick="setLang('vi')">VN</button>
+      <span class="text-white/30 text-xs">|</span>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button id="hamburger" class="md:hidden text-white" onclick="toggleMenu()">
+      <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden">
+    <div class="pt-4 pb-2 px-4 flex flex-col gap-3 border-t border-white/10 mt-3">
+      <a href="index.html#home"      class="text-white/80 py-1" data-lang="vi">Trang Chủ</a>
+      <a href="index.html#home"      class="text-white/80 py-1" data-lang="en">Home</a>
+      <a href="index.html#about"     class="text-white/80 py-1" data-lang="vi">Giới Thiệu</a>
+      <a href="index.html#about"     class="text-white/80 py-1" data-lang="en">About Me</a>
+      <a href="index.html#visa"      class="text-white/80 py-1" data-lang="vi">Visa &amp; Dịch Thuật</a>
+      <a href="index.html#visa"      class="text-white/80 py-1" data-lang="en">Visa &amp; Translation</a>
+      <a href="index.html#transport" class="text-white/80 py-1" data-lang="vi">Di Chuyển</a>
+      <a href="index.html#transport" class="text-white/80 py-1" data-lang="en">Transport</a>
+      <a href="blog.html" style="color:#C9A84C" class="font-semibold py-1" data-lang="vi">Blog</a>
+      <a href="blog.html" style="color:#C9A84C" class="font-semibold py-1" data-lang="en">Blog</a>
+      <a href="index.html#booking" class="btn-primary text-center mt-2" data-lang="vi">Đặt Lịch Ngay</a>
+      <a href="index.html#booking" class="btn-primary text-center mt-2" data-lang="en">Book Now</a>
+      <div class="flex gap-3 mt-1">
+        <button onclick="setLang('vi')" class="lang-btn active text-white" id="mb-btn-vi">&#127475;&#127475; Tiếng Việt</button>
+        <button onclick="setLang('en')" class="lang-btn text-white"         id="mb-btn-en">&#127468;&#127463; English</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="blog-hero flex items-center pt-20">
+  <div class="max-w-6xl mx-auto px-6 py-20 w-full">
+    <div class="max-w-2xl">
+      <span class="text-yellow-400/80 text-xs font-semibold uppercase tracking-widest mb-4 block" data-lang="vi">TriTravel · Góc Nhìn Địa Phương</span>
+      <span class="text-yellow-400/80 text-xs font-semibold uppercase tracking-widest mb-4 block" data-lang="en">TriTravel · Local Perspective</span>
+      <h1 class="font-display font-bold text-4xl md:text-6xl text-white leading-tight mb-5">
+        <span class="hero-title-gradient" data-lang="vi">Blog Du Lịch</span>
+        <span class="hero-title-gradient" data-lang="en">Travel Blog</span>
+      </h1>
+      <p class="text-white/70 text-lg leading-relaxed max-w-lg" data-lang="vi">
+        Kinh nghiệm thực tế từ người địa phương — điểm đến, visa, ẩm thực và những điều chỉ dân bản địa mới biết.
+      </p>
+      <p class="text-white/70 text-lg leading-relaxed max-w-lg" data-lang="en">
+        Real insights from a local — destinations, visa tips, food, and the hidden gems only locals know about.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER + BLOG LIST -->
+<section class="py-16 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Filter tabs -->
+    <div class="flex flex-wrap gap-3 mb-12 fade-up">
+      <button class="filter-tab active" onclick="filterPosts('all', this)" data-lang="vi">Tất Cả</button>
+      <button class="filter-tab active" onclick="filterPosts('all', this)" data-lang="en">All Posts</button>
+      <button class="filter-tab" onclick="filterPosts('destination', this)" data-lang="vi">📍 Điểm Đến</button>
+      <button class="filter-tab" onclick="filterPosts('destination', this)" data-lang="en">📍 Destinations</button>
+      <button class="filter-tab" onclick="filterPosts('visa', this)" data-lang="vi">🛂 Visa &amp; Hướng Dẫn</button>
+      <button class="filter-tab" onclick="filterPosts('visa', this)" data-lang="en">🛂 Visa &amp; Guides</button>
+    </div>
+
+    <!-- Featured post -->
+    <div id="posts-grid">
+
+      <!-- FEATURED: Hoàng hôn Đà Nẵng -->
+      <article class="blog-card fade-up mb-10" data-category="destination">
+        <a href="blog-hoanghon-danang.html" class="featured-card block group">
+          <div class="relative" style="height:480px">
+            <img
+              src="images/blog-sunset-danang.jpg"
+              alt="Hoàng hôn Đà Nẵng"
+              class="absolute inset-0 w-full h-full object-cover"
+              onerror="this.src='https://placehold.co/1200x480/0D2B6B/C9A84C?text=Hoang+Hon+Da+Nang'"
+            />
+            <div class="featured-overlay absolute inset-0"></div>
+            <!-- Top badge -->
+            <div class="absolute top-5 left-5">
+              <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full" style="background:rgba(201,168,76,0.9);color:#0D2B6B" data-lang="vi">Bài Nổi Bật</span>
+              <span class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full" style="background:rgba(201,168,76,0.9);color:#0D2B6B" data-lang="en">Featured</span>
+            </div>
+            <!-- Content overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+              <div class="mb-3">
+                <span class="cat-badge" style="background:rgba(201,168,76,0.2);color:#E2C06A;border-color:rgba(201,168,76,0.5)" data-lang="vi">POV · Đà Nẵng</span>
+                <span class="cat-badge" style="background:rgba(201,168,76,0.2);color:#E2C06A;border-color:rgba(201,168,76,0.5)" data-lang="en">POV · Da Nang</span>
+              </div>
+              <h2 class="font-display font-bold text-white text-2xl md:text-3xl leading-snug mb-3 group-hover:text-yellow-300 transition" data-lang="vi">
+                5 Điểm Xem Hoàng Hôn Đẹp Nhất Đà Nẵng Mà Ít Ai Biết
+              </h2>
+              <h2 class="font-display font-bold text-white text-2xl md:text-3xl leading-snug mb-3 group-hover:text-yellow-300 transition" data-lang="en">
+                5 Best Sunset Spots in Da Nang That Few Know About
+              </h2>
+              <p class="text-white/70 mb-5 max-w-xl" data-lang="vi">Những góc nhìn bí ẩn chỉ người địa phương mới biết — hoàng hôn Đà Nẵng đẹp hơn bạn nghĩ rất nhiều.</p>
+              <p class="text-white/70 mb-5 max-w-xl" data-lang="en">Secret viewpoints only locals know — Da Nang's sunset is far more beautiful than you think.</p>
+              <div class="flex items-center gap-6">
+                <span class="read-more text-yellow-400" data-lang="vi">Đọc Tiếp <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                <span class="read-more text-yellow-400" data-lang="en">Read More <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                <span class="text-white/40 text-sm" data-lang="vi">5 phút đọc</span>
+                <span class="text-white/40 text-sm" data-lang="en">5 min read</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <!-- Regular posts grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="regular-grid">
+
+        <!-- POST: Visa Hàn Quốc -->
+        <article class="blog-card bg-white rounded-2xl overflow-hidden border border-navy/10 fade-up" data-category="visa" style="transition-delay:.1s">
+          <a href="blog-visa-hankquoc-2025.html" class="block group h-full flex flex-col">
+            <div class="relative overflow-hidden" style="height:220px">
+              <img
+                src="images/blog-visa-korea.jpg"
+                alt="Visa Hàn Quốc 2025"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                onerror="this.src='https://placehold.co/600x220/1A3F9A/ffffff?text=Visa+Han+Quoc'"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="cat-badge" data-lang="vi">Hướng Dẫn · Visa</span>
+                <span class="cat-badge" data-lang="en">Guide · Visa</span>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-display font-bold text-navy text-lg leading-snug mb-2 group-hover:text-gold-dark transition" data-lang="vi">
+                Cách Xin Visa Hàn Quốc Tự Túc 2025 – Tỉ Lệ Đậu Cao
+              </h3>
+              <h3 class="font-display font-bold text-navy text-lg leading-snug mb-2 group-hover:text-gold-dark transition" data-lang="en">
+                How to Apply for Korean Visa 2025 – High Approval Tips
+              </h3>
+              <p class="text-navy/60 text-sm leading-relaxed mb-4 flex-1" data-lang="vi">
+                Hồ sơ cần gì, chuẩn bị ra sao để không bị từ chối — hướng dẫn từng bước từ người đã làm nhiều lần.
+              </p>
+              <p class="text-navy/60 text-sm leading-relaxed mb-4 flex-1" data-lang="en">
+                What documents you need and how to prepare so you don't get rejected — step-by-step from someone who's done it many times.
+              </p>
+              <div class="flex items-center justify-between pt-4 border-t border-navy/10">
+                <span class="text-navy/40 text-xs" data-lang="vi">8 phút đọc</span>
+                <span class="text-navy/40 text-xs" data-lang="en">8 min read</span>
+                <span class="read-more" style="color:#A8852E" data-lang="vi">Đọc Tiếp <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+                <span class="read-more" style="color:#A8852E" data-lang="en">Read More <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- PLACEHOLDER card - Coming Soon -->
+        <article class="blog-card bg-white rounded-2xl overflow-hidden border border-dashed border-navy/20 fade-up" data-category="destination" style="transition-delay:.2s">
+          <div class="h-full flex flex-col items-center justify-center py-16 px-8 text-center">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-5" style="background:rgba(201,168,76,0.1);border:2px dashed rgba(201,168,76,0.4)">
+              <svg width="28" height="28" fill="none" stroke="#C9A84C" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <h4 class="font-display font-bold text-navy/50 text-lg mb-2" data-lang="vi">Bài Viết Mới Sắp Ra</h4>
+            <h4 class="font-display font-bold text-navy/50 text-lg mb-2" data-lang="en">New Post Coming Soon</h4>
+            <p class="text-navy/35 text-sm" data-lang="vi">Chủ đề: Kinh nghiệm tham quan Hội An trong ngày</p>
+            <p class="text-navy/35 text-sm" data-lang="en">Topic: Day trip to Hoi An ancient town</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- No results message -->
+    <div id="no-results" class="hidden text-center py-20 fade-up">
+      <div class="text-5xl mb-4">🔍</div>
+      <p class="text-navy/50 text-lg" data-lang="vi">Chưa có bài viết trong danh mục này. Quay lại sớm nhé!</p>
+      <p class="text-navy/50 text-lg" data-lang="en">No posts in this category yet. Check back soon!</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-16 text-center fade-up">
+      <div class="inline-block bg-navy rounded-2xl px-10 py-10">
+        <span class="gold-line mb-4 block mx-auto"></span>
+        <h3 class="font-display font-bold text-white text-2xl mb-2" data-lang="vi">Cần tư vấn hành trình?</h3>
+        <h3 class="font-display font-bold text-white text-2xl mb-2" data-lang="en">Need travel advice?</h3>
+        <p class="text-white/60 mb-6 text-sm" data-lang="vi">Liên hệ TriTravel để được tư vấn miễn phí về tour, visa và di chuyển tại Đà Nẵng.</p>
+        <p class="text-white/60 mb-6 text-sm" data-lang="en">Contact TriTravel for free advice on tours, visa, and transportation in Da Nang.</p>
+        <a href="index.html#booking" class="btn-primary" data-lang="vi">Đặt Lịch Tư Vấn</a>
+        <a href="index.html#booking" class="btn-primary" data-lang="en">Book a Consultation</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-12 px-6" style="background:#081B47">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/></svg>
+          <span class="text-white font-display font-bold text-xl">Tri<span style="color:#C9A84C">Travel</span></span>
+        </div>
+        <p class="text-white/50 text-sm leading-relaxed" data-lang="vi">Đưa Đà Nẵng lên bản đồ du lịch thế giới qua những hành trình chạm đến trái tim.</p>
+        <p class="text-white/50 text-sm leading-relaxed" data-lang="en">Putting Da Nang on the world tourism map through heart-touching journeys.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="vi">Dịch Vụ</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="en">Services</h4>
+        <ul class="space-y-2 text-white/50 text-sm">
+          <li><a href="index.html#visa"      class="hover:text-yellow-400 transition" data-lang="vi">Visa &amp; Dịch Thuật</a><a href="index.html#visa"      class="hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a></li>
+          <li><a href="index.html#tour"      class="hover:text-yellow-400 transition" data-lang="vi">Tour Đà Nẵng</a><a href="index.html#tour"      class="hover:text-yellow-400 transition" data-lang="en">Da Nang Tours</a></li>
+          <li><a href="index.html#transport" class="hover:text-yellow-400 transition" data-lang="vi">Thuê Xe Tự Lái</a><a href="index.html#transport" class="hover:text-yellow-400 transition" data-lang="en">Car Rental</a></li>
+          <li><a href="index.html#transport" class="hover:text-yellow-400 transition" data-lang="vi">Vé Máy Bay</a><a href="index.html#transport" class="hover:text-yellow-400 transition" data-lang="en">Flight Tickets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="vi">Liên Hệ</h4>
+        <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="en">Contact</h4>
+        <ul class="space-y-2 text-white/50 text-sm">
+          <li>📍 <span data-lang="vi">Đà Nẵng, Việt Nam</span><span data-lang="en">Da Nang, Vietnam</span></li>
+          <li>📱 <a href="tel:+84935191394" class="hover:text-yellow-400 transition">0935 191 394</a></li>
+          <li>📧 <a href="mailto:TriTravel.vn@gmail.com" class="hover:text-yellow-400 transition">TriTravel.vn@gmail.com</a></li>
+          <li>
+            <div class="flex gap-3 mt-3">
+              <a href="https://tiktok.com/@TriTravel"    target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">🎵</a>
+              <a href="https://facebook.com/tritravel.vn"   target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">📘</a>
+              <a href="https://instagram.com/tritravel.vn"  target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">📷</a>
+              <a href="https://youtube.com/@TriTravel"   target="_blank" class="text-white/40 hover:text-yellow-400 transition text-lg">▶</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 text-center text-white/30 text-xs">
+      <span data-lang="vi">© 2025 TriTravel. Được tạo ra với ❤ tại Đà Nẵng</span>
+      <span data-lang="en">© 2025 TriTravel. Made with ❤ in Da Nang</span>
+    </div>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+  // 1. LANGUAGE
+  function setLang(lang) {
+    if (lang === 'en') {
+      document.body.classList.add('lang-en');
+    } else {
+      document.body.classList.remove('lang-en');
+    }
+    ['btn-vi','btn-en','mb-btn-vi','mb-btn-en'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var isMatch = (id.includes('en') && lang === 'en') || (id.includes('vi') && lang === 'vi');
+      el.classList.toggle('active', isMatch);
+    });
+    try { localStorage.setItem('TriTravel-lang', lang); } catch(e) {}
+
+    // Re-apply filter to respect language filter buttons
+    var activeTab = document.querySelector('.filter-tab.active');
+    if (activeTab) {
+      var cat = activeTab.getAttribute('data-filter') || 'all';
+      applyFilter(cat);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    var saved = 'vi';
+    try { saved = localStorage.getItem('TriTravel-lang') || 'vi'; } catch(e) {}
+    setLang(saved);
+  });
+
+  // 2. MOBILE MENU
+  function toggleMenu() {
+    var m = document.getElementById('mobile-menu');
+    if (m) m.classList.toggle('open');
+  }
+
+  // 3. HEADER SCROLL
+  window.addEventListener('scroll', function() {
+    var h = document.getElementById('header');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // 4. FADE UP
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+
+  // 5. CATEGORY FILTER
+  function applyFilter(cat) {
+    var posts = document.querySelectorAll('#posts-grid article[data-category]');
+    var visible = 0;
+    posts.forEach(function(p) {
+      var match = cat === 'all' || p.getAttribute('data-category') === cat;
+      p.classList.toggle('hidden-card', !match);
+      if (match) visible++;
+    });
+    var noResults = document.getElementById('no-results');
+    if (noResults) noResults.classList.toggle('hidden', visible > 0);
+  }
+
+  function filterPosts(cat, btn) {
+    // Deactivate all tabs that share the same data-filter value
+    document.querySelectorAll('.filter-tab').forEach(function(t) {
+      t.classList.remove('active');
+    });
+    // Activate both VN and EN versions of clicked category
+    document.querySelectorAll('.filter-tab').forEach(function(t) {
+      var tCat = t.getAttribute('data-filter');
+      if (tCat === cat) t.classList.add('active');
+    });
+    btn.classList.add('active');
+    // Also activate sibling tab with same category
+    document.querySelectorAll('.filter-tab').forEach(function(t) {
+      var onclick = t.getAttribute('onclick') || '';
+      if (onclick.indexOf("'" + cat + "'") !== -1) t.classList.add('active');
+    });
+    applyFilter(cat);
+  }
+</script>
+</body>
+</html>

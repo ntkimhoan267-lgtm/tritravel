@@ -73,7 +73,7 @@
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
     #mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease}
-    #mobile-menu.open{max-height:600px}
+    #mobile-menu.open{max-height:820px}
     .lang-btn{cursor:pointer;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;transition:all .2s;background:transparent;border:none}
     .lang-btn.active{background:var(--gold);color:var(--navy)}
     .lang-btn:not(.active){color:rgba(255,255,255,.6)}
@@ -82,6 +82,14 @@
     body.lang-en [data-lang="en"]{display:revert}
     #header{transition:padding .3s ease,background .3s ease}
     #header.scrolled{padding-top:8px;padding-bottom:8px;background:rgba(8,27,71,.97)!important;backdrop-filter:blur(10px)}
+    .nav-dd{position:relative}
+    .nav-dd-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);min-width:220px;background:#0D2B6B;border:1px solid rgba(201,168,76,.25);border-radius:12px;padding:8px;box-shadow:0 20px 40px rgba(0,0,0,.35);opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:60}
+    .nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(4px)}
+    .nav-dd-menu::before{content:'';position:absolute;bottom:100%;left:0;right:0;height:12px}
+    .nav-dd-item{display:block;padding:9px 14px;border-radius:8px;color:rgba(255,255,255,.8);font-size:.85rem;transition:background .15s,color .15s;white-space:nowrap}
+    .nav-dd-item:hover{background:rgba(201,168,76,.15);color:#E2C06A}
+    .nav-dd-item .sub{display:block;font-size:.68rem;color:rgba(255,255,255,.4);margin-top:1px}
+    .nav-caret{display:inline-block;margin-left:3px;font-size:.6rem;vertical-align:middle}
     .stat-number{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold);line-height:1}
     .service-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:2px solid rgba(201,168,76,.3);font-size:1.6rem;margin-bottom:1rem;transition:all .3s ease}
     .card-lift:hover .service-icon{background:linear-gradient(135deg,#C9A84C,#E2C06A)}
@@ -291,12 +299,24 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
       <a href="#home"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Home</a>
       <a href="#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Gi&#7899;i Thi&#7879;u</a>
       <a href="#about"     class="text-white/80 hover:text-yellow-400 transition" data-lang="en">About Me</a>
-      <a href="#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a>
-      <a href="#visa"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a>
+      <div class="nav-dd" tabindex="0">
+        <span class="text-white/80 hover:text-yellow-400 transition cursor-pointer" data-lang="vi">Visa <span class="nav-caret">&#9662;</span></span>
+        <span class="text-white/80 hover:text-yellow-400 transition cursor-pointer" data-lang="en">Visa <span class="nav-caret">&#9662;</span></span>
+        <div class="nav-dd-menu">
+          <a href="visa/" class="nav-dd-item" data-lang="vi">N&#7897;p H&#7891; S&#417; Visa Online<span class="sub">Khai h&#7891; s&#417; visa tr&#7921;c tuy&#7871;n</span></a>
+          <a href="visa/" class="nav-dd-item" data-lang="en">Online Visa Application<span class="sub">Submit your visa documents</span></a>
+          <a href="visamy/" class="nav-dd-item" data-lang="vi">Visa M&#7929;<span class="sub">N&#7897;p h&#7891; s&#417; visa Hoa K&#7923;</span></a>
+          <a href="visamy/" class="nav-dd-item" data-lang="en">US Visa<span class="sub">Submit US visa documents</span></a>
+          <a href="#visa" class="nav-dd-item" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t<span class="sub">D&#7883;ch v&#7909; t&#432; v&#7845;n &amp; d&#7883;ch thu&#7853;t</span></a>
+          <a href="#visa" class="nav-dd-item" data-lang="en">Visa &amp; Translation<span class="sub">Consulting &amp; translation service</span></a>
+        </div>
+      </div>
       <a href="#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Di Chuy&#7875;n</a>
       <a href="#transport" class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Transport</a>
-      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Tour &amp; Blog</a>
-      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Tours &amp; Blog</a>
+      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Tour</a>
+      <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Tours</a>
+      <a href="blog.html"  class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Blog</a>
+      <a href="blog.html"  class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Blog</a>
       <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="vi">&#272;&#7863;t L&#7883;ch</a>
       <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="en">Book Now</a>
     </nav>
@@ -315,12 +335,18 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
       <a href="#home"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Home</a>
       <a href="#about"     onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Gi&#7899;i Thi&#7879;u</a>
       <a href="#about"     onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">About Me</a>
+      <a href="visa/"                            class="text-white/80 py-1" data-lang="vi">&#128221; N&#7897;p H&#7891; S&#417; Visa Online</a>
+      <a href="visa/"                            class="text-white/80 py-1" data-lang="en">&#128221; Online Visa Application</a>
+      <a href="visamy/"                          class="text-white/80 py-1" data-lang="vi">&#127482;&#127480; N&#7897;p H&#7891; S&#417; Visa M&#7929;</a>
+      <a href="visamy/"                          class="text-white/80 py-1" data-lang="en">&#127482;&#127480; US Visa Application</a>
       <a href="#visa"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a>
       <a href="#visa"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Visa &amp; Translation</a>
       <a href="#transport" onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Di Chuy&#7875;n</a>
       <a href="#transport" onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Transport</a>
-      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Tour &amp; Blog</a>
-      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Tours &amp; Blog</a>
+      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="vi">Tour</a>
+      <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Tours</a>
+      <a href="blog.html"                        class="text-white/80 py-1" data-lang="vi">Blog</a>
+      <a href="blog.html"                        class="text-white/80 py-1" data-lang="en">Blog</a>
       <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="vi">&#272;&#7863;t L&#7883;ch Ngay</a>
       <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="en">Book Now</a>
       <div class="flex gap-3 mt-1">
@@ -583,8 +609,14 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
           <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">Visa Du l&#7883;ch, Th&#432;&#417;ng m&#7841;i, Du h&#7885;c</span><span data-lang="en">Tourist, Business, Student Visa</span></li>
           <li class="flex items-start gap-2"><span class="text-yellow-300">&#10003;</span><span data-lang="vi">T&#432; v&#7845;n h&#7891; s&#417; mi&#7877;n ph&#237;, t&#7881; l&#7879; th&#224;nh c&#244;ng cao</span><span data-lang="en">Free document consultation, high approval rate</span></li>
         </ul>
-        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="vi">T&#432; V&#7845;n Ngay</a>
-        <a href="#booking" class="btn-primary mt-6 inline-block text-sm" data-lang="en">Consult Now</a>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#booking" class="btn-primary inline-block text-sm" data-lang="vi">T&#432; V&#7845;n Ngay</a>
+          <a href="#booking" class="btn-primary inline-block text-sm" data-lang="en">Consult Now</a>
+          <a href="visa/" class="btn-outline inline-block text-sm" data-lang="vi">N&#7897;p H&#7891; S&#417; Online &#8594;</a>
+          <a href="visa/" class="btn-outline inline-block text-sm" data-lang="en">Apply Online &#8594;</a>
+          <a href="visamy/" class="btn-outline inline-block text-sm" data-lang="vi">Visa M&#7929; &#127482;&#127480;</a>
+          <a href="visamy/" class="btn-outline inline-block text-sm" data-lang="en">US Visa &#127482;&#127480;</a>
+        </div>
       </div>
       <div class="bg-white/5 border border-white/10 rounded-2xl p-8 fade-up" style="transition-delay:.15s">
         <h3 class="font-display font-bold text-2xl text-yellow-300 mb-5" data-lang="vi">&#128221; D&#7883;ch V&#7909; D&#7883;ch Thu&#7853;t</h3>
@@ -889,6 +921,8 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
         <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="vi">D&#7883;ch V&#7909;</h4>
         <h4 class="font-semibold mb-4 text-sm uppercase tracking-widest" style="color:#C9A84C" data-lang="en">Services</h4>
         <ul class="space-y-2 text-white/50 text-sm">
+          <li><a href="visa/"      class="hover:text-yellow-400 transition" data-lang="vi">N&#7897;p H&#7891; S&#417; Visa Online</a><a href="visa/"      class="hover:text-yellow-400 transition" data-lang="en">Online Visa Application</a></li>
+          <li><a href="visamy/"    class="hover:text-yellow-400 transition" data-lang="vi">N&#7897;p H&#7891; S&#417; Visa M&#7929;</a><a href="visamy/"    class="hover:text-yellow-400 transition" data-lang="en">US Visa Application</a></li>
           <li><a href="#visa"      class="hover:text-yellow-400 transition" data-lang="vi">Visa &amp; D&#7883;ch Thu&#7853;t</a><a href="#visa"      class="hover:text-yellow-400 transition" data-lang="en">Visa &amp; Translation</a></li>
           <li><a href="#tour"      class="hover:text-yellow-400 transition" data-lang="vi">Tour &#272;&#224; N&#7861;ng</a><a href="#tour"      class="hover:text-yellow-400 transition" data-lang="en">Da Nang Tours</a></li>
           <li><a href="#transport" class="hover:text-yellow-400 transition" data-lang="vi">Thu&#234; Xe T&#7921; L&#225;i</a><a href="#transport" class="hover:text-yellow-400 transition" data-lang="en">Car Rental</a></li>
