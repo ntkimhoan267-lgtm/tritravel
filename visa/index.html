@@ -7,98 +7,116 @@
 <meta name="description" content="Gửi hộ chiếu và CCCD online, TRI TRAVEL kiểm tra và liên hệ tư vấn visa Nhật Bản, Hàn Quốc, Úc.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#14488F;        /* mực xanh con dấu nhập cảnh */
-  --ink-dark:#0D3164;
-  --paper:#FBFAF7;      /* giấy hồ sơ */
+  --navy:#0D2B6B; --navy-light:#1A3F9A; --navy-dark:#081B47;
+  --gold:#C9A84C; --gold-light:#E2C06A; --gold-dark:#A8852E;
+  --cream:#F8F5EE;
+  /* giữ tên biến cũ, ánh xạ sang bảng màu chính của TriTravel */
+  --ink:#0D2B6B;
+  --ink-dark:#081B47;
+  --paper:#F8F5EE;
   --card:#FFFFFF;
-  --text:#1E2733;
-  --muted:#6B7280;
-  --line:#DDD8CE;
-  --stamp:#C0392B;      /* đỏ dấu mộc — chỉ dùng cho dấu * và cảnh báo */
-  --ok:#1F7A55;
-  --radius:14px;
+  --text:#0D2B6B;
+  --muted:#5E6E90;
+  --line:rgba(13,43,107,.14);
+  --stamp:#C0392B;
+  --ok:#A8852E;
+  --radius:16px;
   font-size:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-  font-family:'Be Vietnam Pro',system-ui,sans-serif;
+  font-family:'DM Sans',system-ui,sans-serif;
   background:var(--paper);
   color:var(--text);
   min-height:100vh;
   -webkit-font-smoothing:antialiased;
 }
 .mono{font-family:'IBM Plex Mono',monospace}
+a{text-decoration:none}
 
-/* ---------- Header ---------- */
-header{
-  background:var(--ink-dark);
-  color:#fff;
-  padding:28px 20px 0;
+/* ---------- Header / Masthead ---------- */
+.site-head{
+  position:relative;overflow:hidden;color:#fff;
+  background:linear-gradient(135deg,#081B47 0%,#0D2B6B 55%,#12327F 100%);
 }
-.header-inner{max-width:640px;margin:0 auto}
-.brand{
-  font-size:.8rem;font-weight:700;letter-spacing:.22em;
-  color:#AFC6EA;text-transform:uppercase;
+.site-head::after{
+  content:"";position:absolute;top:-70px;right:-70px;
+  width:260px;height:260px;border-radius:50%;
+  border:1px solid rgba(201,168,76,.15);pointer-events:none;
 }
-.brand a{color:inherit;text-decoration:none}
-h1{
-  font-size:clamp(1.6rem,5.5vw,2.2rem);
-  font-weight:800;line-height:1.2;
-  margin:10px 0 8px;
+.head-bar{
+  max-width:760px;margin:0 auto;position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 20px;
 }
-.sub{color:#C9D8F0;font-size:.95rem;line-height:1.55;max-width:46ch;padding-bottom:22px}
-/* Dải MRZ — chữ ký thị giác của trang */
+.logo{display:flex;align-items:center;gap:10px}
+.logo .wm b{font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#fff;display:block;line-height:1}
+.logo .wm b span{color:var(--gold)}
+.logo .wm small{display:block;font-size:.55rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:2px}
+.head-nav{display:flex;align-items:center;gap:18px;font-size:.85rem;font-weight:500}
+.head-nav a{color:rgba(255,255,255,.75);transition:color .2s}
+.head-nav a:hover{color:var(--gold)}
+.head-nav a.active{color:var(--gold);font-weight:600}
+@media(max-width:520px){.head-nav a.hide-sm{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{max-width:760px;margin:0 auto;position:relative;z-index:2;padding:20px 20px 32px}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(226,192,106,.85);margin-bottom:14px;
+}
+.gold-line{display:inline-block;width:40px;height:2px;background:var(--gold);border-radius:2px}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem,5.5vw,2.6rem);font-weight:700;line-height:1.14;
+  color:#fff;margin-bottom:12px;
+}
+.hero .sub{color:rgba(255,255,255,.68);font-size:.98rem;line-height:1.6;max-width:54ch}
+/* Dải MRZ — chi tiết đặc trưng của hộ chiếu */
 .mrz{
   font-family:'IBM Plex Mono',monospace;
-  font-size:.72rem;letter-spacing:.14em;
-  color:#7E9CCB;
-  border-top:1px dashed rgba(255,255,255,.25);
-  padding:10px 0 14px;
-  white-space:nowrap;overflow:hidden;
-  user-select:none;
+  font-size:.72rem;letter-spacing:.14em;color:rgba(201,168,76,.6);
+  border-top:1px dashed rgba(201,168,76,.28);
+  margin-top:20px;padding-top:12px;
+  white-space:nowrap;overflow:hidden;user-select:none;
 }
 
 /* ---------- Form ---------- */
-main{max-width:640px;margin:0 auto;padding:24px 20px 64px}
+main{max-width:760px;margin:0 auto;padding:34px 20px 60px}
 .card{
   background:var(--card);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:22px 20px;
-  margin-bottom:18px;
+  padding:24px 22px;margin-bottom:18px;
+  box-shadow:0 12px 34px rgba(13,43,107,.06);
 }
-.step{
-  display:flex;align-items:baseline;gap:10px;
-  margin-bottom:16px;
-}
+.step{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .step .no{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:.75rem;color:var(--ink);
-  border:1.5px solid var(--ink);
+  font-family:'Playfair Display',serif;font-weight:700;
+  font-size:1rem;color:var(--navy-dark);
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
   border-radius:50%;
-  width:26px;height:26px;flex:none;
+  width:32px;height:32px;flex:none;
   display:inline-flex;align-items:center;justify-content:center;
 }
-.step h2{font-size:1.05rem;font-weight:700}
-label{
-  display:block;
-  font-size:.82rem;font-weight:500;color:var(--muted);
-  margin:14px 0 6px;
-}
-.req{color:var(--stamp)}
+.step h2{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--navy)}
+label{display:block;font-size:.82rem;font-weight:500;color:var(--muted);margin:14px 0 6px}
+.req{color:var(--gold-dark);font-weight:700}
 input[type=text],input[type=tel],input[type=email],select,textarea{
-  width:100%;
-  font:inherit;font-size:1rem;
+  width:100%;font:inherit;font-size:1rem;
   padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:10px;
+  border:1.5px solid var(--line);border-radius:10px;
   background:#fff;color:var(--text);
+  transition:border-color .15s,box-shadow .15s;
 }
 input:focus,select:focus,textarea:focus{
-  outline:2px solid var(--ink);outline-offset:1px;border-color:var(--ink);
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(201,168,76,.18);
 }
 textarea{resize:vertical;min-height:76px}
 
@@ -107,30 +125,27 @@ textarea{resize:vertical;min-height:76px}
   position:relative;
   border:1.5px dashed var(--line);
   border-radius:12px;
-  padding:18px 14px;
-  text-align:center;
-  cursor:pointer;
-  transition:border-color .2s, background .2s;
-  margin-top:8px;
-  background:#FDFDFB;
+  padding:20px 14px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;margin-top:10px;
+  background:#FCFAF3;
 }
-.slot:hover,.slot:focus-visible{border-color:var(--ink);background:#F4F7FC;outline:none}
-.slot.filled{border-style:solid;border-color:var(--ok);background:#F3FAF6}
+.slot:hover,.slot:focus-visible{border-color:var(--gold);background:rgba(201,168,76,.07);outline:none}
+.slot.filled{border-style:solid;border-color:var(--gold);background:rgba(201,168,76,.09)}
 /* 4 góc định vị như khung máy scan */
 .slot::before,.slot::after,
 .slot .c::before,.slot .c::after{
   content:"";position:absolute;width:16px;height:16px;
-  border-color:var(--ink);border-style:solid;
+  border-color:var(--navy);border-style:solid;
 }
 .slot::before{top:6px;left:6px;border-width:2px 0 0 2px}
 .slot::after{top:6px;right:6px;border-width:2px 2px 0 0}
 .slot .c::before{bottom:6px;left:6px;border-width:0 0 2px 2px}
 .slot .c::after{bottom:6px;right:6px;border-width:0 2px 2px 0}
 .slot.filled::before,.slot.filled::after,
-.slot.filled .c::before,.slot.filled .c::after{border-color:var(--ok)}
+.slot.filled .c::before,.slot.filled .c::after{border-color:var(--gold-dark)}
 .slot input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .slot .icon{font-size:1.5rem;line-height:1;margin-bottom:6px}
-.slot .name{font-weight:700;font-size:.95rem}
+.slot .name{font-weight:600;font-size:.95rem;color:var(--navy)}
 .slot .hint{font-size:.78rem;color:var(--muted);margin-top:3px}
 .slot img.preview{
   max-width:100%;max-height:170px;
@@ -138,31 +153,32 @@ textarea{resize:vertical;min-height:76px}
 }
 .slot .done{
   display:inline-flex;align-items:center;gap:6px;
-  font-size:.8rem;font-weight:700;color:var(--ok);
+  font-size:.8rem;font-weight:700;color:var(--gold-dark);
 }
 .tip{
   font-size:.8rem;color:var(--muted);
-  background:#F4F2EC;border-radius:8px;
-  padding:10px 12px;margin-top:14px;line-height:1.5;
+  background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);
+  border-radius:10px;padding:11px 13px;margin-top:14px;line-height:1.5;
 }
 
 /* ---------- Nút gửi ---------- */
 button.submit{
   width:100%;
-  font:inherit;font-size:1.05rem;font-weight:700;
-  background:var(--ink);color:#fff;
-  border:none;border-radius:12px;
+  font:inherit;font-size:1.05rem;font-weight:600;letter-spacing:.02em;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--navy-dark);
+  border:none;border-radius:50px;
   padding:16px;cursor:pointer;
-  transition:background .2s;
+  transition:transform .2s,box-shadow .2s;
 }
-button.submit:hover{background:var(--ink-dark)}
-button.submit:disabled{background:#9AA7B8;cursor:wait}
-button.submit:focus-visible{outline:3px solid var(--ink-dark);outline-offset:2px}
+button.submit:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(201,168,76,.4)}
+button.submit:disabled{opacity:.6;cursor:wait;transform:none;box-shadow:none}
+button.submit:focus-visible{outline:3px solid var(--gold-dark);outline-offset:3px}
 .privacy{font-size:.75rem;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5}
 .error{
   display:none;
-  background:#FBEBE8;color:var(--stamp);
-  border:1px solid #EAC4BD;border-radius:10px;
+  background:#FBECE9;color:#B23A2E;
+  border:1px solid #EBC6C0;border-radius:12px;
   padding:12px 14px;font-size:.9rem;margin-bottom:14px;
 }
 .error.show{display:block}
@@ -172,11 +188,11 @@ button.submit:focus-visible{outline:3px solid var(--ink-dark);outline-offset:2px
 #success.show{display:block}
 .stamp-seal{
   width:150px;height:150px;margin:0 auto 22px;
-  border:4px solid var(--ok);border-radius:50%;
+  border:4px solid var(--gold-dark);border-radius:50%;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:var(--ok);
+  color:var(--gold-dark);
   transform:rotate(-8deg);
-  font-weight:800;
+  font-family:'Playfair Display',serif;font-weight:700;
   animation:stampIn .45s cubic-bezier(.2,1.6,.4,1) both;
 }
 @keyframes stampIn{
@@ -184,26 +200,27 @@ button.submit:focus-visible{outline:3px solid var(--ink-dark);outline-offset:2px
   to{transform:rotate(-8deg) scale(1);opacity:1}
 }
 @media (prefers-reduced-motion:reduce){.stamp-seal{animation:none}}
-.stamp-seal .big{font-size:1.05rem;letter-spacing:.08em}
-.stamp-seal .mono{font-size:.7rem;margin-top:4px}
-#success h2{font-size:1.4rem;font-weight:800;margin-bottom:10px}
+.stamp-seal .big{font-size:1.05rem;letter-spacing:.06em}
+.stamp-seal .mono{font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:.68rem;margin-top:4px}
+#success h2{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--navy);margin-bottom:10px}
 #success p{color:var(--muted);line-height:1.6;max-width:42ch;margin:0 auto 8px}
 #success .code{
   font-family:'IBM Plex Mono',monospace;
-  font-weight:500;color:var(--ink);font-size:1.05rem;
+  font-weight:500;color:var(--gold-dark);font-size:1.05rem;
 }
 .spinner{
   display:inline-block;width:16px;height:16px;
-  border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;
+  border:2.5px solid rgba(13,43,107,.3);border-top-color:var(--navy-dark);
   border-radius:50%;vertical-align:-3px;margin-right:8px;
   animation:spin .8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 footer{
-  text-align:center;font-size:.78rem;color:var(--muted);
-  padding:0 20px 40px;
+  background:var(--navy-dark);
+  text-align:center;font-size:.8rem;color:rgba(255,255,255,.5);
+  padding:26px 20px;line-height:1.6;
 }
-footer a{color:var(--ink)}
+footer a{color:var(--gold-light)}
 
 /* ---------- Khối form riêng cho Hàn Quốc ---------- */
 #krBlock{display:none}
@@ -249,9 +266,20 @@ footer a{color:var(--ink)}
 </head>
 <body>
 
-<header>
-  <div class="header-inner">
-    <div class="brand"><a href="https://tritravel.vn">TRI TRAVEL</a> · Dịch vụ Visa</div>
+<header class="site-head">
+  <div class="head-bar">
+    <a class="logo" href="/">
+      <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><path d="M28 14L6 4L10 16L6 28L28 14Z" fill="#C9A84C"/><rect x="10" y="14" width="12" height="3" rx="1.5" fill="#C9A84C" opacity="0.5"/></svg>
+      <span class="wm"><b>Tri<span>Travel</span></b><small>Đà Nẵng</small></span>
+    </a>
+    <nav class="head-nav">
+      <a href="/" class="hide-sm">Trang Chủ</a>
+      <a href="/visa/" class="active">Visa</a>
+      <a href="/visamy/">Visa Mỹ</a>
+    </nav>
+  </div>
+  <div class="hero">
+    <div class="eyebrow"><span class="gold-line"></span> TRI TRAVEL · Dịch vụ Visa</div>
     <h1>Nộp hồ sơ visa online</h1>
     <p class="sub">Chụp và gửi hộ chiếu + CCCD ngay tại đây. Hệ thống tự động kiểm tra thông tin, nhân viên TRI TRAVEL sẽ liên hệ tư vấn trong giờ làm việc.</p>
     <div class="mrz" aria-hidden="true">P&lt;VNMTRITRAVEL&lt;&lt;VISA&lt;JAPAN&lt;KOREA&lt;AUSTRALIA&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
