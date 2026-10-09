@@ -84,7 +84,7 @@
     .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
     .fade-up.visible{opacity:1;transform:translateY(0)}
     #mobile-menu{max-height:0;overflow:hidden;transition:max-height .4s ease}
-    #mobile-menu.open{max-height:820px}
+    #mobile-menu.open{max-height:960px}
     .lang-btn{cursor:pointer;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;transition:all .2s;background:transparent;border:none}
     .lang-btn.active{background:var(--gold);color:var(--navy)}
     .lang-btn:not(.active){color:rgba(255,255,255,.6)}
@@ -101,6 +101,9 @@
     .nav-dd-item:hover{background:rgba(201,168,76,.15);color:#E2C06A}
     .nav-dd-item .sub{display:block;font-size:.68rem;color:rgba(255,255,255,.4);margin-top:1px}
     .nav-caret{display:inline-block;margin-left:3px;font-size:.6rem;vertical-align:middle}
+    .nav-gdpt{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(201,168,76,.55);color:#C9A84C;border-radius:50px;padding:6px 14px;font-size:.8rem;font-weight:600;white-space:nowrap;transition:all .2s}
+    .nav-gdpt:hover{background:#C9A84C;color:#0D2B6B}
+    .mb-gdpt{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid rgba(201,168,76,.55);color:#C9A84C;border-radius:50px;padding:10px 16px;font-size:.9rem;font-weight:600;text-align:center}
     .stat-number{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:var(--gold);line-height:1}
     .service-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.05));border:2px solid rgba(201,168,76,.3);font-size:1.6rem;margin-bottom:1rem;transition:all .3s ease}
     .card-lift:hover .service-icon{background:linear-gradient(135deg,#C9A84C,#E2C06A)}
@@ -328,6 +331,8 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
       <a href="#tour"      class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Tours</a>
       <a href="blog.html"  class="text-white/80 hover:text-yellow-400 transition" data-lang="vi">Blog</a>
       <a href="blog.html"  class="text-white/80 hover:text-yellow-400 transition" data-lang="en">Blog</a>
+      <a href="gdpt/"      class="nav-gdpt" data-lang="vi">&#128225; Truy&#7873;n Tin G&#272;PT</a>
+      <a href="gdpt/"      class="nav-gdpt" data-lang="en">&#128225; GĐPT Signaling</a>
       <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="vi">&#272;&#7863;t L&#7883;ch</a>
       <a href="#booking"   class="btn-primary py-2 px-5 text-sm" data-lang="en">Book Now</a>
     </nav>
@@ -358,6 +363,8 @@ body.lang-en [data-lang="en"] { display: inline-block !important; }
       <a href="#tour"      onclick="toggleMenu()" class="text-white/80 py-1" data-lang="en">Tours</a>
       <a href="blog.html"                        class="text-white/80 py-1" data-lang="vi">Blog</a>
       <a href="blog.html"                        class="text-white/80 py-1" data-lang="en">Blog</a>
+      <a href="gdpt/"                            class="mb-gdpt mt-1" data-lang="vi">&#128225; Truy&#7873;n Tin G&#272;PT</a>
+      <a href="gdpt/"                            class="mb-gdpt mt-1" data-lang="en">&#128225; GĐPT Signaling</a>
       <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="vi">&#272;&#7863;t L&#7883;ch Ngay</a>
       <a href="#booking"   onclick="toggleMenu()" class="btn-primary text-center mt-2" data-lang="en">Book Now</a>
       <div class="flex gap-3 mt-1">
