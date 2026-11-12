@@ -12,7 +12,9 @@ hoặc mạng xã hội đều phải có logo. Dùng `scripts/stamp-logo.py` đ
 | `tritravel-icon-192.png` | Bản 192 của icon trên | Web app manifest, Android |
 
 Favicon ở thư mục gốc (`favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`)
-được sinh từ `tritravel-icon-512.png`. Không dùng file favicon 512 trong zip gốc
+được sinh từ `tritravel-icon-512.png` bằng `python3 scripts/make-favicon.py`:
+biểu tượng đặt trên ô trắng bo góc, vì trên nền trong suốt chữ R navy chìm mất khi
+thanh tab trình duyệt màu tối. Không dùng file favicon 512 trong zip gốc
 (chữ navy trên nền navy, thu nhỏ bị mờ).
 
 ## Quy tắc đặt logo

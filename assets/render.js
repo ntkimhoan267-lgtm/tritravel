@@ -103,7 +103,7 @@
     return '<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
       '<title>' + esc(o.title) + '</title>\n<meta name="description" content="' + esc(o.desc) + '">\n' +
       '<meta name="robots" content="index, follow">\n<link rel="canonical" href="' + SITE + o.path + '">\n' +
-      '<link rel="icon" href="/favicon.ico" type="image/x-icon">\n<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n' +
+      '<link rel="icon" href="/favicon.ico?v=2" type="image/x-icon">\n<link rel="icon" href="/favicon-32.png?v=2" type="image/png" sizes="32x32">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">\n' +
       '<meta property="og:site_name" content="TriTravel">\n<meta property="og:locale" content="vi_VN">\n<meta property="og:type" content="' + (o.type || 'website') + '">\n' +
       '<meta property="og:title" content="' + esc(o.ogTitle || o.title) + '">\n<meta property="og:description" content="' + esc(o.desc) + '">\n<meta property="og:url" content="' + SITE + o.path + '">\n' +
       '<meta property="og:image" content="' + img + '">\n<meta property="og:image:width" content="' + (o.imageW || 1200) + '">\n<meta property="og:image:height" content="' + (o.imageH || 630) + '">\n<meta property="og:image:alt" content="' + esc(o.imageAlt || o.title) + '">\n' +
