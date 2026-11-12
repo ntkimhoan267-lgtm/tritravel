@@ -22,6 +22,21 @@
 
 ## Cấu trúc site
 - Site tĩnh HTML, deploy GitHub Pages từ nhánh `main` (domain trong `CNAME`).
-- Trang chính: `index.html`, blog `blog.html` + `blog-*.html`, form visa
-  `visa/`, `visamy/`, trang Truyền Tin GĐPT `gdpt/`.
+- Trang chính: `index.html`, blog `blog.html` + `blog/<slug>.html`, form visa
+  `visa/`, `visamy/`, trang Truyền Tin GĐPT `gdpt/`, dashboard đăng bài `admin/`.
 - Trang con dùng đường dẫn tuyệt đối (`/images/...`), trang ở gốc dùng tương đối.
+- Giao diện dùng chung: `assets/site.css` + `assets/site.js` (không dùng Tailwind
+  CDN). Màu lấy từ logo: navy `#0C254D`, teal `#4EABB0`, vàng `#E9B949`; font
+  Fraunces (tiêu đề) + Be Vietnam Pro (nội dung).
+- Song ngữ: đặt cặp `<span lang="vi">…</span><span lang="en">…</span>`.
+
+## Blog (không sửa tay các file sinh ra)
+- Nguồn: `data/posts/<slug>.json` (nội dung) + `data/posts.json` (danh sách).
+- `blog/<slug>.html`, `blog.html`, `sitemap.xml` và phần giữa các dấu
+  `<!-- header|footer|latest-posts:start/end -->` trong `index.html` là file
+  **sinh ra** bởi `assets/render.js`. Sửa header/footer/khuôn bài ở `render.js`
+  rồi chạy `node scripts/build-blog.js`.
+- Dashboard `/admin/` dùng đúng `render.js` đó trong trình duyệt và commit thẳng
+  lên `main` qua GitHub API; ảnh tải lên được cắt 1200×630 và đóng logo tự động.
+- Ảnh bìa bài: `images/blog/<slug>.jpg` (1200×630). Ảnh thẻ trang chủ:
+  `images/web/`. `blog-*.html` ở gốc chỉ là trang chuyển hướng link cũ.
