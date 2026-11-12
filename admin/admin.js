@@ -140,7 +140,7 @@
       return '<tr><td style="width:128px">' + (p.cover ? '<img src="' + R.esc(p.cover) + '" alt="" loading="lazy">' : '') + '</td>' +
         '<td><b>' + R.esc(p.title) + '</b><span class="muted">' + R.fmtDate(p.date) + ' · ' + ((R.CATS[p.category] || {}).vi || '') + '</span></td>' +
         '<td><span class="pill' + (p.draft ? ' draft' : '') + '">' + (p.draft ? 'Bản nháp' : 'Đã đăng') + '</span></td>' +
-        '<td><div class="acts">' + (p.draft ? '' : '<a class="mini" target="_blank" rel="noopener" href="/blog/' + p.slug + '.html">Xem</a>') +
+        '<td><div class="acts">' + (p.draft ? '' : '<a class="mini" target="_blank" rel="noopener" href="' + R.postUrl(p) + '">Xem</a>') +
         '<button class="mini" data-edit="' + p.slug + '">Sửa</button><button class="mini danger" data-del="' + p.slug + '">Xoá</button></div></td></tr>';
     }).join('') : '<tr><td class="muted" style="padding:28px 10px">Chưa có bài nào. Bấm “Viết bài mới” để bắt đầu.</td></tr>';
   }
@@ -151,7 +151,8 @@
     $('p-title').value = post.title || ''; $('p-excerpt').value = post.excerpt || '';
     $('p-alt').value = post.cover_alt || ''; $('p-cat').value = post.category || 'diem-den';
     $('p-date').value = post.date || today(); $('p-title-en').value = post.title_en || ''; $('p-excerpt-en').value = post.excerpt_en || '';
-    $('editor').innerHTML = post.body || ''; $('html').hidden = true; $('editor').hidden = false;
+    $('editor').innerHTML = post.body || ''; $('html').hidden = true; $('editor').hidden = !!post.url; $('tb').hidden = !!post.url;
+    $('own-page').hidden = !post.url; if (post.url) $('own-page-link').href = post.url;
     $('cover-box').innerHTML = post.cover ? '<img src="' + R.esc(post.cover) + '" alt="">' : '<span>Bấm để chọn ảnh<br>Tự cắt đúng cỡ và đóng logo TriTravel</span>';
     $('focus').value = 50; setCorner('top-right');
     $('publish-btn').textContent = post._published ? 'Cập nhật bài đã đăng' : 'Đăng bài';
@@ -182,6 +183,7 @@
     };
     if (cur.body_en) p.body_en = cur.body_en;
     if (cur.legacy) p.legacy = cur.legacy;
+    if (cur.url) p.url = cur.url;
     if (cur._published && !draft) p.updated = today();
     if (draft) p.draft = true;
     return p;
@@ -191,7 +193,7 @@
     if (draft) return '';
     if (!p.excerpt) return 'Thêm mô tả ngắn – phần này hiện trên Google và khi chia sẻ.';
     if (!p.cover) return 'Chọn ảnh bìa trước khi đăng.';
-    if (p.body.replace(/<[^>]+>/g, '').trim().length < 80) return 'Nội dung bài còn quá ngắn.';
+    if (!p.url && p.body.replace(/<[^>]+>/g, '').trim().length < 80) return 'Nội dung bài còn quá ngắn.';
     return '';
   }
 
@@ -208,7 +210,7 @@
       files.push({ path: 'data/posts/' + p.slug + '.json', text: JSON.stringify(p, null, 1) + '\n' });
       if (cur._cover) files.push({ path: 'images/blog/' + p.slug + '.jpg', base64: cur._cover.split(',')[1] });
       Object.keys(pending).forEach(function (k) { if (p.body.indexOf('/' + k) >= 0) files.push({ path: k, base64: pending[k] }); });
-      if (draft && wasPublished) files.push({ path: 'blog/' + p.slug + '.html', remove: true });
+      if (draft && wasPublished && !p.url) files.push({ path: 'blog/' + p.slug + '.html', remove: true });
       return rebuild(list, p, files);
     }).then(function () {
       return commit(files, (draft ? 'Lưu nháp: ' : wasPublished ? 'Cập nhật bài: ' : 'Đăng bài: ') + p.title);
@@ -221,7 +223,7 @@
 
   /* Dựng lại mọi trang phụ thuộc danh sách bài. changed = bài vừa sửa (đã có nội dung). */
   function rebuild(list, changed, files) {
-    var pub = list.filter(function (x) { return !x.draft; });
+    var pub = list.filter(function (x) { return !x.draft && !x.url; });
     return Promise.all(pub.map(function (s) {
       return changed && s.slug === changed.slug ? changed : getJSON('data/posts/' + s.slug + '.json');
     })).then(function (full) {
@@ -240,7 +242,7 @@
     if (!p || !confirm('Xoá hẳn bài “' + p.title + '”? Không khôi phục được từ dashboard.')) return;
     busy(true, 'Đang xoá…');
     var files = [{ path: 'data/posts/' + slug + '.json', remove: true }];
-    if (!p.draft) files.push({ path: 'blog/' + slug + '.html', remove: true });
+    if (!p.draft && !p.url) files.push({ path: 'blog/' + slug + '.html', remove: true });
     getJSON('data/posts.json').then(function (list) {
       list = list.filter(function (x) { return x.slug !== slug; }); posts = list;
       return rebuild(list, null, files);

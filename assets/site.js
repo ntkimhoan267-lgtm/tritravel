@@ -29,6 +29,36 @@
     });
   }
 
+  // Header ẩn khi cuộn xuống, hiện khi cuộn lên
+  if (header && !header.classList.contains('solid')) {
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (!header.classList.contains('open')) header.classList.toggle('hide', y > lastY && y > 320);
+      lastY = y;
+    }, { passive: true });
+  }
+
+  // Đổi tông màu cả trang theo phần đang ở giữa màn hình (trang chủ)
+  var themed = doc.querySelectorAll('section[data-theme]');
+  if (themed.length) {
+    var body = doc.body, base = body.getAttribute('data-theme') || 'paper', ticking = false;
+    root.classList.add('fx');
+    var pick = function () {
+      ticking = false;
+      var mid = window.innerHeight * 0.55, t = base;
+      for (var i = 0; i < themed.length; i++) {
+        var r = themed[i].getBoundingClientRect();
+        if (r.top < mid && r.bottom > mid) { t = themed[i].getAttribute('data-theme'); break; }
+        if (r.top < mid) t = themed[i].getAttribute('data-theme');
+      }
+      if (body.getAttribute('data-theme') !== t) body.setAttribute('data-theme', t);
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(pick); } }, { passive: true });
+    window.addEventListener('resize', pick);
+    pick();
+  }
+
   // Hiệu ứng xuất hiện khi cuộn
   var items = doc.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
