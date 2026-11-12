@@ -16,7 +16,7 @@ posts.sort((a, b) => (order.indexOf(a.slug) + 1 || 1e9) - (order.indexOf(b.slug)
 const list = posts.map(R.summary);
 
 wr('data/posts.json', JSON.stringify(list, null, 1) + '\n');
-posts.filter(p => !p.draft).forEach(p => {
+posts.filter(p => !p.draft && !p.url).forEach(p => {
   wr('blog/' + p.slug + '.html', R.postPage(p, list));
   if (p.legacy) wr(p.legacy.replace(/^\//, ''), R.redirect(R.postUrl(p)));
 });

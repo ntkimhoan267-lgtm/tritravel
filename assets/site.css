@@ -297,15 +297,12 @@ section[data-theme] .panel{background:var(--tint);border-color:var(--line-c)}
 @keyframes heroZoom{from{transform:scale(1.14)}to{transform:scale(1)}}
 
 /* Ảnh cắt cung tròn: một góc bo thật lớn */
-.shape-tl,.shape-tr,.shape-bl,.shape-br,.about-img img,.about-img::before,.cover img,.posts .thumb{--arc:clamp(90px,15vw,210px)}
+.shape-tl,.shape-tr,.shape-bl,.shape-br,.about-img img,.about-img::before{--arc:clamp(90px,15vw,210px)}
 .shape-tl{border-top-left-radius:var(--arc)!important}
 .shape-tr{border-top-right-radius:var(--arc)!important}
 .shape-bl{border-bottom-left-radius:var(--arc)!important}
 .shape-br{border-bottom-right-radius:var(--arc)!important}
 .about-img img,.about-img::before{border-top-right-radius:var(--arc)!important}
-.cover img{border-bottom-right-radius:var(--arc)!important}
-.posts .post-card:nth-child(odd) .thumb{border-bottom-right-radius:var(--arc)}
-.posts .post-card:nth-child(even) .thumb{border-bottom-left-radius:var(--arc)}
 .js .reveal .svc-img img,.js .tour.reveal img{transform:scale(1.12);transition:transform 1.4s cubic-bezier(.2,.6,.3,1)}
 .js .reveal.in .svc-img img,.js .tour.reveal.in img{transform:scale(1)}
 .js .tour.reveal.in:hover img,.js .reveal.in.svc:hover .svc-img img{transform:scale(1.05)}
@@ -349,6 +346,7 @@ section[data-theme] .ch-body h2 em,section[data-theme] .pull em,section[data-the
 .sign-off span{color:var(--muted-c);font-size:.95rem}
 .ch-body .motto{font-family:var(--serif);font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.12;color:var(--head);margin:52px 0 34px}
 .about .more{margin-top:8px}
+section[data-theme] .about p em{font-family:var(--serif);font-size:1.08em;color:var(--head)}
 section[data-theme=teal] .link-arrow,html.fx body[data-theme=teal] .link-arrow{border-color:var(--gold)}
 
 /* ---------- Blog ---------- */
