@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard – TriTravel</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+body{background:#F4F1EA;font-size:16px}
+[hidden]{display:none!important}
+.adm-top{background:var(--navy-deep);color:#fff;position:sticky;top:0;z-index:20}
+.adm-top .in{display:flex;align-items:center;gap:16px;height:64px;width:min(1240px,100% - 32px);margin:auto}
+.adm-top img{height:40px;width:auto}
+.adm-top b{font-family:var(--serif);font-weight:500;font-size:1.1rem;opacity:.85}
+.adm-top .sp{flex:1}
+.adm-top a,.adm-top button.txt{color:rgba(255,255,255,.8);font-size:.88rem;background:none;border:0;text-decoration:none}
+.adm-top a:hover,.adm-top button.txt:hover{color:var(--gold)}
+.adm{width:min(1240px,100% - 32px);margin:32px auto 120px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
+.card h2{font-size:1.5rem;margin-bottom:6px}
+.muted{color:var(--muted);font-size:.92rem}
+.login{max-width:620px;margin:6vh auto}
+.login ol{padding-left:1.2em;font-size:.94rem;color:var(--text)}
+.login li{margin-bottom:6px}
+.fld{display:grid;gap:6px;margin-bottom:16px}
+.fld label{font-size:.82rem;font-weight:600;color:var(--navy)}
+.fld input,.fld select,.fld textarea{font:inherit;width:100%;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;color:var(--text)}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:0;border-color:var(--teal)}
+.fld small{color:var(--muted);font-size:.8rem}
+.count{float:right;font-weight:400;color:var(--muted)}
+.row2{display:grid;gap:16px}
+@media(min-width:640px){.row2{grid-template-columns:1fr 1fr}}
+.list-head{display:flex;flex-wrap:wrap;gap:16px;align-items:end;justify-content:space-between;margin-bottom:20px}
+.list-head h1{font-size:2.2rem}
+table.posts-t{width:100%;border-collapse:collapse}
+.posts-t td{padding:14px 10px;border-top:1px solid var(--line);vertical-align:middle;font-size:.94rem}
+.posts-t img{width:112px;aspect-ratio:1200/630;object-fit:cover;border-radius:8px;background:var(--sand)}
+.posts-t b{font-family:var(--serif);font-size:1.1rem;color:var(--navy);font-weight:560;display:block}
+.pill{font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--teal-wash);color:#16545B;white-space:nowrap}
+.pill.draft{background:#FFF3D6;color:#6B4B05}
+.acts{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.mini{font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:var(--navy);text-decoration:none}
+.mini:hover{border-color:var(--navy)}
+.mini.danger{color:#9A2C1E}
+.mini.danger:hover{border-color:#9A2C1E}
+.ed{display:grid;gap:20px}
+@media(min-width:1020px){.ed{grid-template-columns:1fr 340px;align-items:start}.ed aside{position:sticky;top:84px}}
+.ed-title{font-family:var(--serif)!important;font-size:clamp(1.6rem,3vw,2.2rem)!important;font-weight:560;color:var(--navy)!important;border:0!important;padding:4px 0!important;border-bottom:1.5px solid var(--line)!important;border-radius:0!important}
+.tb{display:flex;flex-wrap:wrap;gap:4px;padding:8px;border:1.5px solid var(--line);border-bottom:0;border-radius:12px 12px 0 0;background:#FBFAF6;position:sticky;top:64px;z-index:5}
+.tb button{font-size:.82rem;font-weight:600;padding:6px 10px;border-radius:7px;border:0;background:none;color:var(--navy)}
+.tb button:hover{background:var(--teal-wash)}
+.tb i{width:1px;background:var(--line);margin:4px 4px}
+#editor,#html{border:1.5px solid var(--line);border-radius:0 0 12px 12px;padding:26px;min-height:420px;background:#fff}
+#editor:focus{outline:0;border-color:var(--teal)}
+#editor>*{max-width:none}
+#editor:empty::before{content:"Bắt đầu viết ở đây… Dùng thanh công cụ phía trên để thêm tiêu đề, danh sách, ô mẹo, ảnh.";color:#A9B0BD}
+#editor figure{position:relative}
+#editor details>*:not(summary){display:block}
+#html{width:100%;font:13px/1.6 ui-monospace,Menlo,monospace;resize:vertical}
+.cover-box{aspect-ratio:1200/630;border:1.5px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:.88rem;overflow:hidden;cursor:pointer;background:var(--paper)}
+.cover-box img{width:100%;height:100%;object-fit:cover}
+.cover-box:hover{border-color:var(--teal)}
+.ed aside .row2{grid-template-columns:1fr}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button{font-size:.76rem;padding:5px 9px;border-radius:7px;border:1.5px solid var(--line);background:#fff;color:var(--navy)}
+.seg button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}
+.save{display:grid;gap:8px;margin-top:6px}
+.save .btn{width:100%}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--navy-deep);color:#fff;padding:13px 22px;border-radius:12px;font-size:.92rem;z-index:100;max-width:min(92vw,560px);box-shadow:var(--shadow)}
+.toast.err{background:#9A2C1E}
+.modal{position:fixed;inset:0;background:rgba(7,24,51,.7);z-index:90;display:grid;grid-template-rows:auto 1fr;padding:20px;gap:12px}
+.modal .bar{display:flex;gap:10px;justify-content:flex-end}
+.modal iframe{width:100%;height:100%;border:0;border-radius:14px;background:#fff;margin:auto}
+.modal iframe.phone{max-width:400px}
+.busy{pointer-events:none;opacity:.55}
+details.help summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:.9rem}
+</style>
+</head>
+<body>
+<header class="adm-top"><div class="in">
+  <a href="/"><img src="/images/logo/tritravel-logo-white.png" alt="TriTravel" width="163" height="40"></a>
+  <b>Dashboard</b><span class="sp"></span>
+  <a href="/blog.html" target="_blank" rel="noopener">Xem blog ↗</a>
+  <button class="txt" id="logout" hidden>Đăng xuất</button>
+</div></header>
+
+<main class="adm">
+
+<!-- ĐĂNG NHẬP -->
+<section id="v-login" class="login card" hidden>
+  <h2>Kết nối với website</h2>
+  <p class="muted">Dashboard đăng bài bằng cách lưu thẳng vào kho mã GitHub của tritravel.vn. Bạn chỉ cần tạo một “khoá truy cập” (token) một lần cho mỗi thiết bị.</p>
+  <details class="help" open><summary>Cách tạo token (2 phút)</summary>
+    <ol>
+      <li>Đăng nhập GitHub, mở <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
+      <li><b>Repository access</b>: chọn <i>Only select repositories</i> → <code id="repo-hint">tritravel</code>.</li>
+      <li><b>Permissions → Repository permissions → Contents</b>: chọn <i>Read and write</i>. Các quyền khác để nguyên.</li>
+      <li>Bấm <i>Generate token</i>, sao chép chuỗi <code>github_pat_…</code> và dán vào ô bên dưới.</li>
+    </ol>
+  </details>
+  <div class="fld" style="margin-top:18px"><label for="token">Token GitHub</label><input id="token" type="password" autocomplete="off" placeholder="github_pat_…"><small>Token chỉ lưu trong trình duyệt của bạn trên máy này, không gửi đi đâu ngoài GitHub. Đừng đăng nhập trên máy công cộng.</small></div>
+  <details class="help"><summary>Nâng cao</summary>
+    <div class="row2" style="margin-top:12px">
+      <div class="fld"><label for="repo">Kho mã</label><input id="repo" value="ntkimhoan267-lgtm/tritravel"></div>
+      <div class="fld"><label for="branch">Nhánh</label><input id="branch" value="main"></div>
+    </div>
+  </details>
+  <button class="btn btn-navy" id="login-btn" style="margin-top:14px">Kết nối</button>
+</section>
+
+<!-- DANH SÁCH -->
+<section id="v-list" hidden>
+  <div class="list-head">
+    <div><h1>Bài viết</h1><p class="muted" id="list-sub"></p></div>
+    <button class="btn btn-gold" id="new-btn">+ Viết bài mới</button>
+  </div>
+  <div class="card" style="padding:8px 16px"><table class="posts-t"><tbody id="rows"></tbody></table></div>
+</section>
+
+<!-- SOẠN BÀI -->
+<section id="v-edit" hidden>
+  <p><button class="mini" id="back-btn">← Danh sách bài</button></p>
+  <div class="ed">
+    <div class="card">
+      <div class="fld"><input class="ed-title" id="p-title" placeholder="Tiêu đề bài viết" maxlength="110"></div>
+      <div class="fld"><label for="p-excerpt">Mô tả ngắn <span class="count" id="c-excerpt"></span></label><textarea id="p-excerpt" rows="2" maxlength="200" placeholder="1–2 câu tóm tắt. Hiện dưới tiêu đề, trên Google và khi chia sẻ Facebook/Zalo."></textarea></div>
+      <div class="tb" id="tb">
+        <button data-b="h2" title="Tiêu đề mục – tự vào mục lục">Tiêu đề lớn</button><button data-b="h3">Tiêu đề nhỏ</button><button data-b="p">Đoạn văn</button><i></i>
+        <button data-c="bold"><b>B</b></button><button data-c="italic"><em>I</em></button><button data-a="link">Link</button><i></i>
+        <button data-c="insertUnorderedList">• Danh sách</button><button data-c="insertOrderedList">1. Số thứ tự</button><button data-a="steps">Các bước</button><button data-b="blockquote">Trích dẫn</button><i></i>
+        <button data-a="note">Ô mẹo</button><button data-a="warn">Ô lưu ý</button><button data-a="meta" title="Dòng thông tin nhỏ: địa điểm · giờ · cách đi">Dòng thông tin</button><button data-a="faq">Hỏi đáp</button><button data-a="img">Ảnh</button><i></i>
+        <button data-a="html" id="html-btn">HTML</button>
+      </div>
+      <div id="editor" class="prose" contenteditable="true"></div>
+      <textarea id="html" hidden spellcheck="false"></textarea>
+      <input type="file" id="img-file" accept="image/*" hidden>
+    </div>
+    <aside class="card">
+      <div class="fld"><label>Ảnh bìa (1200 × 630) *</label>
+        <div class="cover-box" id="cover-box"><span>Bấm để chọn ảnh<br>Tự cắt đúng cỡ và đóng logo TriTravel</span></div>
+        <input type="file" id="cover-file" accept="image/*" hidden>
+        <small>Vị trí logo – tránh đè lên mặt người hoặc chữ:</small>
+        <div class="seg" id="corner"><button data-v="top-right" aria-pressed="true">Trên phải</button><button data-v="top-left" aria-pressed="false">Trên trái</button><button data-v="bottom-right" aria-pressed="false">Dưới phải</button><button data-v="bottom-left" aria-pressed="false">Dưới trái</button></div>
+        <small>Phần ảnh giữ lại khi cắt:</small>
+        <input type="range" id="focus" min="0" max="100" value="50" aria-label="Vị trí cắt ảnh">
+      </div>
+      <div class="fld"><label for="p-alt">Mô tả ảnh bìa</label><input id="p-alt" placeholder="Vd: Cầu Rồng lúc hoàng hôn"></div>
+      <div class="row2">
+        <div class="fld"><label for="p-cat">Chuyên mục</label><select id="p-cat"></select></div>
+        <div class="fld"><label for="p-date">Ngày đăng</label><input id="p-date" type="date"></div>
+      </div>
+      <details class="help" style="margin-bottom:16px"><summary>Bản tiếng Anh (tuỳ chọn)</summary>
+        <div class="fld" style="margin-top:12px"><label for="p-title-en">Tiêu đề tiếng Anh</label><input id="p-title-en"></div>
+        <div class="fld"><label for="p-excerpt-en">Mô tả ngắn tiếng Anh</label><textarea id="p-excerpt-en" rows="2"></textarea></div>
+      </details>
+      <p class="muted" id="p-url" style="word-break:break-all"></p>
+      <div class="save">
+        <button class="btn btn-gold" id="publish-btn">Đăng bài</button>
+        <button class="btn btn-line" id="preview-btn">Xem trước</button>
+        <button class="btn btn-line" id="draft-btn">Lưu nháp (chưa hiện trên web)</button>
+      </div>
+      <p class="muted" style="margin:14px 0 0">Sau khi đăng, website cập nhật trong khoảng 1–2 phút.</p>
+    </aside>
+  </div>
+</section>
+</main>
+
+<div class="modal" id="modal" hidden>
+  <div class="bar"><button class="mini" data-pv="desk">Máy tính</button><button class="mini" data-pv="phone">Điện thoại</button><button class="mini" id="modal-close">Đóng ✕</button></div>
+  <iframe id="pv" title="Xem trước"></iframe>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="/assets/render.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>
