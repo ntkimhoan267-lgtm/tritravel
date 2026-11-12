@@ -15,8 +15,9 @@
 - Header và footer trang mới phải dùng `images/logo/tritravel-logo-white.png`
   (cao 40–44px), cùng bộ favicon ở thư mục gốc:
   `favicon.ico`, `favicon-32.png`, `apple-touch-icon.png`.
-- Favicon chỉ được sinh lại từ `images/logo/tritravel-icon-512.png`
-  (biểu tượng TR trên nền trong suốt). Không dùng nền navy phía sau.
+- Favicon chỉ được sinh lại từ `images/logo/tritravel-icon-512.png` bằng
+  `python3 scripts/make-favicon.py`: biểu tượng TR đặt trên ô trắng bo góc để
+  chữ R navy không chìm khi thanh tab màu tối. Không dùng nền navy phía sau.
 - Không thay đổi màu, tỉ lệ hay cắt xén logo. Không đặt logo đè lên mặt người
   hoặc chữ tiêu đề của ảnh.
 
