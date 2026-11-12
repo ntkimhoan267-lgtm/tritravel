@@ -27,3 +27,7 @@ home = R.inject(home, 'header', R.header('', '', false));
 home = R.inject(home, 'footer', R.footer(''));
 home = R.inject(home, 'latest-posts', R.latest(list, ''));
 wr('index.html', home);
+let story = rd('cau-chuyen.html');
+story = R.inject(story, 'header', R.header('', 'about', false));
+story = R.inject(story, 'footer', R.footer(''));
+wr('cau-chuyen.html', story);

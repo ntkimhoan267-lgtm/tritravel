@@ -72,7 +72,7 @@
   function footer(r) {
     var home = r === '/' ? '/' : './';
     return '<footer class="site-footer">\n  <div class="wrap">\n    <div class="foot-grid">\n' +
-      '      <div><img src="' + r + 'images/logo/tritravel-logo-white.png" alt="TriTravel" width="179" height="44" loading="lazy"><p>' + t('Người dẫn đường Đà Nẵng – tour riêng, visa, dịch thuật, thuê xe và vé máy bay, lo trọn từ lúc lên kế hoạch đến khi bạn về nhà.', 'Your Da Nang local guide – private tours, visas, translation, car rental and flights, handled end to end.') + '</p></div>\n' +
+      '      <div><img src="' + r + 'images/logo/tritravel-logo-white.png" alt="TriTravel" width="179" height="44" loading="lazy"><p>' + '<b style="color:#fff;font-family:var(--serif);font-weight:500;font-size:1.15rem">Born in Da Nang. Built for the world.</b><br>' + t('Người dẫn đường Đà Nẵng – tour riêng, visa, dịch thuật, thuê xe và vé máy bay, lo trọn từ lúc lên kế hoạch đến khi bạn về nhà.', 'Your Da Nang local guide – private tours, visas, translation, car rental and flights, handled end to end.') + '</p></div>\n' +
       '      <div><h4>' + t('Dịch vụ', 'Services') + '</h4><ul>' +
       '<li><a href="' + home + '#tours">' + t('Tour Đà Nẵng – Hội An – Huế', 'Da Nang – Hoi An – Hue tours') + '</a></li>' +
       '<li><a href="' + r + 'visa/">' + t('Nộp hồ sơ visa online', 'Online visa application') + '</a></li>' +
@@ -82,6 +82,7 @@
       '<li><a href="' + home + '#transport">' + t('Vé máy bay', 'Flight tickets') + '</a></li></ul></div>\n' +
       '      <div><h4>' + t('Khám phá', 'Explore') + '</h4><ul>' +
       '<li><a href="' + home + '#about">' + t('Về TriTravel', 'About TriTravel') + '</a></li>' +
+      '<li><a href="' + r + 'cau-chuyen.html">' + t('Câu chuyện TriTravel', 'Our story') + '</a></li>' +
       '<li><a href="' + r + 'blog.html">Blog</a></li>' +
       '<li><a href="' + home + '#faq">' + t('Câu hỏi thường gặp', 'FAQ') + '</a></li>' +
       '<li><a href="' + r + 'gdpt/">' + t('Truyền tin GĐPT', 'GĐPT Signaling') + '</a></li>' +
@@ -203,7 +204,7 @@
   }
 
   function sitemap(posts) {
-    var urls = [['/', ''], ['/blog.html', ''], ['/visa/', ''], ['/visamy/', '']].concat(sortPosts(posts).map(function (p) { return [postUrl(p), p.updated || p.date]; }));
+    var urls = [['/', ''], ['/cau-chuyen.html', ''], ['/blog.html', ''], ['/visa/', ''], ['/visamy/', '']].concat(sortPosts(posts).map(function (p) { return [postUrl(p), p.updated || p.date]; }));
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       urls.map(function (u) { return '  <url><loc>' + SITE + u[0] + '</loc>' + (u[1] ? '<lastmod>' + u[1] + '</lastmod>' : '') + '</url>'; }).join('\n') + '\n</urlset>\n';
   }
