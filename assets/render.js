@@ -60,7 +60,7 @@
     ];
     var links = nav.map(function (n) { return '<a href="' + n[0] + '"' + (current === n[3] ? ' aria-current="page"' : '') + '>' + t(n[1], n[2]) + '</a>'; }).join('');
     return SPRITE + '\n<header class="site-header' + (solid ? ' solid' : '') + '">\n  <div class="wrap bar">\n' +
-      '    <a class="logo" href="' + home + '" aria-label="TriTravel – Trang chủ"><img src="' + r + 'images/logo/tritravel-logo-white.png" alt="TriTravel – Da Nang, Vietnam" width="171" height="42"></a>\n' +
+      '    <a class="logo" href="' + home + '" aria-label="TriTravel – Trang chủ"><img src="' + r + 'images/logo/tritravel-logo-white.png" srcset="' + r + 'images/logo/tritravel-logo-white-360.png 360w, ' + r + 'images/logo/tritravel-logo-white.png 920w" sizes="180px" alt="TriTravel – Da Nang, Vietnam" width="171" height="42"></a>\n' +
       '    <nav class="nav" aria-label="Chính">' + links + '</nav>\n' +
       '    <div class="head-tools">\n' +
       '      <div class="lang" role="group" aria-label="Ngôn ngữ"><button type="button" data-set="vi">VI</button><button type="button" data-set="en">EN</button></div>\n' +
@@ -73,15 +73,15 @@
   function footer(r) {
     var home = r === '/' ? '/' : './';
     return '<footer class="site-footer">\n  <div class="wrap">\n    <div class="foot-grid">\n' +
-      '      <div><img src="' + r + 'images/logo/tritravel-logo-white.png" alt="TriTravel" width="179" height="44" loading="lazy"><p>' + '<b style="color:#fff;font-family:var(--serif);font-weight:500;font-size:1.15rem">Born in Da Nang. Built for the world.</b><br>' + t('Người dẫn đường Đà Nẵng – tour riêng, visa, dịch thuật, thuê xe và vé máy bay, lo trọn từ lúc lên kế hoạch đến khi bạn về nhà.', 'Your Da Nang local guide – private tours, visas, translation, car rental and flights, handled end to end.') + '</p></div>\n' +
-      '      <div><h4>' + t('Dịch vụ', 'Services') + '</h4><ul>' +
+      '      <div><img src="' + r + 'images/logo/tritravel-logo-white.png" srcset="' + r + 'images/logo/tritravel-logo-white-360.png 360w, ' + r + 'images/logo/tritravel-logo-white.png 920w" sizes="180px" alt="TriTravel" width="179" height="44" loading="lazy"><p>' + '<b style="color:#fff;font-family:var(--serif);font-weight:500;font-size:1.15rem">Born in Da Nang. Built for the world.</b><br>' + t('Người dẫn đường Đà Nẵng – tour riêng, visa, dịch thuật, thuê xe và vé máy bay, lo trọn từ lúc lên kế hoạch đến khi bạn về nhà.', 'Your Da Nang local guide – private tours, visas, translation, car rental and flights, handled end to end.') + '</p></div>\n' +
+      '      <div><h2>' + t('Dịch vụ', 'Services') + '</h2><ul>' +
       '<li><a href="' + home + '#tours">' + t('Tour Đà Nẵng – Hội An – Huế', 'Da Nang – Hoi An – Hue tours') + '</a></li>' +
       '<li><a href="' + r + 'visa/">' + t('Nộp hồ sơ visa online', 'Online visa application') + '</a></li>' +
       '<li><a href="' + r + 'visamy/">' + t('Hồ sơ visa Mỹ', 'US visa application') + '</a></li>' +
       '<li><a href="' + home + '#visa">' + t('Dịch thuật công chứng', 'Certified translation') + '</a></li>' +
       '<li><a href="' + home + '#transport">' + t('Thuê xe tự lái', 'Self-drive car rental') + '</a></li>' +
       '<li><a href="' + home + '#transport">' + t('Vé máy bay', 'Flight tickets') + '</a></li></ul></div>\n' +
-      '      <div><h4>' + t('Khám phá', 'Explore') + '</h4><ul>' +
+      '      <div><h2>' + t('Khám phá', 'Explore') + '</h2><ul>' +
       '<li><a href="' + home + '#about">' + t('Về TriTravel', 'About TriTravel') + '</a></li>' +
       '<li><a href="' + r + 'cau-chuyen.html">' + t('Câu chuyện TriTravel', 'Our story') + '</a></li>' +
       '<li><a href="' + r + 'blog.html">Blog</a></li>' +
@@ -89,7 +89,7 @@
       '<li><a href="' + r + 'gdpt/">' + t('Truyền tin GĐPT', 'GĐPT Signaling') + '</a></li>' +
       '<li><a href="https://facebook.com/tritravel.vn" rel="noopener">Facebook</a> · <a href="https://tiktok.com/@TriTravel" rel="noopener">TikTok</a></li>' +
       '<li><a href="https://instagram.com/tritravel.vn" rel="noopener">Instagram</a> · <a href="https://youtube.com/@TriTravel" rel="noopener">YouTube</a></li></ul></div>\n' +
-      '      <div><h4>' + t('Liên hệ', 'Contact') + '</h4><ul>' +
+      '      <div><h2>' + t('Liên hệ', 'Contact') + '</h2><ul>' +
       '<li>' + t('Đà Nẵng, Việt Nam', 'Da Nang, Vietnam') + '</li>' +
       '<li><a href="tel:+84935191394">0935 191 394</a></li>' +
       '<li><a href="https://zalo.me/0935191394" rel="noopener">Zalo</a> · <a href="https://wa.me/84935191394" rel="noopener">WhatsApp</a> · <a href="https://m.me/tritravel.vn" rel="noopener">Messenger</a></li>' +
@@ -118,7 +118,7 @@
 
   function postCard(p, r, feature) {
     return '<a class="post-card reveal' + (feature ? ' feature' : '') + '" data-cat="' + esc(p.category) + '" href="' + (p.url ? (r === '/' ? p.url : p.url.replace(/^\//, '')) : r + 'blog/' + p.slug + '.html') + '">' +
-      '<div class="thumb"><img src="' + r + String(p.cover).replace(/^\//, '') + '" alt="' + esc(p.cover_alt || p.title) + '" width="1200" height="630" loading="lazy"></div>' +
+      '<div class="thumb"><img src="' + r + String(p.cover).replace(/^\//, '') + '"' + (p.cover_sm ? ' srcset="' + r + String(p.cover_sm).replace(/^\//, '') + ' 800w, ' + r + String(p.cover).replace(/^\//, '') + ' 1200w" sizes="' + (feature ? '(min-width:900px) 640px, 100vw' : '(min-width:1000px) 380px, (min-width:700px) 50vw, 100vw') + '"' : '') + ' alt="' + esc(p.cover_alt || p.title) + '" width="1200" height="630" loading="lazy"></div>' +
       '<div class="txt"><div class="post-meta"><span>' + catLabel(p) + '</span><span>' + t(p.read_min + ' phút đọc', p.read_min + ' min read') + '</span></div>' +
       '<h3>' + t(esc(p.title), esc(p.title_en || p.title)) + '</h3><p>' + t(esc(p.excerpt), esc(p.excerpt_en || p.excerpt)) + '</p></div></a>';
   }
@@ -142,7 +142,7 @@
       '<section class="page-hero"><div class="wrap"><p class="eyebrow">' + t('Blog · Góc nhìn địa phương', 'Blog · A local point of view') + '</p>' +
       '<h1>' + t('Đà Nẵng, kể bởi <em>người ở đây</em>.', 'Da Nang, told by <em>someone who lives here</em>.') + '</h1>' +
       '<p>' + t('Điểm đến, lịch trình, visa và những mẹo nhỏ đúc kết từ hơn 8 năm dẫn khách – viết để bạn dùng được ngay.', 'Destinations, itineraries, visas and small tips from 8+ years of guiding – written to be used.') + '</p></div></section>\n' +
-      '<section class="section"><div class="wrap">\n<div class="filters">' + filters + '</div>\n<div class="posts">\n' + cards +
+      '<section class="section"><div class="wrap">\n<div class="filters">' + filters + '</div>\n<h2 class="sr">' + t('Bài viết', 'Articles') + '</h2>\n<div class="posts">\n' + cards +
       '\n<p class="posts-empty" hidden>' + t('Chưa có bài trong chuyên mục này.', 'No posts in this category yet.') + '</p>\n</div>\n' +
       '<div class="cta-band"><div><h2>' + t('Cần người lên lịch trình giúp?', 'Want someone to plan it for you?') + '</h2><p>' + t('Nhắn TriTravel số người, ngày đi và điều bạn thích – nhận lịch trình gợi ý và báo giá miễn phí.', 'Tell TriTravel your group size, dates and interests – get a suggested itinerary and quote for free.') + '</p></div>' +
       '<a class="btn btn-gold" href="./#contact">' + t('Nhận tư vấn miễn phí', 'Get free advice') + ' ' + icon('arrow') + '</a></div>\n' +
@@ -169,7 +169,7 @@
       : { h: t('Muốn đi những nơi này cùng người bản địa?', 'Want to see these places with a local?'), p: t('Xe riêng, lịch trình theo ý bạn, và những góc không có trong brochure.', 'Private car, an itinerary shaped around you, and corners no brochure mentions.'), b: t('Đặt lịch tư vấn', 'Book a consultation') };
     var tocHtml = function (x) { return x.toc.map(function (i) { return '<li><a href="#' + i[0] + '">' + esc(i[1]) + '</a></li>'; }).join(''); };
     var toc = vi.toc.length ? '<aside class="toc"><h2>' + t('Trong bài này', 'In this article') + '</h2>' +
-      (hasEn ? '<ol lang="vi">' + tocHtml(vi) + '</ol><ol lang="en">' + tocHtml(en) + '</ol>' : '<ol>' + tocHtml(vi) + '</ol>') +
+      (hasEn ? '<ol lang="vi">' + tocHtml(vi) + '</ol><ol lang="en">' + tocHtml(en) + '</ol>' : '<ol lang="vi" data-keep>' + tocHtml(vi) + '</ol>') +
       '<a class="btn btn-navy btn-sm" href="/#contact">' + cta.b + '</a></aside>' : '<div></div>';
     var related = sortPosts(posts).filter(function (p) { return p.slug !== post.slug; }).slice(0, 3);
     var url = SITE + postUrl(post);
@@ -183,16 +183,16 @@
       '<div class="post-meta"><span>' + catLabel(post) + '</span><span>' + t(fmtDate(post.date), fmtDate(post.date, true)) + '</span><span>' + t(post.read_min + ' phút đọc', post.read_min + ' min read') + '</span></div>' +
       '<h1>' + t(esc(post.title), esc(post.title_en || post.title)) + '</h1>' +
       '<p class="dek">' + t(esc(post.excerpt), esc(post.excerpt_en || post.excerpt)) + '</p>' +
-      '<div class="byline"><img src="/images/TriTravel-portrait.jpg" alt="" width="42" height="42"><div><b>TriTravel</b>' + t('Người dẫn đường Đà Nẵng', 'Da Nang local guide') + '</div></div>' +
+      '<div class="byline"><img src="/images/TriTravel-portrait-160.jpg" alt="" width="42" height="42"><div><b>TriTravel</b>' + t('Người dẫn đường Đà Nẵng', 'Da Nang local guide') + '</div></div>' +
       '</div></header>\n' +
       '<div class="cover"><img src="' + esc(post.cover) + '" alt="' + esc(post.cover_alt || post.title) + '" width="1200" height="630"></div>\n' +
       '<div class="wrap article-grid">\n' + toc + '\n<div>\n' +
-      (hasEn ? '<div class="prose" lang="vi">\n' + vi.html + '\n</div>\n<div class="prose" lang="en">\n' + en.html + '\n</div>' : '<div class="prose">\n' + vi.html + '\n</div>') +
+      (hasEn ? '<div class="prose" lang="vi">\n' + vi.html + '\n</div>\n<div class="prose" lang="en">\n' + en.html + '\n</div>' : '<div class="prose" lang="vi" data-keep>\n' + vi.html + '\n</div>') +
       '\n<div class="share"><span>' + t('Chia sẻ bài viết:', 'Share:') + '</span>' +
       '<a class="btn btn-line btn-sm" href="https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '" target="_blank" rel="noopener">Facebook</a>' +
       '<a class="btn btn-line btn-sm" href="https://wa.me/?text=' + encodeURIComponent(post.title + ' ' + url) + '" target="_blank" rel="noopener">WhatsApp</a>' +
       '<button class="btn btn-line btn-sm" type="button" data-copy>' + icon('link') + t('Sao chép link', 'Copy link') + '</button></div>\n' +
-      '<div class="author"><img src="/images/TriTravel-portrait.jpg" alt="TriTravel" width="64" height="64" loading="lazy"><div><b>TriTravel</b><p>' +
+      '<div class="author"><img src="/images/TriTravel-portrait-160.jpg" alt="TriTravel" width="64" height="64" loading="lazy"><div><b>TriTravel</b><p>' +
       t('Sinh ra và lớn lên tại Đà Nẵng, hơn 8 năm dẫn tour, tư vấn visa và dịch thuật. Mọi bài viết đều từ trải nghiệm thực tế.', 'Born and raised in Da Nang, 8+ years guiding tours and advising on visas and translation. Every post comes from first-hand experience.') +
       '</p></div></div>\n</div>\n</div>\n</article>\n' +
       '<div class="wrap"><div class="cta-band"><div><h2>' + cta.h + '</h2><p>' + cta.p + '</p></div><a class="btn btn-gold" href="/#contact">' + cta.b + ' ' + icon('arrow') + '</a></div></div>\n' +
@@ -205,7 +205,7 @@
   }
 
   function sitemap(posts) {
-    var seen = {}, urls = [['/', ''], ['/cau-chuyen.html', ''], ['/blog.html', ''], ['/visa/', ''], ['/visamy/', '']].concat(sortPosts(posts).map(function (p) { return [postUrl(p), p.updated || p.date]; }));
+    var seen = {}, urls = [['/', ''], ['/cau-chuyen.html', ''], ['/blog.html', ''], ['/visa/', ''], ['/visamy/', ''], ['/gdpt/', '']].concat(sortPosts(posts).map(function (p) { return [postUrl(p), p.updated || p.date]; }));
     urls = urls.reverse().filter(function (u) { if (seen[u[0]]) return false; seen[u[0]] = 1; return true; }).reverse();
     return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       urls.map(function (u) { return '  <url><loc>' + SITE + u[0] + '</loc>' + (u[1] ? '<lastmod>' + u[1] + '</lastmod>' : '') + '</url>'; }).join('\n') + '\n</urlset>\n';
@@ -221,7 +221,7 @@
 
   function summary(p) {
     var o = {};
-    ['slug', 'title', 'title_en', 'excerpt', 'excerpt_en', 'category', 'date', 'updated', 'read_min', 'cover', 'cover_alt', 'url', 'draft'].forEach(function (k) { if (p[k] !== undefined && p[k] !== '') o[k] = p[k]; });
+    ['slug', 'title', 'title_en', 'excerpt', 'excerpt_en', 'category', 'date', 'updated', 'read_min', 'cover', 'cover_sm', 'cover_alt', 'url', 'draft'].forEach(function (k) { if (p[k] !== undefined && p[k] !== '') o[k] = p[k]; });
     return o;
   }
   function readMinutes(body) { var w = String(body || '').replace(/<[^>]+>/g, ' ').trim().split(/\s+/).length; return Math.max(1, Math.round(w / 230)); }

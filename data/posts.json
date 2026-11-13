@@ -9,6 +9,7 @@
   "date": "2026-11-12",
   "read_min": 4,
   "cover": "/images/blog/cau-chuyen-tritravel.jpg",
+  "cover_sm": "/images/blog/cau-chuyen-tritravel-sm.jpg",
   "cover_alt": "Người sáng lập TriTravel trước khung cảnh Đà Nẵng về đêm",
   "url": "/cau-chuyen.html"
  },
@@ -22,6 +23,7 @@
   "date": "2025-07-01",
   "read_min": 5,
   "cover": "/images/blog/hoang-hon-da-nang.jpg",
+  "cover_sm": "/images/blog/hoang-hon-da-nang-sm.jpg",
   "cover_alt": "Cầu Rồng và sông Hàn, Đà Nẵng lúc hoàng hôn"
  },
  {
@@ -34,6 +36,7 @@
   "date": "2025-07-01",
   "read_min": 8,
   "cover": "/images/blog/visa-han-quoc-tu-tuc.jpg",
+  "cover_sm": "/images/blog/visa-han-quoc-tu-tuc-sm.jpg",
   "cover_alt": "Hướng dẫn xin visa Hàn Quốc tự túc – TriTravel"
  }
 ]

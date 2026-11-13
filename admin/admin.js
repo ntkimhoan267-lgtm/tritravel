@@ -171,7 +171,11 @@
   function redrawCover() {
     if (!coverSrc) return;
     processImage(coverSrc, [1200, 630], corner, +$('focus').value).then(function (url) {
-      cur._cover = url; $('cover-box').innerHTML = '<img src="' + url + '" alt="">';
+      cur._cover = url; cur._cover_sm = null; $('cover-box').innerHTML = '<img src="' + url + '" alt="">';
+      return loadImg(url).then(function (im) {
+        var c = document.createElement('canvas'); c.width = 800; c.height = 420;
+        c.getContext('2d').drawImage(im, 0, 0, 800, 420); cur._cover_sm = c.toDataURL('image/jpeg', 0.82);
+      });
     }).catch(function (e) { toast(e.message, true); });
   }
   function collect(draft) {
@@ -179,7 +183,7 @@
     var p = {
       slug: slug, title: $('p-title').value.trim(), title_en: $('p-title-en').value.trim(), excerpt: $('p-excerpt').value.trim(), excerpt_en: $('p-excerpt-en').value.trim(),
       category: $('p-cat').value, date: $('p-date').value || today(), read_min: R.readMinutes(body),
-      cover: cur._cover ? '/images/blog/' + slug + '.jpg' : (cur.cover || ''), cover_alt: $('p-alt').value.trim() || $('p-title').value.trim(), body: body
+      cover: cur._cover ? '/images/blog/' + slug + '.jpg' : (cur.cover || ''), cover_sm: cur._cover_sm ? '/images/blog/' + slug + '-sm.jpg' : (cur._cover ? '' : (cur.cover_sm || '')), cover_alt: $('p-alt').value.trim() || $('p-title').value.trim(), body: body
     };
     if (cur.body_en) p.body_en = cur.body_en;
     if (cur.legacy) p.legacy = cur.legacy;
@@ -209,6 +213,7 @@
       posts = list;
       files.push({ path: 'data/posts/' + p.slug + '.json', text: JSON.stringify(p, null, 1) + '\n' });
       if (cur._cover) files.push({ path: 'images/blog/' + p.slug + '.jpg', base64: cur._cover.split(',')[1] });
+      if (cur._cover_sm) files.push({ path: 'images/blog/' + p.slug + '-sm.jpg', base64: cur._cover_sm.split(',')[1] });
       Object.keys(pending).forEach(function (k) { if (p.body.indexOf('/' + k) >= 0) files.push({ path: k, base64: pending[k] }); });
       if (draft && wasPublished && !p.url) files.push({ path: 'blog/' + p.slug + '.html', remove: true });
       return rebuild(list, p, files);

@@ -31,3 +31,7 @@ let story = rd('cau-chuyen.html');
 story = R.inject(story, 'header', R.header('', 'about', false));
 story = R.inject(story, 'footer', R.footer(''));
 wr('cau-chuyen.html', story);
+let nf = rd('404.html');
+nf = R.inject(nf, 'header', R.header('/', '', false));
+nf = R.inject(nf, 'footer', R.footer('/'));
+wr('404.html', nf);

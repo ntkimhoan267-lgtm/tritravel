@@ -24,8 +24,12 @@
       var open = header.classList.toggle('open');
       mb.setAttribute('aria-expanded', open);
     });
+    var closeMenu = function () { header.classList.remove('open'); if (mb) mb.setAttribute('aria-expanded', 'false'); };
     header.addEventListener('click', function (e) {
-      if (e.target.closest('.mobile-nav a')) header.classList.remove('open');
+      if (e.target.closest('.mobile-nav a')) closeMenu();
+    });
+    doc.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && header.classList.contains('open')) { closeMenu(); if (mb) mb.focus(); }
     });
   }
 
@@ -121,9 +125,14 @@
         location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Yêu cầu tư vấn – TriTravel') + '&body=' + encodeURIComponent(text);
         say('Đã mở ứng dụng email với nội dung soạn sẵn.', 'Your email app opened with the message ready.');
       } else {
-        var open = function () { window.open(ZALO, '_blank', 'noopener'); };
-        var done = function () { say('Đã sao chép nội dung. Zalo đang mở – bạn dán (Paste) vào khung chat và gửi nhé.', 'Message copied. Zalo is opening – paste it into the chat and send.'); open(); };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, done); else done();
+        // Sao chép và mở Zalo ngay trong cú bấm: Safari/iOS chặn cửa sổ mở sau một lời hứa (promise).
+        var copied = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(text) : Promise.reject();
+        window.open(ZALO, '_blank', 'noopener');
+        copied.then(function () {
+          say('Đã sao chép nội dung. Zalo đang mở – bạn dán (Paste) vào khung chat và gửi nhé.', 'Message copied. Zalo is opening – paste it into the chat and send.');
+        }, function () {
+          say('Zalo đang mở – bạn gửi giúp mình họ tên, số điện thoại và nhu cầu nhé.', 'Zalo is opening – please send your name, phone number and what you need.');
+        });
       }
     });
   }

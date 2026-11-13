@@ -7,6 +7,7 @@ hoặc mạng xã hội đều phải có logo. Dùng `scripts/stamp-logo.py` đ
 |---|---|---|
 | `tritravel-logo.png` | Logo đầy đủ (biểu tượng + chữ TRITRAVEL, DA NANG • VIETNAM), 920×226 | Nền sáng: ảnh trời, giấy, poster sáng, in ấn |
 | `tritravel-logo-white.png` | Logo đầy đủ bản chữ trắng (tạo từ bản gốc) | Nền tối: header/footer navy, ảnh tối, video |
+| `tritravel-logo-white-360.png` | Bản thu nhỏ (360px) của logo chữ trắng, chỉ dùng trong `srcset` của header/footer để trang tải nhanh; file gốc vẫn là `src` | Nền tối |
 | `tritravel-symbol.png` | Biểu tượng TR đứng riêng, 270×232 | Chỗ hẹp: avatar, icon, huy hiệu trang GĐPT, ảnh vuông nhỏ |
 | `tritravel-icon-512.png` | Biểu tượng TR trên nền trong suốt, vuông 512 | Nguồn gốc để sinh favicon, icon app, avatar mạng xã hội |
 | `tritravel-icon-192.png` | Bản 192 của icon trên | Web app manifest, Android |
